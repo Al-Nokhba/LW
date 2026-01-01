@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة الإدارة المركزية | النخبة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #c0392b;
+            --primary-light: #e74c3c;
+            --secondary: #2c3e50;
+            --accent: #f1c40f;
+            --bg-body: #f0f2f5;
+            --glass-bg: #ffffff;
+            --text-main: #2c3e50;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --radius: 15px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; outline: none; }
+        
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            min-height: 100vh;
+        }
+
+        /* --- Header --- */
+        header {
+            background: var(--secondary);
+            color: #fff;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .admin-logo { font-size: 1.4rem; font-weight: 900; display: flex; align-items: center; gap: 10px; }
+        .admin-badge { background: var(--accent); color: var(--secondary); padding: 4px 12px; border-radius: 50px; font-size: 0.8rem; font-weight: bold; }
+
+        /* --- Layout --- */
+        .container { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
+
+        /* --- View: Teachers Grid (Main) --- */
+        .grid-header { margin-bottom: 30px; border-bottom: 2px solid #e0e0e0; padding-bottom: 15px; }
+        .grid-header h2 { font-weight: 800; color: var(--secondary); }
+
+        .teachers-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px;
+        }
+        .admin-card {
+            background: #fff; border-radius: var(--radius); overflow: hidden;
+            box-shadow: var(--shadow); transition: 0.3s; cursor: pointer;
+            border: 1px solid transparent; position: relative;
+        }
+        .admin-card:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+        
+        .ac-header { height: 100px; background: linear-gradient(45deg, var(--secondary), #34495e); position: relative; }
+        .ac-img { 
+            width: 90px; height: 90px; border-radius: 50%; object-fit: cover; 
+            border: 4px solid #fff; position: absolute; bottom: -45px; right: 20px;
+            background: #fff;
+        }
+        .ac-body { padding: 50px 20px 20px; }
+        .ac-name { font-size: 1.2rem; font-weight: 800; color: var(--secondary); margin-bottom: 5px; }
+        .ac-subject { font-size: 0.9rem; color: #777; font-weight: 600; display: flex; align-items: center; gap: 5px; }
+        .ac-action { 
+            margin-top: 20px; padding: 10px; width: 100%; border: none; 
+            background: #f8f9fa; color: var(--primary); font-weight: bold; 
+            border-radius: 8px; cursor: pointer; transition: 0.2s;
+        }
+        .admin-card:hover .ac-action { background: var(--primary); color: #fff; }
+
+        /* --- View: Dashboard (Manager) --- */
+        .dash-top-bar {
+            display: flex; align-items: center; justify-content: space-between;
+            background: #fff; padding: 20px; border-radius: var(--radius);
+            box-shadow: var(--shadow); margin-bottom: 30px;
+        }
+        .teacher-info-mini { display: flex; align-items: center; gap: 15px; }
+        .mini-img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent); }
+        
+        .back-btn {
+            background: #f0f2f5; color: var(--text-main); border: none; padding: 10px 20px;
+            border-radius: 50px; cursor: pointer; font-weight: bold; display: flex; align-items: center; gap: 8px;
+            transition: 0.3s;
+        }
+        .back-btn:hover { background: #e0e0e0; }
+
+        .btn-main {
+            background: var(--primary); color: #fff; border: none; padding: 12px 25px; 
+            border-radius: 10px; font-weight: bold; cursor: pointer; display: inline-flex; 
+            align-items: center; gap: 10px; box-shadow: 0 4px 10px rgba(192, 57, 43, 0.3);
+            transition: 0.3s;
+        }
+        .btn-main:hover { background: var(--primary-light); transform: translateY(-2px); }
+
+        /* --- Package Cards --- */
+        .pkg-card {
+            background: #fff; border-radius: var(--radius); margin-bottom: 25px;
+            box-shadow: var(--shadow); overflow: hidden; border: 1px solid #eee;
+        }
+        .pkg-head {
+            padding: 20px; background: #fafafa; border-bottom: 1px solid #eee;
+            display: flex; flex-wrap: wrap; gap: 15px; justify-content: space-between; align-items: center;
+        }
+        .pkg-title { font-size: 1.1rem; font-weight: 800; color: var(--secondary); }
+        .pkg-badges { display: flex; gap: 10px; font-size: 0.85rem; }
+        .badge { padding: 4px 10px; border-radius: 6px; font-weight: bold; }
+        .b-type { background: #e3f2fd; color: #1976d2; }
+        .b-price { background: #e8f5e9; color: #2e7d32; }
+
+        .week-item {
+            border: 1px solid #eee; border-radius: 10px; margin: 15px 20px; overflow: hidden;
+        }
+        .week-header {
+            padding: 15px; background: #fff; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+            font-weight: 700; transition: 0.2s;
+        }
+        .week-header:hover { background: #f8f9fa; }
+        .week-content { display: none; background: #fafafa; border-top: 1px solid #eee; padding: 10px; }
+        .week-content.active { display: block; animation: slideDown 0.3s ease; }
+
+        .content-row {
+            display: flex; align-items: center; justify-content: space-between;
+            background: #fff; padding: 10px 15px; margin-bottom: 8px;
+            border-radius: 8px; border: 1px solid #eee;
+        }
+        .c-type-icon { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; margin-left: 10px; font-size: 0.8rem; }
+
+        /* --- Modals --- */
+        .modal-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(5px);
+            z-index: 1000; display: none; justify-content: center; align-items: center; padding: 20px;
+        }
+        .modal-box {
+            background: #fff; width: 100%; max-width: 550px; padding: 30px; 
+            border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            max-height: 90vh; overflow-y: auto;
+        }
+        .inp-field {
+            width: 100%; padding: 12px; margin-bottom: 15px; border: 2px solid #eee;
+            border-radius: 10px; font-size: 0.95rem; transition: 0.3s;
+        }
+        .inp-field:focus { border-color: var(--primary); }
+        .q-box { background: #f9f9f9; padding: 15px; border-radius: 10px; border: 1px solid #eee; margin-bottom: 15px; }
+
+        /* Helpers */
+        .hidden { display: none !important; }
+        @keyframes slideDown { from {opacity:0; transform: translateY(-10px);} to {opacity:1; transform: translateY(0);} }
+
+        #toast {
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(50px);
+            background: var(--secondary); color: #fff; padding: 10px 25px; border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2); opacity: 0; transition: 0.4s; z-index: 2000; font-weight: bold;
+        }
+        #toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+    </style>
+</head>
+<body>
+
+    <!-- Toast Notification -->
+    <div id="toast"><i class="fas fa-check-circle"></i> تم الحفظ بنجاح</div>
+
+    <!-- Header -->
+    <header>
+        <div class="admin-logo">
+            <i class="fas fa-shield-alt" style="color:var(--primary);"></i>
+            <span>لوحة الإدارة</span>
+        </div>
+        <div class="admin-badge">مدير النظام <i class="fas fa-user-tie"></i></div>
+    </header>
+
+    <!-- 1. VIEW: TEACHERS SELECTION (MAIN HOME) -->
+    <div id="view-teachers" class="container">
+        <div class="grid-header">
+            <h2>إدارة المدرسين</h2>
+            <p style="color:#666; margin-top:5px;">اختر المدرس لإدارة المحتوى والطلاب والكورسات الخاصة به</p>
+        </div>
+        <div class="teachers-grid" id="teachersGrid"></div>
+    </div>
+
+    <!-- 2. VIEW: TEACHER MANAGER (DASHBOARD) -->
+    <div id="view-manager" class="container hidden">
+        <!-- Top Navigation Bar -->
+        <div class="dash-top-bar">
+            <div class="teacher-info-mini">
+                <button class="back-btn" onclick="closeManager()"><i class="fas fa-arrow-right"></i> مدرسين آخرين</button>
+                <div style="width:1px; height:30px; background:#ddd; margin:0 10px;"></div>
+                <img id="mng-img" src="" class="mini-img">
+                <div>
+                    <h3 id="mng-name" style="line-height:1; margin-bottom:3px; color:var(--secondary);"></h3>
+                    <span id="mng-subject" style="font-size:0.8rem; color:#777;"></span>
+                </div>
+            </div>
+            <div>
+                <button class="btn-main" onclick="openModal('pkgModal')"><i class="fas fa-plus-circle"></i> باقة جديدة</button>
+            </div>
+        </div>
+
+        <!-- Packages List Area -->
+        <div id="packagesContainer"></div>
+    </div>
+
+    <!-- MODALS -->
+
+    <!-- Create Package Modal -->
+    <div id="pkgModal" class="modal-overlay">
+        <div class="modal-box">
+            <h3 style="margin-bottom:20px; color:var(--secondary);">إنشاء كورس / باقة جديدة</h3>
+            <label style="font-weight:bold; display:block; margin-bottom:5px;">اسم الكورس</label>
+            <input type="text" id="pTitle" class="inp-field" placeholder="مثال: مراجعة الباب الأول">
+            
+            <div style="display:flex; gap:10px;">
+                <div style="flex:1">
+                    <label style="font-weight:bold; display:block; margin-bottom:5px;">النظام</label>
+                    <select id="pType" class="inp-field">
+                        <option value="شهر">نظام شهر</option>
+                        <option value="ترم">ترم كامل</option>
+                        <option value="مجاني">كورس مجاني</option>
+                    </select>
+                </div>
+                <div style="flex:1">
+                    <label style="font-weight:bold; display:block; margin-bottom:5px;">السعر</label>
+                    <input type="number" id="pPrice" class="inp-field" placeholder="0">
+                </div>
+            </div>
+
+            <label style="font-weight:bold; display:block; margin-bottom:5px;">صورة الغلاف (رابط)</label>
+            <input type="url" id="pImg" class="inp-field" placeholder="https://...">
+
+            <label style="font-weight:bold; display:block; margin-bottom:5px;">الوصف</label>
+            <textarea id="pDesc" class="inp-field" rows="3"></textarea>
+
+            <button class="btn-main" style="width:100%; justify-content:center;" onclick="createPackage()">حفظ الباقة</button>
+            <button onclick="closeModal('pkgModal')" style="width:100%; margin-top:10px; background:none; border:none; color:#777; cursor:pointer;">إلغاء</button>
+        </div>
+    </div>
+
+    <!-- Content Selection Modal -->
+    <div id="contentSelectModal" class="modal-overlay">
+        <div class="modal-box" style="text-align:center; max-width:400px;">
+            <h3 style="margin-bottom:25px;">نوع المحتوى للإضافة</h3>
+            <div style="display:flex; gap:20px; justify-content:center;">
+                <div onclick="openVideoModal()" style="cursor:pointer; transition:0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                    <div style="width:70px; height:70px; background:#e74c3c; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 10px; color:#fff; font-size:1.8rem; box-shadow:0 10px 20px rgba(231, 76, 60, 0.3);">
+                        <i class="fab fa-youtube"></i>
+                    </div>
+                    <b>فيديو</b>
+                </div>
+                <div onclick="openExamModal()" style="cursor:pointer; transition:0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                    <div style="width:70px; height:70px; background:#3498db; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 10px; color:#fff; font-size:1.8rem; box-shadow:0 10px 20px rgba(52, 152, 219, 0.3);">
+                        <i class="fas fa-clipboard-list"></i>
+                    </div>
+                    <b>امتحان</b>
+                </div>
+            </div>
+            <button onclick="closeModal('contentSelectModal')" style="margin-top:25px; padding:10px; background:#eee; border:none; border-radius:8px; width:100%; cursor:pointer;">إغلاق</button>
+        </div>
+    </div>
+
+    <!-- Video Modal -->
+    <div id="videoModal" class="modal-overlay">
+        <div class="modal-box">
+            <h3 style="margin-bottom:20px;"><i class="fab fa-youtube" style="color:red"></i> إضافة فيديو</h3>
+            <input id="vTitle" class="inp-field" placeholder="عنوان الدرس">
+            <input id="vUrl" class="inp-field" placeholder="رابط الفيديو (Youtube URL)">
+            <button class="btn-main" style="width:100%; justify-content:center;" onclick="addVideo()">نشر الفيديو</button>
+            <button onclick="closeModal('videoModal')" style="width:100%; margin-top:10px; background:none; border:none; cursor:pointer;">إلغاء</button>
+        </div>
+    </div>
+
+    <!-- Exam Modal -->
+    <div id="examModal" class="modal-overlay">
+        <div class="modal-box" style="max-width:700px;">
+            <h3 style="margin-bottom:20px; color:var(--primary);"><i class="fas fa-file-alt"></i> إضافة امتحان</h3>
+            <input id="eTitle" class="inp-field" placeholder="عنوان الامتحان" style="font-weight:bold;">
+            
+            <div id="questionsContainer" style="max-height:50vh; overflow-y:auto; padding:5px;"></div>
+            
+            <button onclick="addQuestionUI()" style="width:100%; padding:12px; border:2px dashed #ccc; background:#f9f9f9; border-radius:10px; margin:15px 0; cursor:pointer; font-weight:bold; color:#555;">
+                <i class="fas fa-plus"></i> إضافة سؤال جديد
+            </button>
+            
+            <button class="btn-main" style="width:100%; justify-content:center;" onclick="addExam()">نشر الامتحان</button>
+            <button onclick="closeModal('examModal')" style="width:100%; margin-top:10px; background:none; border:none; cursor:pointer;">إلغاء</button>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getDatabase, ref, push, set, onValue, remove, update } 
+        from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCsnZdFrg-KlWFc0z6OgmXgBp6lPKf14fU",
+            authDomain: "saifsa-b51f1.firebaseapp.com",
+            databaseURL: "https://saifsa-b51f1-default-rtdb.europe-west1.firebasedatabase.app",
+            projectId: "saifsa-b51f1",
+            storageBucket: "saifsa-b51f1.firebasestorage.app",
+            messagingSenderId: "41089917871",
+            appId: "1:41089917871:web:fce49f6f23bd4f679b055a",
+            measurementId: "G-4K733KS3CP"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        // --- GLOBAL VARIABLES ---
+        let currentTeacherId = null;
+        let activePkgId = null;
+        let activeWeekId = null;
+
+        // القائمة الكاملة للمدرسين (8 مدرسين)
+        const allTeachers = [
+            { id: "t1", name: "Miss May", subject: "لغة إنجليزية", img: "https://i.postimg.cc/hGYYpxyS/image_(1).png" },
+            { id: "t2", name: "أ/ خالد صقر", subject: "علوم متكاملة", img: "https://i.postimg.cc/25tt2vc6/image_(2).png" },
+            { id: "t3", name: "Englishawy", subject: "لغة إنجليزية", img: "https://i.postimg.cc/W4yyXrWt/image_(4).png" },
+            { id: "t4", name: "أ/ محمد صلاح", subject: "لغة عربية", img: "https://i.postimg.cc/ydSb5dt6/image_(5).png" },
+            { id: "t5", name: "جيو/ ماجد إمام", subject: "علوم متكاملة", img: "https://i.postimg.cc/76TWc6df/image_(6).png" },
+            { id: "t6", name: "أ/ محمد عبد الجواد", subject: "علوم متكاملة", img: "https://i.postimg.cc/yNGGv9f5/c78ffbf64a791da67752132a9aaf7c8f127fc4f4.jpg" },
+            { id: "t7", name: "Minology", subject: "فلسفة", img: "https://i.postimg.cc/K4Sq9sKj/Gemini-Generated-Image-3j04bf3j04bf3j04.png" },
+            { id: "t8", name: "أ/ لطفي زهران", subject: "رياضيات", img: "https://i.postimg.cc/7ZMs9kgG/Gemini-Generated-Image-7ou14v7ou14v7ou1.png" }
+        ];
+
+        // --- 1. INITIALIZATION & RENDERING ---
+        window.onload = () => {
+            renderTeachersGrid();
+        };
+
+        function renderTeachersGrid() {
+            const grid = document.getElementById('teachersGrid');
+            grid.innerHTML = allTeachers.map(t => `
+                <div class="admin-card" onclick="openTeacherManager('${t.id}')">
+                    <div class="ac-header">
+                        <img src="${t.img}" class="ac-img">
+                    </div>
+                    <div class="ac-body">
+                        <h3 class="ac-name">${t.name}</h3>
+                        <div class="ac-subject"><i class="fas fa-book"></i> ${t.subject}</div>
+                        <button class="ac-action">إدارة المحتوى <i class="fas fa-arrow-left"></i></button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // --- 2. MANAGER VIEW LOGIC ---
+        window.openTeacherManager = (tId) => {
+            const teacher = allTeachers.find(t => t.id === tId);
+            currentTeacherId = tId;
+            
+            // Set Header Info
+            document.getElementById('mng-img').src = teacher.img;
+            document.getElementById('mng-name').innerText = teacher.name;
+            document.getElementById('mng-subject').innerText = teacher.subject;
+
+            // Switch Views
+            document.getElementById('view-teachers').classList.add('hidden');
+            document.getElementById('view-manager').classList.remove('hidden');
+            window.scrollTo(0,0);
+
+            // Load Data
+            loadPackages(tId);
+        };
+
+        window.closeManager = () => {
+            document.getElementById('view-manager').classList.add('hidden');
+            document.getElementById('view-teachers').classList.remove('hidden');
+            currentTeacherId = null;
+        };
+
+        // --- 3. FIREBASE PACKAGE MANAGEMENT ---
+        function loadPackages(tId) {
+            const container = document.getElementById('packagesContainer');
+            container.innerHTML = '<div style="text-align:center; padding:40px; color:#888;"><i class="fas fa-spinner fa-spin"></i> جاري التحميل...</div>';
+            
+            const refPath = ref(db, `teachers/${tId}/packages`);
+            
+            onValue(refPath, (snapshot) => {
+                container.innerHTML = '';
+                if(!snapshot.exists()) {
+                    container.innerHTML = `
+                        <div style="text-align:center; padding:50px; background:#fff; border-radius:15px; border:2px dashed #ddd;">
+                            <i class="fas fa-box-open" style="font-size:3rem; color:#ddd; margin-bottom:15px;"></i>
+                            <h3 style="color:#777;">لا توجد باقات لهذا المدرس</h3>
+                            <button class="btn-main" style="margin-top:15px;" onclick="openModal('pkgModal')">أضف أول باقة</button>
+                        </div>`;
+                    return;
+                }
+
+                const data = snapshot.val();
+                Object.entries(data).forEach(([key, pkg]) => {
+                    const pkgCard = document.createElement('div');
+                    pkgCard.className = 'pkg-card';
+                    pkgCard.innerHTML = `
+                        <div class="pkg-head">
+                            <div style="display:flex; align-items:center; gap:15px;">
+                                <img src="${pkg.image || 'https://via.placeholder.com/50'}" style="width:50px; height:50px; border-radius:8px; object-fit:cover;">
+                                <div>
+                                    <div class="pkg-title">${pkg.title}</div>
+                                    <div class="pkg-badges">
+                                        <span class="badge b-type">${pkg.type}</span>
+                                        <span class="badge b-price">${pkg.price} جنية</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="display:flex; gap:10px;">
+                                <button onclick="addWeek('${key}')" class="btn-main" style="padding:8px 15px; font-size:0.85rem; background:var(--secondary);">
+                                    <i class="fas fa-plus"></i> أسبوع
+                                </button>
+                                <button onclick="deletePkg('${key}')" style="background:#fee; color:#c0392b; border:1px solid #fab; padding:8px 12px; border-radius:8px; cursor:pointer;">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div id="weeks-${key}" style="padding-bottom:10px;"></div>
+                    `;
+                    container.appendChild(pkgCard);
+                    loadWeeks(tId, key);
+                });
+            });
+        }
+
+        window.createPackage = () => {
+            const title = document.getElementById('pTitle').value;
+            const type = document.getElementById('pType').value;
+            const price = document.getElementById('pPrice').value;
+            const img = document.getElementById('pImg').value;
+            const desc = document.getElementById('pDesc').value;
+
+            if(!title) return alert('الرجاء كتابة اسم الباقة');
+
+            const newPkgRef = push(ref(db, `teachers/${currentTeacherId}/packages`));
+            set(newPkgRef, {
+                title, type, price: price || 0, image: img, description: desc
+            }).then(() => {
+                closeModal('pkgModal');
+                showToast();
+                // Reset Fields
+                document.getElementById('pTitle').value = '';
+                document.getElementById('pPrice').value = '';
+            });
+        };
+
+        window.deletePkg = (pkgId) => {
+            if(confirm('هل أنت متأكد من حذف هذه الباقة وجميع محتوياتها؟')) {
+                remove(ref(db, `teachers/${currentTeacherId}/packages/${pkgId}`));
+            }
+        };
+
+        // --- 4. WEEKS & CONTENT MANAGEMENT ---
+        function loadWeeks(tId, pkgId) {
+            const weeksRef = ref(db, `teachers/${tId}/packages/${pkgId}/weeks`);
+            onValue(weeksRef, (snapshot) => {
+                const wContainer = document.getElementById(`weeks-${pkgId}`);
+                wContainer.innerHTML = '';
+                
+                if(snapshot.exists()) {
+                    const weeks = snapshot.val();
+                    Object.entries(weeks).forEach(([wId, week]) => {
+                        const wDiv = document.createElement('div');
+                        wDiv.className = 'week-item';
+                        wDiv.innerHTML = `
+                            <div class="week-header" onclick="toggleWeek(this)">
+                                <span><i class="far fa-calendar-alt"></i> ${week.title}</span>
+                                <div style="display:flex; align-items:center; gap:10px;">
+                                    <button onclick="prepareAddContent('${pkgId}', '${wId}', event)" style="background:#e3f2fd; color:#1565c0; border:none; padding:5px 10px; border-radius:5px; font-weight:bold; font-size:0.8rem; cursor:pointer;">
+                                        <i class="fas fa-plus"></i> محتوى
+                                    </button>
+                                    <i class="fas fa-chevron-down" style="color:#aaa;"></i>
+                                </div>
+                            </div>
+                            <div class="week-content" id="content-${wId}"></div>
+                        `;
+                        wContainer.appendChild(wDiv);
+                        loadContent(tId, pkgId, wId);
+                    });
+                }
+            });
+        }
+
+        window.addWeek = (pkgId) => {
+            const newWeekRef = push(ref(db, `teachers/${currentTeacherId}/packages/${pkgId}/weeks`));
+            set(newWeekRef, { title: "أسبوع جديد" });
+        };
+
+        window.toggleWeek = (header) => {
+            const content = header.nextElementSibling;
+            content.classList.toggle('active');
+            const icon = header.querySelector('.fa-chevron-down');
+            if(icon) icon.style.transform = content.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0deg)';
+        };
+
+        function loadContent(tId, pkgId, wId) {
+            const cRef = ref(db, `teachers/${tId}/packages/${pkgId}/weeks/${wId}/content`);
+            onValue(cRef, (snapshot) => {
+                const cContainer = document.getElementById(`content-${wId}`);
+                cContainer.innerHTML = '';
+                
+                if(snapshot.exists()) {
+                    Object.entries(snapshot.val()).forEach(([cId, item]) => {
+                        const isVideo = item.type === 'video';
+                        const iconClass = isVideo ? 'fa-play' : 'fa-file-alt';
+                        const iconColor = isVideo ? '#e74c3c' : '#3498db';
+                        
+                        cContainer.innerHTML += `
+                            <div class="content-row">
+                                <div style="display:flex; align-items:center;">
+                                    <div class="c-type-icon" style="background:${iconColor};"><i class="fas ${iconClass}"></i></div>
+                                    <span style="font-weight:600; margin-right:10px; color:#444;">${item.title}</span>
+                                </div>
+                                <button onclick="deleteContent('${pkgId}', '${wId}', '${cId}')" style="color:#e74c3c; background:none; border:none; cursor:pointer; font-size:1rem; padding:5px;"><i class="fas fa-times"></i></button>
+                            </div>
+                        `;
+                    });
+                } else {
+                    cContainer.innerHTML = '<div style="font-size:0.8rem; color:#999; text-align:center; padding:5px;">لا يوجد محتوى</div>';
+                }
+            });
+        }
+
+        window.prepareAddContent = (pId, wId, e) => {
+            e.stopPropagation();
+            activePkgId = pId;
+            activeWeekId = wId;
+            openModal('contentSelectModal');
+        };
+
+        window.deleteContent = (pId, wId, cId) => {
+            if(confirm('حذف هذا المحتوى؟')) {
+                remove(ref(db, `teachers/${currentTeacherId}/packages/${pId}/weeks/${wId}/content/${cId}`));
+            }
+        };
+
+        // --- 5. ADDING SPECIFIC CONTENT ---
+        window.openVideoModal = () => { closeModal('contentSelectModal'); openModal('videoModal'); };
+        window.openExamModal = () => { 
+            closeModal('contentSelectModal'); 
+            document.getElementById('questionsContainer').innerHTML = ''; 
+            addQuestionUI(); 
+            openModal('examModal'); 
+        };
+
+        window.addVideo = () => {
+            const title = document.getElementById('vTitle').value;
+            const url = document.getElementById('vUrl').value;
+            if(!title || !url) return alert("أكمل البيانات");
+
+            push(ref(db, `teachers/${currentTeacherId}/packages/${activePkgId}/weeks/${activeWeekId}/content`), {
+                type: 'video', title, url
+            }).then(() => { closeModal('videoModal'); showToast(); });
+        };
+
+        // Exam Logic
+        window.addQuestionUI = () => {
+            const container = document.getElementById('questionsContainer');
+            const div = document.createElement('div');
+            const qId = Date.now();
+            div.className = 'q-box';
+            div.innerHTML = `
+                <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+                    <span style="font-weight:bold; color:var(--primary);">سؤال جديد</span>
+                    <button onclick="this.parentElement.parentElement.remove()" style="color:red; border:none; background:none; cursor:pointer;"><i class="fas fa-trash"></i></button>
+                </div>
+                <input class="inp-field q-text" placeholder="نص السؤال" style="border-color:#ccc;">
+                ${[1,2,3,4].map((n, i) => `
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:5px;">
+                        <input type="radio" name="rad_${qId}" value="${i}" ${i===0?'checked':''}>
+                        <input class="inp-field opt" placeholder="الخيار ${n}" style="margin-bottom:0; padding:8px;">
+                    </div>
+                `).join('')}
+            `;
+            container.appendChild(div);
+        };
+
+        window.addExam = () => {
+            const title = document.getElementById('eTitle').value;
+            const qBoxes = document.querySelectorAll('.q-box');
+            let questions = [];
+
+            qBoxes.forEach(box => {
+                const text = box.querySelector('.q-text').value;
+                const opts = Array.from(box.querySelectorAll('.opt')).map(i => i.value);
+                let correct = 0;
+                box.querySelectorAll('input[type="radio"]').forEach((r, idx) => { if(r.checked) correct = idx; });
+                
+                if(text) questions.push({ text, options: opts, correct });
+            });
+
+            if(!title || questions.length === 0) return alert("يجب إضافة عنوان وسؤال واحد على الأقل");
+
+            push(ref(db, `teachers/${currentTeacherId}/packages/${activePkgId}/weeks/${activeWeekId}/content`), {
+                type: 'exam', title, questions
+            }).then(() => { closeModal('examModal'); showToast(); });
+        };
+
+        // --- HELPERS ---
+        window.openModal = (id) => document.getElementById(id).style.display = 'flex';
+        window.closeModal = (id) => document.getElementById(id).style.display = 'none';
+        window.showToast = () => {
+            const t = document.getElementById('toast');
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 3000);
+        };
+
+    </script>
+</body>
+</html>
