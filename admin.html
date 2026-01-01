@@ -4,298 +4,357 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>لوحة الإدارة المركزية | النخبة</title>
+    
+    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            --primary: #c0392b;
-            --primary-light: #e74c3c;
-            --secondary: #2c3e50;
-            --accent: #f1c40f;
-            --bg-body: #f0f2f5;
-            --glass-bg: #ffffff;
+            --primary: #c0392b;       /* اللون الأحمر الأساسي */
+            --primary-dark: #a93226;
+            --secondary: #2c3e50;     /* اللون الكحلي */
+            --accent: #f1c40f;        /* اللون الأصفر */
+            --success: #27ae60;       /* الأخضر للقبول */
+            --danger: #c0392b;        /* الأحمر للحذف والرفض */
+            --bg-body: #f4f6f9;
+            --white: #ffffff;
             --text-main: #2c3e50;
-            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            --radius: 15px;
+            --text-light: #7f8c8d;
+            --shadow: 0 4px 15px rgba(0,0,0,0.05);
+            --radius: 12px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; outline: none; }
         
-        body {
-            background-color: var(--bg-body);
-            color: var(--text-main);
-            min-height: 100vh;
-        }
+        body { background-color: var(--bg-body); color: var(--text-main); padding-bottom: 50px; }
 
-        /* --- Header --- */
+        /* --- HEADER --- */
         header {
-            background: var(--secondary);
-            color: #fff;
-            padding: 15px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            background: var(--secondary); color: var(--white);
+            padding: 15px 5%; display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100;
         }
-        .admin-logo { font-size: 1.4rem; font-weight: 900; display: flex; align-items: center; gap: 10px; }
-        .admin-badge { background: var(--accent); color: var(--secondary); padding: 4px 12px; border-radius: 50px; font-size: 0.8rem; font-weight: bold; }
+        .brand { font-size: 1.4rem; font-weight: 900; display: flex; align-items: center; gap: 10px; }
+        .admin-badge { background: var(--accent); color: var(--secondary); padding: 5px 15px; border-radius: 50px; font-weight: bold; font-size: 0.85rem; }
 
-        /* --- Layout --- */
+        /* --- CONTAINER --- */
         .container { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
+        .hidden { display: none !important; }
 
-        /* --- View: Teachers Grid (Main) --- */
+        /* --- BUTTONS STYLES --- */
+        .btn { border: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; gap: 8px; font-size: 0.95rem; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        
+        .btn-primary { background: var(--primary); color: #fff; }
+        .btn-primary:hover { background: var(--primary-dark); }
+        
+        .btn-success { background: var(--success); color: #fff; }
+        .btn-danger { background: var(--danger); color: #fff; }
+        .btn-outline { background: transparent; border: 2px solid var(--text-light); color: var(--text-light); }
+        .btn-outline:hover { border-color: var(--secondary); color: var(--secondary); }
+
+        .btn-sm { padding: 5px 10px; font-size: 0.85rem; }
+
+        /* --- TEACHERS GRID VIEW --- */
         .grid-header { margin-bottom: 30px; border-bottom: 2px solid #e0e0e0; padding-bottom: 15px; }
-        .grid-header h2 { font-weight: 800; color: var(--secondary); }
-
-        .teachers-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px;
-        }
-        .admin-card {
-            background: #fff; border-radius: var(--radius); overflow: hidden;
-            box-shadow: var(--shadow); transition: 0.3s; cursor: pointer;
-            border: 1px solid transparent; position: relative;
-        }
-        .admin-card:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+        .teachers-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
         
-        .ac-header { height: 100px; background: linear-gradient(45deg, var(--secondary), #34495e); position: relative; }
-        .ac-img { 
-            width: 90px; height: 90px; border-radius: 50%; object-fit: cover; 
-            border: 4px solid #fff; position: absolute; bottom: -45px; right: 20px;
-            background: #fff;
+        .teacher-card {
+            background: var(--white); border-radius: var(--radius); overflow: hidden;
+            box-shadow: var(--shadow); transition: 0.3s; border: 1px solid transparent;
+            cursor: pointer; position: relative;
         }
-        .ac-body { padding: 50px 20px 20px; }
-        .ac-name { font-size: 1.2rem; font-weight: 800; color: var(--secondary); margin-bottom: 5px; }
-        .ac-subject { font-size: 0.9rem; color: #777; font-weight: 600; display: flex; align-items: center; gap: 5px; }
-        .ac-action { 
-            margin-top: 20px; padding: 10px; width: 100%; border: none; 
-            background: #f8f9fa; color: var(--primary); font-weight: bold; 
-            border-radius: 8px; cursor: pointer; transition: 0.2s;
-        }
-        .admin-card:hover .ac-action { background: var(--primary); color: #fff; }
-
-        /* --- View: Dashboard (Manager) --- */
-        .dash-top-bar {
-            display: flex; align-items: center; justify-content: space-between;
-            background: #fff; padding: 20px; border-radius: var(--radius);
-            box-shadow: var(--shadow); margin-bottom: 30px;
-        }
-        .teacher-info-mini { display: flex; align-items: center; gap: 15px; }
-        .mini-img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent); }
+        .teacher-card:hover { transform: translateY(-5px); border-color: var(--primary); }
         
-        .back-btn {
-            background: #f0f2f5; color: var(--text-main); border: none; padding: 10px 20px;
-            border-radius: 50px; cursor: pointer; font-weight: bold; display: flex; align-items: center; gap: 8px;
-            transition: 0.3s;
+        .tc-head { height: 100px; background: linear-gradient(135deg, var(--secondary), #34495e); position: relative; }
+        .tc-img { 
+            width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 4px solid #fff;
+            position: absolute; bottom: -40px; right: 20px; background: #fff;
         }
-        .back-btn:hover { background: #e0e0e0; }
+        .tc-body { padding: 50px 20px 20px; }
+        .tc-name { font-size: 1.2rem; font-weight: 800; color: var(--secondary); }
+        .tc-sub { font-size: 0.9rem; color: var(--text-light); margin-bottom: 15px; }
+        .tc-btn { width: 100%; justify-content: center; background: #f0f2f5; color: var(--secondary); }
+        .teacher-card:hover .tc-btn { background: var(--primary); color: #fff; }
 
-        .btn-main {
-            background: var(--primary); color: #fff; border: none; padding: 12px 25px; 
-            border-radius: 10px; font-weight: bold; cursor: pointer; display: inline-flex; 
-            align-items: center; gap: 10px; box-shadow: 0 4px 10px rgba(192, 57, 43, 0.3);
-            transition: 0.3s;
+        /* --- DASHBOARD VIEW --- */
+        .dash-header {
+            background: var(--white); padding: 20px; border-radius: var(--radius);
+            box-shadow: var(--shadow); margin-bottom: 25px;
+            display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px;
         }
-        .btn-main:hover { background: var(--primary-light); transform: translateY(-2px); }
+        .dh-info { display: flex; align-items: center; gap: 15px; }
+        .dh-img { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent); }
+        
+        /* Tabs */
+        .tabs-container { display: flex; background: #f0f2f5; padding: 5px; border-radius: 50px; gap: 5px; }
+        .tab-btn {
+            background: transparent; border: none; padding: 10px 25px; border-radius: 40px;
+            font-weight: bold; color: #7f8c8d; cursor: pointer; transition: 0.3s;
+        }
+        .tab-btn.active { background: var(--secondary); color: #fff; box-shadow: 0 4px 10px rgba(44, 62, 80, 0.3); }
+        .badge-count { background: var(--danger); color: #fff; padding: 2px 8px; border-radius: 10px; font-size: 0.75rem; margin-right: 5px; }
 
-        /* --- Package Cards --- */
-        .pkg-card {
-            background: #fff; border-radius: var(--radius); margin-bottom: 25px;
-            box-shadow: var(--shadow); overflow: hidden; border: 1px solid #eee;
+        /* --- PACKAGES LIST --- */
+        .pkg-card { background: var(--white); border-radius: var(--radius); margin-bottom: 20px; box-shadow: var(--shadow); overflow: hidden; border: 1px solid #eee; }
+        .pkg-header {
+            padding: 15px 20px; background: #fafafa; border-bottom: 1px solid #eee;
+            display: flex; justify-content: space-between; align-items: center;
         }
-        .pkg-head {
-            padding: 20px; background: #fafafa; border-bottom: 1px solid #eee;
-            display: flex; flex-wrap: wrap; gap: 15px; justify-content: space-between; align-items: center;
-        }
-        .pkg-title { font-size: 1.1rem; font-weight: 800; color: var(--secondary); }
-        .pkg-badges { display: flex; gap: 10px; font-size: 0.85rem; }
-        .badge { padding: 4px 10px; border-radius: 6px; font-weight: bold; }
-        .b-type { background: #e3f2fd; color: #1976d2; }
-        .b-price { background: #e8f5e9; color: #2e7d32; }
-
-        .week-item {
-            border: 1px solid #eee; border-radius: 10px; margin: 15px 20px; overflow: hidden;
-        }
-        .week-header {
-            padding: 15px; background: #fff; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        .pkg-title { font-weight: 800; font-size: 1.1rem; color: var(--secondary); }
+        .pkg-meta { font-size: 0.9rem; color: var(--text-light); display: flex; gap: 10px; margin-top: 5px; }
+        .tag { background: #e0f7fa; color: #006064; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; }
+        
+        .week-container { padding: 15px; }
+        .week-item { border: 1px solid #eee; border-radius: 10px; margin-bottom: 15px; overflow: hidden; }
+        .week-top {
+            padding: 12px 15px; background: #fff; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
             font-weight: 700; transition: 0.2s;
         }
-        .week-header:hover { background: #f8f9fa; }
+        .week-top:hover { background: #f9f9f9; }
         .week-content { display: none; background: #fafafa; border-top: 1px solid #eee; padding: 10px; }
-        .week-content.active { display: block; animation: slideDown 0.3s ease; }
+        .week-content.open { display: block; animation: fadeIn 0.3s; }
 
         .content-row {
-            display: flex; align-items: center; justify-content: space-between;
-            background: #fff; padding: 10px 15px; margin-bottom: 8px;
-            border-radius: 8px; border: 1px solid #eee;
+            display: flex; justify-content: space-between; align-items: center;
+            background: #fff; padding: 10px; margin-bottom: 8px; border-radius: 8px; border: 1px solid #eee;
         }
-        .c-type-icon { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; margin-left: 10px; font-size: 0.8rem; }
+        .c-icon { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 0.9rem; }
 
-        /* --- Modals --- */
+        /* --- REQUESTS GRID --- */
+        .req-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+        .req-card {
+            background: var(--white); border-radius: 15px; overflow: hidden;
+            box-shadow: var(--shadow); border: 1px solid #eee; display: flex; flex-direction: column;
+        }
+        .req-img-wrapper {
+            height: 180px; background: #000; position: relative; overflow: hidden; cursor: pointer;
+        }
+        .req-img-wrapper img { width: 100%; height: 100%; object-fit: contain; transition: 0.3s; opacity: 0.9; }
+        .req-img-wrapper:hover img { transform: scale(1.05); opacity: 1; }
+        .zoom-hint { position: absolute; bottom: 10px; left: 10px; background: rgba(0,0,0,0.6); color: #fff; padding: 5px 10px; border-radius: 20px; font-size: 0.8rem; }
+
+        .req-details { padding: 15px; flex: 1; }
+        .req-name { font-weight: 800; font-size: 1.1rem; color: var(--secondary); margin-bottom: 8px; }
+        .req-line { font-size: 0.9rem; color: #555; margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
+        .req-line i { color: var(--primary); width: 20px; text-align: center; }
+        
+        .req-actions { padding: 15px; display: flex; gap: 10px; border-top: 1px solid #eee; background: #fafafa; }
+        .req-actions button { flex: 1; justify-content: center; }
+
+        /* --- MODALS --- */
         .modal-overlay {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(5px);
+            position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px);
             z-index: 1000; display: none; justify-content: center; align-items: center; padding: 20px;
         }
         .modal-box {
-            background: #fff; width: 100%; max-width: 550px; padding: 30px; 
-            border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-            max-height: 90vh; overflow-y: auto;
+            background: #fff; width: 100%; max-width: 500px; padding: 30px;
+            border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            max-height: 90vh; overflow-y: auto; animation: slideUp 0.3s;
         }
+        .inp-group { margin-bottom: 15px; }
+        .inp-label { display: block; font-weight: bold; margin-bottom: 5px; color: var(--secondary); }
         .inp-field {
-            width: 100%; padding: 12px; margin-bottom: 15px; border: 2px solid #eee;
-            border-radius: 10px; font-size: 0.95rem; transition: 0.3s;
+            width: 100%; padding: 12px; border: 2px solid #eee; border-radius: 10px;
+            font-size: 1rem; transition: 0.3s;
         }
         .inp-field:focus { border-color: var(--primary); }
-        .q-box { background: #f9f9f9; padding: 15px; border-radius: 10px; border: 1px solid #eee; margin-bottom: 15px; }
+        
+        /* Preview Modal */
+        #imgPreviewModal .modal-box { max-width: 800px; background: transparent; box-shadow: none; padding: 0; text-align: center; }
+        #previewImgSrc { max-width: 100%; max-height: 85vh; border-radius: 10px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
 
-        /* Helpers */
-        .hidden { display: none !important; }
-        @keyframes slideDown { from {opacity:0; transform: translateY(-10px);} to {opacity:1; transform: translateY(0);} }
+        /* Question Box */
+        .q-box { background: #f8f9fa; border: 1px solid #e0e0e0; padding: 15px; border-radius: 10px; margin-bottom: 10px; position: relative; }
+        .del-q-btn { position: absolute; top: 10px; left: 10px; color: var(--danger); background: none; border: none; cursor: pointer; }
 
+        @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+        @keyframes slideUp { from { transform: translateY(20px); opacity:0; } to { transform: translateY(0); opacity:1; } }
+
+        /* Toast */
         #toast {
-            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(50px);
-            background: var(--secondary); color: #fff; padding: 10px 25px; border-radius: 50px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2); opacity: 0; transition: 0.4s; z-index: 2000; font-weight: bold;
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px);
+            background: var(--secondary); color: #fff; padding: 12px 30px; border-radius: 50px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2); transition: 0.4s; z-index: 2000; opacity: 0;
         }
         #toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
     </style>
 </head>
 <body>
 
-    <!-- Toast Notification -->
-    <div id="toast"><i class="fas fa-check-circle"></i> تم الحفظ بنجاح</div>
+    <div id="toast"><i class="fas fa-check-circle"></i> تم تنفيذ العملية بنجاح</div>
 
     <!-- Header -->
     <header>
-        <div class="admin-logo">
-            <i class="fas fa-shield-alt" style="color:var(--primary);"></i>
+        <div class="brand">
+            <i class="fas fa-graduation-cap" style="color:var(--accent);"></i>
             <span>لوحة الإدارة</span>
         </div>
-        <div class="admin-badge">مدير النظام <i class="fas fa-user-tie"></i></div>
+        <div class="admin-badge">
+            <i class="fas fa-user-shield"></i> المدير المسؤول
+        </div>
     </header>
 
-    <!-- 1. VIEW: TEACHERS SELECTION (MAIN HOME) -->
+    <!-- VIEW 1: TEACHERS LIST -->
     <div id="view-teachers" class="container">
         <div class="grid-header">
-            <h2>إدارة المدرسين</h2>
-            <p style="color:#666; margin-top:5px;">اختر المدرس لإدارة المحتوى والطلاب والكورسات الخاصة به</p>
+            <h2><i class="fas fa-chalkboard-teacher" style="color:var(--primary);"></i> اختر المدرس</h2>
+            <p style="color:#7f8c8d;">اضغط على كارت المدرس لإدارة المحتوى والطلبات الخاصة به.</p>
         </div>
         <div class="teachers-grid" id="teachersGrid"></div>
     </div>
 
-    <!-- 2. VIEW: TEACHER MANAGER (DASHBOARD) -->
+    <!-- VIEW 2: TEACHER DASHBOARD -->
     <div id="view-manager" class="container hidden">
-        <!-- Top Navigation Bar -->
-        <div class="dash-top-bar">
-            <div class="teacher-info-mini">
-                <button class="back-btn" onclick="closeManager()"><i class="fas fa-arrow-right"></i> مدرسين آخرين</button>
-                <div style="width:1px; height:30px; background:#ddd; margin:0 10px;"></div>
-                <img id="mng-img" src="" class="mini-img">
+        
+        <!-- Dashboard Top Bar -->
+        <div class="dash-header">
+            <div class="dh-info">
+                <button class="btn btn-outline" onclick="closeManager()">
+                    <i class="fas fa-arrow-right"></i> خروج
+                </button>
+                <div style="width:1px; height:40px; background:#ddd; margin:0 10px;"></div>
+                <img id="mng-img" src="" class="dh-img">
                 <div>
-                    <h3 id="mng-name" style="line-height:1; margin-bottom:3px; color:var(--secondary);"></h3>
-                    <span id="mng-subject" style="font-size:0.8rem; color:#777;"></span>
+                    <h3 id="mng-name" style="margin-bottom:2px; line-height:1;"></h3>
+                    <span id="mng-subject" style="font-size:0.9rem; color:#777;"></span>
                 </div>
             </div>
-            <div>
-                <button class="btn-main" onclick="openModal('pkgModal')"><i class="fas fa-plus-circle"></i> باقة جديدة</button>
+
+            <div class="tabs-container">
+                <button class="tab-btn active" onclick="switchTab('packages', this)">
+                    <i class="fas fa-layer-group"></i> الباقات والمحتوى
+                </button>
+                <button class="tab-btn" onclick="switchTab('requests', this)">
+                    <i class="fas fa-users"></i> الطلبات 
+                    <span id="reqBadge" class="badge-count hidden">0</span>
+                </button>
             </div>
+
+            <button class="btn btn-primary" id="btnAddPkg" onclick="openModal('pkgModal')">
+                <i class="fas fa-plus"></i> إضافة باقة
+            </button>
         </div>
 
-        <!-- Packages List Area -->
-        <div id="packagesContainer"></div>
+        <!-- TAB CONTENT: PACKAGES -->
+        <div id="tab-packages">
+            <div id="packagesContainer"></div>
+        </div>
+
+        <!-- TAB CONTENT: REQUESTS -->
+        <div id="tab-requests" class="hidden">
+            <div class="req-grid" id="requestsContainer"></div>
+        </div>
+
     </div>
 
-    <!-- MODALS -->
-
-    <!-- Create Package Modal -->
+    <!-- MODAL: ADD PACKAGE -->
     <div id="pkgModal" class="modal-overlay">
         <div class="modal-box">
-            <h3 style="margin-bottom:20px; color:var(--secondary);">إنشاء كورس / باقة جديدة</h3>
-            <label style="font-weight:bold; display:block; margin-bottom:5px;">اسم الكورس</label>
-            <input type="text" id="pTitle" class="inp-field" placeholder="مثال: مراجعة الباب الأول">
+            <h3 style="margin-bottom:20px; color:var(--secondary);">إضافة كورس / باقة جديدة</h3>
             
-            <div style="display:flex; gap:10px;">
-                <div style="flex:1">
-                    <label style="font-weight:bold; display:block; margin-bottom:5px;">النظام</label>
+            <div class="inp-group">
+                <label class="inp-label">اسم الباقة</label>
+                <input type="text" id="pTitle" class="inp-field" placeholder="مثال: مراجعة الباب الأول">
+            </div>
+
+            <div style="display:flex; gap:15px;">
+                <div class="inp-group" style="flex:1;">
+                    <label class="inp-label">النوع</label>
                     <select id="pType" class="inp-field">
                         <option value="شهر">نظام شهر</option>
                         <option value="ترم">ترم كامل</option>
-                        <option value="مجاني">كورس مجاني</option>
+                        <option value="كورس">كورس مكثف</option>
                     </select>
                 </div>
-                <div style="flex:1">
-                    <label style="font-weight:bold; display:block; margin-bottom:5px;">السعر</label>
+                <div class="inp-group" style="flex:1;">
+                    <label class="inp-label">السعر (جنية)</label>
                     <input type="number" id="pPrice" class="inp-field" placeholder="0">
                 </div>
             </div>
 
-            <label style="font-weight:bold; display:block; margin-bottom:5px;">صورة الغلاف (رابط)</label>
-            <input type="url" id="pImg" class="inp-field" placeholder="https://...">
+            <div class="inp-group">
+                <label class="inp-label">صورة الغلاف (رابط)</label>
+                <input type="url" id="pImg" class="inp-field" placeholder="https://...">
+            </div>
 
-            <label style="font-weight:bold; display:block; margin-bottom:5px;">الوصف</label>
-            <textarea id="pDesc" class="inp-field" rows="3"></textarea>
+            <div class="inp-group">
+                <label class="inp-label">الوصف</label>
+                <textarea id="pDesc" class="inp-field" rows="3" placeholder="وصف محتوى الباقة..."></textarea>
+            </div>
 
-            <button class="btn-main" style="width:100%; justify-content:center;" onclick="createPackage()">حفظ الباقة</button>
-            <button onclick="closeModal('pkgModal')" style="width:100%; margin-top:10px; background:none; border:none; color:#777; cursor:pointer;">إلغاء</button>
+            <button class="btn btn-primary" style="width:100%; justify-content:center;" onclick="createPackage()">حفظ الباقة</button>
+            <button onclick="closeModal('pkgModal')" style="width:100%; margin-top:10px; background:none; border:none; cursor:pointer; color:#777;">إلغاء</button>
         </div>
     </div>
 
-    <!-- Content Selection Modal -->
+    <!-- MODAL: CONTENT TYPE SELECTOR -->
     <div id="contentSelectModal" class="modal-overlay">
         <div class="modal-box" style="text-align:center; max-width:400px;">
-            <h3 style="margin-bottom:25px;">نوع المحتوى للإضافة</h3>
-            <div style="display:flex; gap:20px; justify-content:center;">
-                <div onclick="openVideoModal()" style="cursor:pointer; transition:0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-                    <div style="width:70px; height:70px; background:#e74c3c; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 10px; color:#fff; font-size:1.8rem; box-shadow:0 10px 20px rgba(231, 76, 60, 0.3);">
-                        <i class="fab fa-youtube"></i>
-                    </div>
-                    <b>فيديو</b>
-                </div>
-                <div onclick="openExamModal()" style="cursor:pointer; transition:0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-                    <div style="width:70px; height:70px; background:#3498db; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 10px; color:#fff; font-size:1.8rem; box-shadow:0 10px 20px rgba(52, 152, 219, 0.3);">
-                        <i class="fas fa-clipboard-list"></i>
-                    </div>
-                    <b>امتحان</b>
-                </div>
+            <h3 style="margin-bottom:25px;">اختر نوع المحتوى</h3>
+            <div style="display:flex; gap:15px; justify-content:center;">
+                <button onclick="openVideoModal()" class="btn btn-primary" style="flex:1; justify-content:center; background:#e74c3c; height:100px; flex-direction:column;">
+                    <i class="fab fa-youtube" style="font-size:2rem; margin-bottom:5px;"></i> فيديو
+                </button>
+                <button onclick="openExamModal()" class="btn btn-primary" style="flex:1; justify-content:center; background:#3498db; height:100px; flex-direction:column;">
+                    <i class="fas fa-clipboard-list" style="font-size:2rem; margin-bottom:5px;"></i> امتحان
+                </button>
             </div>
-            <button onclick="closeModal('contentSelectModal')" style="margin-top:25px; padding:10px; background:#eee; border:none; border-radius:8px; width:100%; cursor:pointer;">إغلاق</button>
+            <button onclick="closeModal('contentSelectModal')" style="margin-top:20px; border:none; background:none; cursor:pointer; color:#777;">إلغاء</button>
         </div>
     </div>
 
-    <!-- Video Modal -->
+    <!-- MODAL: ADD VIDEO -->
     <div id="videoModal" class="modal-overlay">
         <div class="modal-box">
-            <h3 style="margin-bottom:20px;"><i class="fab fa-youtube" style="color:red"></i> إضافة فيديو</h3>
-            <input id="vTitle" class="inp-field" placeholder="عنوان الدرس">
-            <input id="vUrl" class="inp-field" placeholder="رابط الفيديو (Youtube URL)">
-            <button class="btn-main" style="width:100%; justify-content:center;" onclick="addVideo()">نشر الفيديو</button>
-            <button onclick="closeModal('videoModal')" style="width:100%; margin-top:10px; background:none; border:none; cursor:pointer;">إلغاء</button>
+            <h3 style="margin-bottom:20px; color:#e74c3c;"><i class="fab fa-youtube"></i> إضافة فيديو</h3>
+            <div class="inp-group">
+                <label class="inp-label">عنوان الفيديو</label>
+                <input id="vTitle" class="inp-field" placeholder="شرح الدرس الأول...">
+            </div>
+            <div class="inp-group">
+                <label class="inp-label">رابط الفيديو (Youtube)</label>
+                <input id="vUrl" class="inp-field" placeholder="https://youtube.com/...">
+            </div>
+            <button class="btn btn-primary" style="width:100%; background:#e74c3c; justify-content:center;" onclick="addVideo()">نشر الفيديو</button>
+            <button onclick="closeModal('videoModal')" style="width:100%; margin-top:10px; background:none; border:none; cursor:pointer; color:#777;">إلغاء</button>
         </div>
     </div>
 
-    <!-- Exam Modal -->
+    <!-- MODAL: ADD EXAM -->
     <div id="examModal" class="modal-overlay">
         <div class="modal-box" style="max-width:700px;">
-            <h3 style="margin-bottom:20px; color:var(--primary);"><i class="fas fa-file-alt"></i> إضافة امتحان</h3>
-            <input id="eTitle" class="inp-field" placeholder="عنوان الامتحان" style="font-weight:bold;">
+            <h3 style="margin-bottom:20px; color:#3498db;"><i class="fas fa-clipboard-list"></i> إضافة امتحان</h3>
             
-            <div id="questionsContainer" style="max-height:50vh; overflow-y:auto; padding:5px;"></div>
+            <div class="inp-group">
+                <label class="inp-label">عنوان الامتحان</label>
+                <input id="eTitle" class="inp-field" placeholder="امتحان على الباب الأول">
+            </div>
+
+            <div id="questionsContainer" style="max-height:40vh; overflow-y:auto; padding:5px;"></div>
             
-            <button onclick="addQuestionUI()" style="width:100%; padding:12px; border:2px dashed #ccc; background:#f9f9f9; border-radius:10px; margin:15px 0; cursor:pointer; font-weight:bold; color:#555;">
+            <button onclick="addQuestionUI()" style="width:100%; padding:12px; border:2px dashed #3498db; background:#f0f8ff; color:#3498db; border-radius:10px; margin:15px 0; cursor:pointer; font-weight:bold;">
                 <i class="fas fa-plus"></i> إضافة سؤال جديد
             </button>
             
-            <button class="btn-main" style="width:100%; justify-content:center;" onclick="addExam()">نشر الامتحان</button>
-            <button onclick="closeModal('examModal')" style="width:100%; margin-top:10px; background:none; border:none; cursor:pointer;">إلغاء</button>
+            <button class="btn btn-primary" style="width:100%; background:#3498db; justify-content:center;" onclick="addExam()">نشر الامتحان</button>
+            <button onclick="closeModal('examModal')" style="width:100%; margin-top:10px; background:none; border:none; cursor:pointer; color:#777;">إلغاء</button>
+        </div>
+    </div>
+
+    <!-- MODAL: IMAGE PREVIEW -->
+    <div id="imgPreviewModal" class="modal-overlay" onclick="closeModal('imgPreviewModal')">
+        <div class="modal-box">
+            <img id="previewImgSrc" src="">
+            <p style="color:#fff; margin-top:10px;">اضغط في أي مكان للإغلاق</p>
         </div>
     </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getDatabase, ref, push, set, onValue, remove, update } 
+        import { getDatabase, ref, push, set, onValue, remove, update, get } 
         from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
         const firebaseConfig = {
@@ -316,8 +375,8 @@
         let currentTeacherId = null;
         let activePkgId = null;
         let activeWeekId = null;
+        let teacherPackagesIds = []; 
 
-        // القائمة الكاملة للمدرسين (8 مدرسين)
         const allTeachers = [
             { id: "t1", name: "Miss May", subject: "لغة إنجليزية", img: "https://i.postimg.cc/hGYYpxyS/image_(1).png" },
             { id: "t2", name: "أ/ خالد صقر", subject: "علوم متكاملة", img: "https://i.postimg.cc/25tt2vc6/image_(2).png" },
@@ -329,43 +388,34 @@
             { id: "t8", name: "أ/ لطفي زهران", subject: "رياضيات", img: "https://i.postimg.cc/7ZMs9kgG/Gemini-Generated-Image-7ou14v7ou14v7ou1.png" }
         ];
 
-        // --- 1. INITIALIZATION & RENDERING ---
+        // --- INITIALIZATION ---
         window.onload = () => {
-            renderTeachersGrid();
-        };
-
-        function renderTeachersGrid() {
             const grid = document.getElementById('teachersGrid');
             grid.innerHTML = allTeachers.map(t => `
-                <div class="admin-card" onclick="openTeacherManager('${t.id}')">
-                    <div class="ac-header">
-                        <img src="${t.img}" class="ac-img">
-                    </div>
-                    <div class="ac-body">
-                        <h3 class="ac-name">${t.name}</h3>
-                        <div class="ac-subject"><i class="fas fa-book"></i> ${t.subject}</div>
-                        <button class="ac-action">إدارة المحتوى <i class="fas fa-arrow-left"></i></button>
+                <div class="teacher-card" onclick="openTeacherManager('${t.id}')">
+                    <div class="tc-head"><img src="${t.img}" class="tc-img"></div>
+                    <div class="tc-body">
+                        <h3 class="tc-name">${t.name}</h3>
+                        <div class="tc-sub">${t.subject}</div>
+                        <button class="btn tc-btn">دخول لوحة التحكم <i class="fas fa-arrow-left"></i></button>
                     </div>
                 </div>
             `).join('');
-        }
+        };
 
-        // --- 2. MANAGER VIEW LOGIC ---
+        // --- MANAGER NAVIGATION ---
         window.openTeacherManager = (tId) => {
-            const teacher = allTeachers.find(t => t.id === tId);
             currentTeacherId = tId;
-            
-            // Set Header Info
+            const teacher = allTeachers.find(t => t.id === tId);
             document.getElementById('mng-img').src = teacher.img;
             document.getElementById('mng-name').innerText = teacher.name;
             document.getElementById('mng-subject').innerText = teacher.subject;
-
-            // Switch Views
+            
             document.getElementById('view-teachers').classList.add('hidden');
             document.getElementById('view-manager').classList.remove('hidden');
-            window.scrollTo(0,0);
-
-            // Load Data
+            
+            // Default to packages tab
+            window.switchTab('packages', document.querySelector('.tab-btn'));
             loadPackages(tId);
         };
 
@@ -375,217 +425,277 @@
             currentTeacherId = null;
         };
 
-        // --- 3. FIREBASE PACKAGE MANAGEMENT ---
-        function loadPackages(tId) {
-            const container = document.getElementById('packagesContainer');
-            container.innerHTML = '<div style="text-align:center; padding:40px; color:#888;"><i class="fas fa-spinner fa-spin"></i> جاري التحميل...</div>';
-            
-            const refPath = ref(db, `teachers/${tId}/packages`);
-            
-            onValue(refPath, (snapshot) => {
-                container.innerHTML = '';
-                if(!snapshot.exists()) {
-                    container.innerHTML = `
-                        <div style="text-align:center; padding:50px; background:#fff; border-radius:15px; border:2px dashed #ddd;">
-                            <i class="fas fa-box-open" style="font-size:3rem; color:#ddd; margin-bottom:15px;"></i>
-                            <h3 style="color:#777;">لا توجد باقات لهذا المدرس</h3>
-                            <button class="btn-main" style="margin-top:15px;" onclick="openModal('pkgModal')">أضف أول باقة</button>
-                        </div>`;
-                    return;
-                }
+        window.switchTab = (tabName, btn) => {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
 
-                const data = snapshot.val();
-                Object.entries(data).forEach(([key, pkg]) => {
-                    const pkgCard = document.createElement('div');
-                    pkgCard.className = 'pkg-card';
-                    pkgCard.innerHTML = `
-                        <div class="pkg-head">
-                            <div style="display:flex; align-items:center; gap:15px;">
-                                <img src="${pkg.image || 'https://via.placeholder.com/50'}" style="width:50px; height:50px; border-radius:8px; object-fit:cover;">
-                                <div>
-                                    <div class="pkg-title">${pkg.title}</div>
-                                    <div class="pkg-badges">
-                                        <span class="badge b-type">${pkg.type}</span>
-                                        <span class="badge b-price">${pkg.price} جنية</span>
+            if(tabName === 'packages') {
+                document.getElementById('tab-packages').classList.remove('hidden');
+                document.getElementById('tab-requests').classList.add('hidden');
+                document.getElementById('btnAddPkg').classList.remove('hidden');
+            } else {
+                document.getElementById('tab-packages').classList.add('hidden');
+                document.getElementById('tab-requests').classList.remove('hidden');
+                document.getElementById('btnAddPkg').classList.add('hidden');
+                loadRequests(); 
+            }
+        };
+
+        // --- REQUESTS LOGIC ---
+        function loadRequests() {
+            const container = document.getElementById('requestsContainer');
+            container.innerHTML = '<p style="text-align:center; width:100%; margin-top:50px;"><i class="fas fa-spinner fa-spin"></i> جاري تحميل الطلبات...</p>';
+            
+            // 1. Get Teacher's Packages IDs
+            const teacherPkgRef = ref(db, `teachers/${currentTeacherId}/packages`);
+            get(teacherPkgRef).then(snap => {
+                teacherPackagesIds = snap.exists() ? Object.keys(snap.val()) : [];
+                
+                // 2. Fetch Requests
+                const reqRef = ref(db, 'requests');
+                onValue(reqRef, (reqSnap) => {
+                    container.innerHTML = '';
+                    let count = 0;
+
+                    if (!reqSnap.exists()) {
+                        renderNoRequests(container);
+                        return;
+                    }
+
+                    const data = reqSnap.val();
+                    let hasRequests = false;
+
+                    Object.entries(data).forEach(([reqId, req]) => {
+                        // FILTER: Only show requests for this teacher's packages AND status is pending
+                        if (teacherPackagesIds.includes(req.packageId) && req.status === 'pending') {
+                            hasRequests = true;
+                            count++;
+                            
+                            const div = document.createElement('div');
+                            div.className = 'req-card';
+                            div.innerHTML = `
+                                <div class="req-img-wrapper" onclick="showImage('${req.receiptImage}')">
+                                    <img src="${req.receiptImage}">
+                                    <div class="zoom-hint"><i class="fas fa-search-plus"></i> اضغط للتكبير</div>
+                                </div>
+                                <div class="req-details">
+                                    <div class="req-name">${req.userName}</div>
+                                    <div class="req-line"><i class="fas fa-phone"></i> ${req.senderPhone}</div>
+                                    <div class="req-line"><i class="fas fa-box-open"></i> ${req.pkgTitle}</div>
+                                    <div class="req-line" style="font-size:0.8rem; color:#888;">
+                                        <i class="far fa-clock"></i> ${new Date(req.timestamp).toLocaleString('ar-EG')}
                                     </div>
                                 </div>
-                            </div>
-                            <div style="display:flex; gap:10px;">
-                                <button onclick="addWeek('${key}')" class="btn-main" style="padding:8px 15px; font-size:0.85rem; background:var(--secondary);">
-                                    <i class="fas fa-plus"></i> أسبوع
-                                </button>
-                                <button onclick="deletePkg('${key}')" style="background:#fee; color:#c0392b; border:1px solid #fab; padding:8px 12px; border-radius:8px; cursor:pointer;">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div id="weeks-${key}" style="padding-bottom:10px;"></div>
-                    `;
-                    container.appendChild(pkgCard);
-                    loadWeeks(tId, key);
+                                <div class="req-actions">
+                                    <button class="btn btn-success" onclick="handleReq('${reqId}', '${req.userId}', '${req.packageId}', 'approve')">
+                                        <i class="fas fa-check"></i> تفعيل
+                                    </button>
+                                    <button class="btn btn-danger" onclick="handleReq('${reqId}', '${req.userId}', '${req.packageId}', 'reject')">
+                                        <i class="fas fa-times"></i> رفض
+                                    </button>
+                                </div>
+                            `;
+                            container.appendChild(div);
+                        }
+                    });
+
+                    // Update Badge
+                    const badge = document.getElementById('reqBadge');
+                    badge.innerText = count;
+                    badge.classList.toggle('hidden', count === 0);
+
+                    if (!hasRequests) renderNoRequests(container);
                 });
             });
         }
 
-        window.createPackage = () => {
-            const title = document.getElementById('pTitle').value;
-            const type = document.getElementById('pType').value;
-            const price = document.getElementById('pPrice').value;
-            const img = document.getElementById('pImg').value;
-            const desc = document.getElementById('pDesc').value;
+        function renderNoRequests(container) {
+            container.innerHTML = `
+                <div style="text-align:center; grid-column:1/-1; padding:50px; color:#95a5a6;">
+                    <i class="far fa-check-circle" style="font-size:3rem; margin-bottom:15px; display:block;"></i>
+                    <h3>لا توجد طلبات معلقة</h3>
+                    <p>جميع طلبات هذا المدرس تمت مراجعتها</p>
+                </div>
+            `;
+            document.getElementById('reqBadge').classList.add('hidden');
+        }
 
-            if(!title) return alert('الرجاء كتابة اسم الباقة');
+        window.showImage = (src) => {
+            document.getElementById('previewImgSrc').src = src;
+            document.getElementById('imgPreviewModal').style.display = 'flex';
+        };
 
-            const newPkgRef = push(ref(db, `teachers/${currentTeacherId}/packages`));
-            set(newPkgRef, {
-                title, type, price: price || 0, image: img, description: desc
-            }).then(() => {
-                closeModal('pkgModal');
-                showToast();
-                // Reset Fields
-                document.getElementById('pTitle').value = '';
-                document.getElementById('pPrice').value = '';
+        window.handleReq = async (reqId, userId, pkgId, action) => {
+            if(!confirm(action === 'approve' ? 'تأكيد تفعيل اشتراك الطالب؟' : 'تأكيد رفض الطلب؟')) return;
+            
+            const newStatus = action === 'approve' ? 'active' : 'rejected';
+            
+            // Update Request Status
+            await update(ref(db, `requests/${reqId}`), { status: newStatus });
+            // Update User Subscription Status
+            await update(ref(db, `users/${userId}/subscriptions/${pkgId}`), { status: newStatus });
+            
+            showToast(action === 'approve' ? 'تم التفعيل بنجاح' : 'تم رفض الطلب');
+        };
+
+        // --- PACKAGES & CONTENT LOGIC ---
+        function loadPackages(tId) {
+            const container = document.getElementById('packagesContainer');
+            container.innerHTML = '<p style="text-align:center; margin-top:30px;"><i class="fas fa-spinner fa-spin"></i> جاري التحميل...</p>';
+            
+            onValue(ref(db, `teachers/${tId}/packages`), (snap) => {
+                container.innerHTML = '';
+                if(!snap.exists()) {
+                    container.innerHTML = `
+                        <div style="text-align:center; padding:50px; border:2px dashed #ddd; border-radius:15px;">
+                            <i class="fas fa-box-open" style="font-size:3rem; color:#ccc; margin-bottom:10px;"></i>
+                            <p style="color:#777;">لم يتم إضافة أي باقات بعد</p>
+                        </div>
+                    `;
+                    return;
+                }
+                const data = snap.val();
+                Object.entries(data).forEach(([pid, pkg]) => {
+                    const el = document.createElement('div');
+                    el.className = 'pkg-card';
+                    el.innerHTML = `
+                        <div class="pkg-header">
+                            <div>
+                                <div class="pkg-title">${pkg.title}</div>
+                                <div class="pkg-meta">
+                                    <span class="tag">${pkg.type}</span>
+                                    <span style="color:var(--success); font-weight:bold;">${pkg.price} جنية</span>
+                                </div>
+                            </div>
+                            <div style="display:flex; gap:10px;">
+                                <button class="btn btn-sm btn-outline" onclick="addWeek('${pid}')"><i class="fas fa-plus"></i> أسبوع</button>
+                                <button class="btn btn-sm btn-danger" onclick="deletePkg('${pid}')"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div id="weeks-${pid}" class="week-container"></div>
+                    `;
+                    container.appendChild(el);
+                    loadWeeks(tId, pid);
+                });
             });
-        };
+        }
 
-        window.deletePkg = (pkgId) => {
-            if(confirm('هل أنت متأكد من حذف هذه الباقة وجميع محتوياتها؟')) {
-                remove(ref(db, `teachers/${currentTeacherId}/packages/${pkgId}`));
-            }
-        };
-
-        // --- 4. WEEKS & CONTENT MANAGEMENT ---
-        function loadWeeks(tId, pkgId) {
-            const weeksRef = ref(db, `teachers/${tId}/packages/${pkgId}/weeks`);
-            onValue(weeksRef, (snapshot) => {
-                const wContainer = document.getElementById(`weeks-${pkgId}`);
-                wContainer.innerHTML = '';
-                
-                if(snapshot.exists()) {
-                    const weeks = snapshot.val();
-                    Object.entries(weeks).forEach(([wId, week]) => {
-                        const wDiv = document.createElement('div');
-                        wDiv.className = 'week-item';
-                        wDiv.innerHTML = `
-                            <div class="week-header" onclick="toggleWeek(this)">
+        function loadWeeks(tId, pid) {
+            onValue(ref(db, `teachers/${tId}/packages/${pid}/weeks`), (snap) => {
+                const wCont = document.getElementById(`weeks-${pid}`);
+                wCont.innerHTML = '';
+                if(snap.exists()) {
+                    Object.entries(snap.val()).forEach(([wid, week]) => {
+                        const div = document.createElement('div');
+                        div.className = 'week-item';
+                        div.innerHTML = `
+                            <div class="week-top" onclick="this.nextElementSibling.classList.toggle('open')">
                                 <span><i class="far fa-calendar-alt"></i> ${week.title}</span>
-                                <div style="display:flex; align-items:center; gap:10px;">
-                                    <button onclick="prepareAddContent('${pkgId}', '${wId}', event)" style="background:#e3f2fd; color:#1565c0; border:none; padding:5px 10px; border-radius:5px; font-weight:bold; font-size:0.8rem; cursor:pointer;">
+                                <div style="display:flex; gap:10px; align-items:center;">
+                                    <button class="btn btn-sm btn-primary" onclick="prepContent('${pid}', '${wid}', event)">
                                         <i class="fas fa-plus"></i> محتوى
                                     </button>
-                                    <i class="fas fa-chevron-down" style="color:#aaa;"></i>
+                                    <i class="fas fa-chevron-down" style="font-size:0.8rem;"></i>
                                 </div>
                             </div>
-                            <div class="week-content" id="content-${wId}"></div>
+                            <div class="week-content" id="c-${wid}"></div>
                         `;
-                        wContainer.appendChild(wDiv);
-                        loadContent(tId, pkgId, wId);
-                    });
-                }
-            });
-        }
-
-        window.addWeek = (pkgId) => {
-            const newWeekRef = push(ref(db, `teachers/${currentTeacherId}/packages/${pkgId}/weeks`));
-            set(newWeekRef, { title: "أسبوع جديد" });
-        };
-
-        window.toggleWeek = (header) => {
-            const content = header.nextElementSibling;
-            content.classList.toggle('active');
-            const icon = header.querySelector('.fa-chevron-down');
-            if(icon) icon.style.transform = content.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0deg)';
-        };
-
-        function loadContent(tId, pkgId, wId) {
-            const cRef = ref(db, `teachers/${tId}/packages/${pkgId}/weeks/${wId}/content`);
-            onValue(cRef, (snapshot) => {
-                const cContainer = document.getElementById(`content-${wId}`);
-                cContainer.innerHTML = '';
-                
-                if(snapshot.exists()) {
-                    Object.entries(snapshot.val()).forEach(([cId, item]) => {
-                        const isVideo = item.type === 'video';
-                        const iconClass = isVideo ? 'fa-play' : 'fa-file-alt';
-                        const iconColor = isVideo ? '#e74c3c' : '#3498db';
+                        wCont.appendChild(div);
                         
-                        cContainer.innerHTML += `
-                            <div class="content-row">
-                                <div style="display:flex; align-items:center;">
-                                    <div class="c-type-icon" style="background:${iconColor};"><i class="fas ${iconClass}"></i></div>
-                                    <span style="font-weight:600; margin-right:10px; color:#444;">${item.title}</span>
-                                </div>
-                                <button onclick="deleteContent('${pkgId}', '${wId}', '${cId}')" style="color:#e74c3c; background:none; border:none; cursor:pointer; font-size:1rem; padding:5px;"><i class="fas fa-times"></i></button>
-                            </div>
-                        `;
+                        if(week.content) {
+                            const cDiv = document.getElementById(`c-${wid}`);
+                            Object.entries(week.content).forEach(([cid, c]) => {
+                                const isVid = c.type === 'video';
+                                cDiv.innerHTML += `
+                                    <div class="content-row">
+                                        <div style="display:flex; align-items:center; gap:10px;">
+                                            <div class="c-icon" style="background:${isVid ? '#e74c3c' : '#3498db'}">
+                                                <i class="fas ${isVid ? 'fa-play' : 'fa-clipboard-list'}"></i>
+                                            </div>
+                                            <span style="font-weight:600; font-size:0.9rem;">${c.title}</span>
+                                        </div>
+                                        <button onclick="delContent('${pid}','${wid}','${cid}')" style="color:var(--danger); border:none; background:none; cursor:pointer;">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </div>
+                                `;
+                            });
+                        } else {
+                            document.getElementById(`c-${wid}`).innerHTML = '<p style="text-align:center; font-size:0.85rem; color:#aaa; padding:10px;">لا يوجد محتوى</p>';
+                        }
                     });
-                } else {
-                    cContainer.innerHTML = '<div style="font-size:0.8rem; color:#999; text-align:center; padding:5px;">لا يوجد محتوى</div>';
                 }
             });
         }
 
-        window.prepareAddContent = (pId, wId, e) => {
-            e.stopPropagation();
-            activePkgId = pId;
-            activeWeekId = wId;
-            openModal('contentSelectModal');
+        // --- CRUD FUNCTIONS ---
+        window.createPackage = () => {
+            const title = document.getElementById('pTitle').value;
+            const price = document.getElementById('pPrice').value;
+            const type = document.getElementById('pType').value;
+            const img = document.getElementById('pImg').value;
+            const desc = document.getElementById('pDesc').value;
+            
+            if(!title) return alert('يرجى كتابة اسم الباقة');
+
+            push(ref(db, `teachers/${currentTeacherId}/packages`), { title, price, type, image:img, description:desc })
+            .then(() => { closeModal('pkgModal'); showToast('تم إضافة الباقة'); });
         };
 
-        window.deleteContent = (pId, wId, cId) => {
-            if(confirm('حذف هذا المحتوى؟')) {
-                remove(ref(db, `teachers/${currentTeacherId}/packages/${pId}/weeks/${wId}/content/${cId}`));
-            }
-        };
+        window.deletePkg = (pid) => { if(confirm('حذف الباقة؟ سيتم حذف جميع المحتويات بداخلها.')) remove(ref(db, `teachers/${currentTeacherId}/packages/${pid}`)); };
+        window.addWeek = (pid) => push(ref(db, `teachers/${currentTeacherId}/packages/${pid}/weeks`), { title: 'أسبوع جديد' });
+        
+        window.prepContent = (pid, wid, e) => { e.stopPropagation(); activePkgId=pid; activeWeekId=wid; document.getElementById('contentSelectModal').style.display='flex'; };
+        window.delContent = (pid, wid, cid) => { if(confirm('حذف المحتوى؟')) remove(ref(db, `teachers/${currentTeacherId}/packages/${pid}/weeks/${wid}/content/${cid}`)); };
 
-        // --- 5. ADDING SPECIFIC CONTENT ---
-        window.openVideoModal = () => { closeModal('contentSelectModal'); openModal('videoModal'); };
-        window.openExamModal = () => { 
-            closeModal('contentSelectModal'); 
-            document.getElementById('questionsContainer').innerHTML = ''; 
-            addQuestionUI(); 
-            openModal('examModal'); 
-        };
-
+        // --- CONTENT MODALS ---
+        window.openVideoModal = () => { closeModal('contentSelectModal'); document.getElementById('videoModal').style.display='flex'; };
         window.addVideo = () => {
             const title = document.getElementById('vTitle').value;
             const url = document.getElementById('vUrl').value;
-            if(!title || !url) return alert("أكمل البيانات");
-
-            push(ref(db, `teachers/${currentTeacherId}/packages/${activePkgId}/weeks/${activeWeekId}/content`), {
-                type: 'video', title, url
-            }).then(() => { closeModal('videoModal'); showToast(); });
+            if(title) {
+                push(ref(db, `teachers/${currentTeacherId}/packages/${activePkgId}/weeks/${activeWeekId}/content`), { type:'video', title, url });
+                closeModal('videoModal');
+                showToast('تم نشر الفيديو');
+            }
         };
 
-        // Exam Logic
+        window.openExamModal = () => { 
+            closeModal('contentSelectModal'); 
+            document.getElementById('questionsContainer').innerHTML=''; 
+            window.addQuestionUI(); 
+            document.getElementById('examModal').style.display='flex'; 
+        };
+        
         window.addQuestionUI = () => {
-            const container = document.getElementById('questionsContainer');
-            const div = document.createElement('div');
-            const qId = Date.now();
-            div.className = 'q-box';
-            div.innerHTML = `
-                <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
-                    <span style="font-weight:bold; color:var(--primary);">سؤال جديد</span>
-                    <button onclick="this.parentElement.parentElement.remove()" style="color:red; border:none; background:none; cursor:pointer;"><i class="fas fa-trash"></i></button>
-                </div>
-                <input class="inp-field q-text" placeholder="نص السؤال" style="border-color:#ccc;">
-                ${[1,2,3,4].map((n, i) => `
+            const id = Date.now();
+            const d = document.createElement('div');
+            d.className = 'q-box';
+            d.innerHTML = `
+                <button class="del-q-btn" onclick="this.parentElement.remove()"><i class="fas fa-trash"></i></button>
+                <label style="display:block; font-weight:bold; margin-bottom:5px;">نص السؤال:</label>
+                <input class="inp-field q-txt" placeholder="اكتب السؤال هنا..." style="background:#fff;">
+                <label style="display:block; font-weight:bold; margin:10px 0 5px;">الاجابات (اختر الصحيحة):</label>
+                ${[1,2,3,4].map((i, idx) => `
                     <div style="display:flex; align-items:center; gap:10px; margin-bottom:5px;">
-                        <input type="radio" name="rad_${qId}" value="${i}" ${i===0?'checked':''}>
-                        <input class="inp-field opt" placeholder="الخيار ${n}" style="margin-bottom:0; padding:8px;">
+                        <input type="radio" name="rad_${id}" value="${idx}" ${idx===0?'checked':''}>
+                        <input class="inp-field opt" placeholder="الخيار ${i}" style="margin-bottom:0; padding:8px; font-size:0.9rem;">
                     </div>
                 `).join('')}
             `;
-            container.appendChild(div);
+            document.getElementById('questionsContainer').appendChild(d);
         };
 
         window.addExam = () => {
             const title = document.getElementById('eTitle').value;
+            if(!title) return alert('يرجى كتابة عنوان الامتحان');
+            
             const qBoxes = document.querySelectorAll('.q-box');
-            let questions = [];
+            if(qBoxes.length === 0) return alert('أضف سؤالاً واحداً على الأقل');
 
+            let questions = [];
             qBoxes.forEach(box => {
-                const text = box.querySelector('.q-text').value;
+                const text = box.querySelector('.q-txt').value;
                 const opts = Array.from(box.querySelectorAll('.opt')).map(i => i.value);
                 let correct = 0;
                 box.querySelectorAll('input[type="radio"]').forEach((r, idx) => { if(r.checked) correct = idx; });
@@ -593,21 +703,20 @@
                 if(text) questions.push({ text, options: opts, correct });
             });
 
-            if(!title || questions.length === 0) return alert("يجب إضافة عنوان وسؤال واحد على الأقل");
-
-            push(ref(db, `teachers/${currentTeacherId}/packages/${activePkgId}/weeks/${activeWeekId}/content`), {
-                type: 'exam', title, questions
-            }).then(() => { closeModal('examModal'); showToast(); });
+            push(ref(db, `teachers/${currentTeacherId}/packages/${activePkgId}/weeks/${activeWeekId}/content`), { type:'exam', title, questions })
+            .then(() => { closeModal('examModal'); showToast('تم نشر الامتحان'); });
         };
 
         // --- HELPERS ---
         window.openModal = (id) => document.getElementById(id).style.display = 'flex';
         window.closeModal = (id) => document.getElementById(id).style.display = 'none';
-        window.showToast = () => {
+        
+        function showToast(msg) {
             const t = document.getElementById('toast');
+            t.innerHTML = `<i class="fas fa-check-circle"></i> ${msg}`;
             t.classList.add('show');
             setTimeout(() => t.classList.remove('show'), 3000);
-        };
+        }
 
     </script>
 </body>
