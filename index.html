@@ -9,6 +9,12 @@
     <title>منصة النخبة التعليمية | أقوى مدرسي مصر</title>
     
     <meta name="description" content="منصة النخبة التعليمية، تجمع لك أقوى مدرسي الثانوية العامة في مكان واحد.">
+
+    <meta property="og:title" content="منصة النخبة التعليمية | أقوى مدرسي مصر">
+    <meta property="og:description" content="منصة النخبة التعليمية، تجمع لك أقوى مدرسي الثانوية العامة في مكان واحد.">
+    <meta property="og:image" content="https://i.postimg.cc/wvL7Rgyx/Screenshot-2026-01-01-201916.png">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content=""> 
     
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -57,7 +63,6 @@
             transition: var(--transition);
         }
 
-        /* --- Animations & Background --- */
         .background-shapes {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
             overflow: hidden; pointer-events: none;
@@ -76,7 +81,6 @@
             100% { transform: translate(30px, 50px); }
         }
 
-        /* --- Navbar --- */
         nav {
             position: sticky; top: 0; z-index: 100;
             background: var(--glass-bg);
@@ -111,11 +115,9 @@
         .theme-btn:hover { transform: rotate(15deg); color: var(--accent); }
         .menu-btn { display: none; }
 
-        /* --- Views & Layout --- */
         .view { display: none; opacity: 0; transition: opacity 0.5s; padding-bottom: 80px; }
         .view.active-view { display: block; opacity: 1; animation: fadeIn 0.5s forwards; }
         
-        /* --- Clean Back Button Style --- */
         .clean-back-container {
             padding: 30px 5% 10px;
             display: flex;
@@ -146,7 +148,6 @@
             box-shadow: 0 10px 20px rgba(192, 57, 43, 0.3);
         }
 
-        /* --- Hero --- */
         .hero { min-height: 85vh; display: flex; align-items: center; justify-content: space-between; padding: 0 5%; gap: 40px; }
         .hero-text { flex: 1; z-index: 2; }
         .hero h1 { font-size: 3.2rem; margin-bottom: 20px; line-height: 1.3; font-weight: 900; }
@@ -175,7 +176,6 @@
         .section-title { text-align: center; margin-bottom: 60px; font-size: 2.5rem; color: var(--secondary); font-weight: 900; padding-top: 60px; text-shadow: 2px 2px 0 rgba(0,0,0,0.05); }
         .section-title span { color: var(--primary); border-bottom: 4px solid var(--accent); }
 
-        /* --- Teacher Cards --- */
         .teachers-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 40px; padding: 0 5% 80px;
@@ -212,7 +212,6 @@
         }
         .btn-card:hover { background: var(--primary); color: #fff; transform: scale(1.02); }
 
-        /* --- Teacher Profile --- */
         .teacher-profile-header {
             padding: 50px 5%; text-align: center; background: var(--glass-bg);
             margin: 20px 5%; border-radius: 40px; box-shadow: var(--shadow);
@@ -230,7 +229,6 @@
         .tp-name { font-size: 1.8rem; color: var(--secondary); margin-bottom: 10px; font-weight: 900; }
         .tp-bio { color: var(--text-light); max-width: 700px; margin: 0 auto; line-height: 1.6; font-size: 1rem; }
 
-        /* --- Packages Grid --- */
         .packages-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px; padding: 20px 5%;
@@ -266,7 +264,6 @@
         }
         .pkg-btn:hover { background: var(--primary); }
 
-        /* --- Course Content Styles --- */
         .course-header {
             background: linear-gradient(rgba(44, 62, 80, 0.9), rgba(44, 62, 80, 0.9)), url('https://images.unsplash.com/photo-1513258496098-b05360f979aa?auto=format&fit=crop&q=80');
             background-size: cover; background-position: center;
@@ -282,7 +279,6 @@
         .content-link { display: flex; align-items: center; gap: 15px; padding: 15px 20px; border-bottom: 1px solid #eee; text-decoration: none; color: var(--text-main); font-weight: 600; }
         .content-link:hover { background: #fff; padding-right: 25px; color: var(--primary); }
 
-        /* --- Video View Specifics --- */
         .video-container-page {
             max-width: 1000px; margin: 0 auto; padding: 0 5%;
         }
@@ -293,7 +289,6 @@
         .video-frame-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
         .video-title-page { font-size: 1.8rem; font-weight: 900; margin-top: 25px; color: var(--secondary); }
 
-        /* --- Exam View Specifics --- */
         .exam-container { max-width: 800px; margin: 0 auto; padding: 0 5%; }
         .exam-header { text-align: center; margin-bottom: 40px; }
         .question-box {
@@ -313,10 +308,8 @@
             border-color: var(--primary); background: rgba(192, 57, 43, 0.05); color: var(--primary);
         }
 
-        /* --- Result View Specifics --- */
         .result-header { text-align: center; padding: 40px 0; }
         
-        /* 3D Trophy Avatar Style */
         .trophy-avatar {
             width: 180px; height: 180px; margin: 0 auto 20px;
             display: block; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
@@ -337,7 +330,6 @@
         .ans-correct { background: rgba(39, 174, 96, 0.1); color: #27ae60; border: 1px solid #27ae60; }
         .ans-wrong { background: rgba(192, 57, 43, 0.1); color: #c0392b; border: 1px solid #c0392b; }
 
-        /* --- Auth Modal --- */
         .modal-overlay {
             position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(8px);
             z-index: 1000; display: none; justify-content: center; align-items: center; padding: 20px;
@@ -359,7 +351,6 @@
         .inp-wrapper { position: relative; }
         .inp-icon { position: absolute; left: 18px; top: 18px; color: var(--primary); }
 
-        /* --- Footer (Restored) --- */
         footer {
             background: var(--secondary); color: #fff;
             padding: 70px 5% 30px; margin-top: 100px; text-align: center;
@@ -385,9 +376,34 @@
         .footer-links a { color: #fff; text-decoration: none; transition: 0.3s; font-weight: bold; }
         .footer-links a:hover { color: var(--accent); }
         
-        /* Toast */
         #toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background: rgba(44, 62, 80, 0.95); color: #fff; padding: 15px 35px; border-radius: 50px; z-index: 9999; transition: 0.4s; opacity: 0; pointer-events: none; }
         #toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+        /* Floating Share Button Style */
+        .share-float-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            border-radius: 50%;
+            border: none;
+            box-shadow: 0 5px 20px rgba(192, 57, 43, 0.4);
+            z-index: 900;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .share-float-btn:hover {
+            transform: scale(1.15) rotate(10deg);
+            box-shadow: 0 8px 30px rgba(192, 57, 43, 0.6);
+        }
 
         @media (max-width: 768px) {
             .hero { flex-direction: column-reverse; text-align: center; padding-top: 40px; }
@@ -396,6 +412,7 @@
             .nav-links.active { display: flex; }
             .menu-btn { display: block; }
             .teachers-grid { grid-template-columns: 1fr; }
+            .share-float-btn { width: 50px; height: 50px; bottom: 20px; left: 20px; font-size: 1.2rem; }
         }
     </style>
 </head>
@@ -431,7 +448,6 @@
         </div>
     </nav>
 
-    <!-- HOME VIEW -->
     <div id="home" class="view active-view">
         <section class="hero">
             <div class="hero-text">
@@ -538,9 +554,7 @@
                     </div>
                 </div>
 
-                <!-- Teacher 7: Minology (Badge Moved to Left) -->
                 <div class="teacher-card">
-                    <!-- Added inline style to move badge to left -->
                     <div class="subject-badge" style="right: auto; left: 15px;"><i class="fas fa-brain"></i> فلسفة</div>
                     <div class="card-img-wrapper">
                         <img src="https://i.postimg.cc/K4Sq9sKj/Gemini-Generated-Image-3j04bf3j04bf3j04.png" alt="Minology">
@@ -555,7 +569,6 @@
                     </div>
                 </div>
 
-                <!-- Teacher 8: Lotfy Zahran (Fixed: Math) -->
                 <div class="teacher-card">
                     <div class="subject-badge"><i class="fas fa-calculator"></i> رياضيات</div>
                     <div class="card-img-wrapper">
@@ -574,7 +587,6 @@
         </section>
     </div>
 
-    <!-- TEACHER VIEW (Package List) -->
     <div id="teacher-view" class="view">
         <div class="clean-back-container">
             <button class="clean-back-btn" onclick="switchView('home')"><i class="fas fa-arrow-right"></i></button>
@@ -588,7 +600,6 @@
         <div class="packages-grid" id="packages-list"></div>
     </div>
 
-    <!-- COURSE DETAILS VIEW (Weeks List) -->
     <div id="course-details-view" class="view">
         <div class="clean-back-container">
             <button class="clean-back-btn" onclick="switchView('teacher-view')"><i class="fas fa-arrow-right"></i></button>
@@ -604,7 +615,6 @@
         <div class="course-content-container" id="course-content-area"></div>
     </div>
 
-    <!-- VIDEO PLAYER VIEW (New Page) -->
     <div id="video-view" class="view">
         <div class="clean-back-container">
             <button class="clean-back-btn" onclick="switchView('course-details-view')"><i class="fas fa-arrow-right"></i></button>
@@ -618,7 +628,6 @@
         </div>
     </div>
 
-    <!-- EXAM VIEW -->
     <div id="exam-view" class="view">
         <div class="clean-back-container">
             <button class="clean-back-btn" onclick="switchView('course-details-view')"><i class="fas fa-arrow-right"></i></button>
@@ -636,7 +645,6 @@
         </div>
     </div>
 
-    <!-- EXAM RESULT VIEW -->
     <div id="exam-result-view" class="view">
         <div class="clean-back-container">
             <button class="clean-back-btn" onclick="switchView('course-details-view')"><i class="fas fa-arrow-right"></i></button>
@@ -644,7 +652,6 @@
 
         <div class="exam-container">
             <div class="result-header">
-                <!-- Trophy 3D Avatar Added Here -->
                 <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="trophy-avatar" alt="Trophy">
                 
                 <h2 style="color:var(--secondary); font-weight:900;">النتيجة النهائية</h2>
@@ -658,10 +665,8 @@
         </div>
     </div>
 
-    <!-- Auth & Profile Modals -->
     <div id="auth-modal" class="modal-overlay">
         <div class="auth-box">
-            <!-- Auth 3D Avatar Added Here -->
             <img src="https://cdn-icons-png.flaticon.com/512/9374/9374921.png" class="auth-avatar-header" alt="Login">
             
             <button class="close-modal" onclick="closeAuthModal()"><i class="fas fa-times"></i></button>
@@ -703,7 +708,10 @@
         </div>
     </div>
 
-    <!-- Restored Full Footer -->
+    <button id="share-btn" class="share-float-btn" onclick="shareSite()">
+        <i class="fas fa-share-alt"></i>
+    </button>
+
     <footer>
         <h2 style="margin-bottom:15px; font-weight:900;">تابعنا على المنصات</h2>
         <p style="opacity:0.9; font-weight:600;">عشان يوصلك كل جديد ومذكرات مجانية</p>
@@ -744,12 +752,10 @@
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
-        // --- GLOBAL VARIABLES ---
         window.currentTeacherPackages = {}; 
         let currentTeacherName = "";
         let currentExamQuestions = [];
 
-        // --- VIEW NAVIGATION ---
         window.switchView = function(viewId) {
             document.querySelectorAll('.view').forEach(el => el.classList.remove('active-view'));
             const iframe = document.getElementById('page-video-frame');
@@ -771,7 +777,6 @@
             switchView('teacher-view');
         }
 
-        // --- FETCHING DATA ---
         function fetchPackages(teacherId) {
             const list = document.getElementById('packages-list');
             list.innerHTML = '<i class="fas fa-spinner fa-spin" style="font-size:3rem; color:var(--primary); margin:auto;"></i>';
@@ -814,7 +819,6 @@
             });
         }
 
-        // --- COURSE DETAILS ---
         window.openCourseDetails = function(pkgId) {
             const pkg = window.currentTeacherPackages[pkgId];
             if(!pkg) return;
@@ -868,7 +872,6 @@
             head.querySelector('.fa-chevron-down').style.transform = head.nextElementSibling.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
         }
 
-        // --- NEW VIDEO PAGE LOGIC ---
         window.openVideoPage = function(url, title) {
             let embedUrl = url;
             if (url.includes('watch?v=')) embedUrl = `https://www.youtube.com/embed/${url.split('v=')[1].split('&')[0]}`;
@@ -879,7 +882,6 @@
             switchView('video-view');
         }
 
-        // --- NEW EXAM PAGE LOGIC ---
         window.openExamPage = function(pkgId, wId, cId) {
             const examData = window.currentTeacherPackages[pkgId].weeks[wId].content[cId];
             
@@ -954,7 +956,6 @@
             switchView('exam-result-view');
         }
 
-        // --- AUTH & MISC ---
         const MALE_AVATAR = "https://cdn-icons-png.flaticon.com/512/4140/4140048.png"; 
         const FEMALE_AVATAR = "https://cdn-icons-png.flaticon.com/512/4140/4140047.png"; 
 
@@ -1030,6 +1031,33 @@
             body.setAttribute('data-theme', body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
         }
         window.toggleMenu = () => document.getElementById('navLinks').classList.toggle('active');
+
+        window.shareSite = async () => {
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: 'منصة النخبة التعليمية',
+                        text: 'أقوى مدرسي الثانوية العامة في مكان واحد',
+                        url: window.location.href
+                    });
+                } catch (err) {
+                    console.log('Error sharing', err);
+                }
+            } else {
+                const dummy = document.createElement('input');
+                document.body.appendChild(dummy);
+                dummy.value = window.location.href;
+                dummy.select();
+                document.execCommand('copy');
+                document.body.removeChild(dummy);
+                
+                const toast = document.getElementById('toast');
+                const msg = document.getElementById('toast-msg');
+                msg.innerText = 'تم نسخ الرابط بنجاح';
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 3000);
+            }
+        }
     </script>
 </body>
 </html>
