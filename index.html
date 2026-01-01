@@ -14,7 +14,6 @@
     <meta property="og:description" content="منصة النخبة التعليمية، تجمع لك أقوى مدرسي الثانوية العامة في مكان واحد.">
     <meta property="og:image" content="https://i.postimg.cc/wvL7Rgyx/Screenshot-2026-01-01-201916.png">
     <meta property="og:type" content="website">
-    <meta property="og:url" content=""> 
     
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -35,6 +34,7 @@
             --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
             --correct: #27ae60;
             --wrong: #c0392b;
+            --pending: #f39c12;
         }
 
         [data-theme="dark"] {
@@ -164,6 +164,11 @@
             transition: var(--transition); display: inline-flex; align-items: center; gap: 10px;
         }
         .btn-main:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 15px 35px rgba(192, 57, 43, 0.5); }
+        
+        .btn-disabled { background: #95a5a6; cursor: not-allowed; box-shadow: none; pointer-events: none; }
+        .btn-success { background: linear-gradient(45deg, #27ae60, #2ecc71); box-shadow: 0 10px 25px rgba(39, 174, 96, 0.3); }
+        .btn-pending { background: linear-gradient(45deg, #f39c12, #f1c40f); box-shadow: 0 10px 25px rgba(243, 156, 18, 0.3); color: #fff; }
+        .btn-wrong { background: linear-gradient(45deg, #c0392b, #e74c3c); }
 
         .hero-img { flex: 1; z-index: 2; display: flex; justify-content: center; }
         .hero-img img { 
@@ -350,6 +355,8 @@
         .inp-field { width: 100%; padding: 14px 20px 14px 50px; border-radius: 15px; background: rgba(255,255,255,0.8); margin-bottom: 18px; border: 2px solid transparent; }
         .inp-wrapper { position: relative; }
         .inp-icon { position: absolute; left: 18px; top: 18px; color: var(--primary); }
+        .file-upload-wrapper { border: 2px dashed #ccc; padding: 20px; text-align: center; border-radius: 15px; margin-bottom: 20px; cursor: pointer; transition: 0.3s; background: rgba(255,255,255,0.5); }
+        .file-upload-wrapper:hover { border-color: var(--primary); background: rgba(192, 57, 43, 0.05); }
 
         footer {
             background: var(--secondary); color: #fff;
@@ -379,7 +386,6 @@
         #toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background: rgba(44, 62, 80, 0.95); color: #fff; padding: 15px 35px; border-radius: 50px; z-index: 9999; transition: 0.4s; opacity: 0; pointer-events: none; }
         #toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 
-        /* Floating Share Button Style */
         .share-float-btn {
             position: fixed;
             bottom: 30px;
@@ -665,6 +671,36 @@
         </div>
     </div>
 
+    <div id="payment-modal" class="modal-overlay">
+        <div class="auth-box">
+            <button class="close-modal" onclick="document.getElementById('payment-modal').classList.remove('active')"><i class="fas fa-times"></i></button>
+            <h2 style="text-align:center; color:var(--secondary); margin-bottom:20px;">تأكيد الاشتراك</h2>
+            
+            <div style="background:var(--secondary); color:#fff; padding:20px; border-radius:15px; text-align:center; margin-bottom:25px;">
+                <p style="opacity:0.8; font-size:0.9rem;">حول مبلغ الاشتراك عبر فودافون كاش على:</p>
+                <h1 style="font-size:2rem; margin:10px 0; color:var(--accent);">01061767493</h1>
+                <p id="payment-amount-display" style="font-weight:bold;"></p>
+            </div>
+
+            <form onsubmit="handlePaymentSubmit(event)">
+                <label style="display:block; margin-bottom:10px; font-weight:700;">1. رقم محفظة التحويل:</label>
+                <div class="inp-wrapper"><i class="fas fa-phone inp-icon"></i><input type="tel" id="pay-sender-phone" class="inp-field" placeholder="رقم المحفظة اللي حولت منه" required></div>
+                
+                <label style="display:block; margin-bottom:10px; font-weight:700;">2. سكرين شوت التحويل:</label>
+                <label for="pay-receipt" class="file-upload-wrapper">
+                    <i class="fas fa-cloud-upload-alt" style="font-size:2rem; color:var(--primary); margin-bottom:10px;"></i>
+                    <div id="file-name-display" style="color:var(--text-light);">اضغط لرفع صورة التحويل</div>
+                    <input type="file" id="pay-receipt" accept="image/*" style="display:none;" required onchange="document.getElementById('file-name-display').innerText = this.files[0].name">
+                </label>
+
+                <input type="hidden" id="pay-pkg-id">
+                <input type="hidden" id="pay-pkg-price">
+
+                <button class="btn-main" style="width:100%; justify-content:center;">تأكيد الدفع <i class="fas fa-check"></i></button>
+            </form>
+        </div>
+    </div>
+
     <div id="auth-modal" class="modal-overlay">
         <div class="auth-box">
             <img src="https://cdn-icons-png.flaticon.com/512/9374/9374921.png" class="auth-avatar-header" alt="Login">
@@ -728,7 +764,6 @@
         <div class="footer-links">
             <a href="#"><i class="fas fa-user-shield"></i> سياسة الخصوصية</a>
             <a href="#"><i class="fas fa-file-contract"></i> شروط الاستخدام</a>
-            <a href="#"><i class="fas fa-info-circle"></i> من نحن</a>
             <a href="#"><i class="fas fa-envelope"></i> اتصل بنا</a>
         </div>
         <p style="margin-top:40px; font-size:0.9rem; color:#fff; opacity:0.6;">جميع الحقوق محفوظة &copy; 2026 لمنصة النخبة</p>
@@ -736,7 +771,7 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+        import { getDatabase, ref, onValue, push, set, update, get } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyCsnZdFrg-KlWFc0z6OgmXgBp6lPKf14fU",
@@ -755,6 +790,14 @@
         window.currentTeacherPackages = {}; 
         let currentTeacherName = "";
         let currentExamQuestions = [];
+        let currentUser = JSON.parse(localStorage.getItem('nokhba_user'));
+
+        const toBase64 = file => new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+        });
 
         window.switchView = function(viewId) {
             document.querySelectorAll('.view').forEach(el => el.classList.remove('active-view'));
@@ -782,89 +825,195 @@
             list.innerHTML = '<i class="fas fa-spinner fa-spin" style="font-size:3rem; color:var(--primary); margin:auto;"></i>';
             const packagesRef = ref(db, `teachers/${teacherId}/packages`);
             
-            onValue(packagesRef, (snapshot) => {
-                list.innerHTML = ''; 
-                if (!snapshot.exists()) {
-                    list.innerHTML = `
-                        <div style="text-align:center; padding:40px;">
-                             <img src="https://cdn-icons-png.flaticon.com/512/7486/7486831.png" style="width:120px; opacity:0.8;">
-                             <h3 style="margin-top:20px; color:var(--text-light);">لا يوجد محتوى حالياً</h3>
-                        </div>`;
-                    return;
-                }
-                const data = snapshot.val();
-                window.currentTeacherPackages = data;
-
-                Object.entries(data).forEach(([pkgId, pkg]) => {
-                    const pkgImg = pkg.image || 'https://via.placeholder.com/300x200';
-                    const pkgType = pkg.type || 'كورس';
-                    const pkgPrice = pkg.price ? `${pkg.price} EGP` : 'مجاني';
-                    
-                    const card = document.createElement('div');
-                    card.className = 'pkg-card';
-                    card.innerHTML = `
-                        <div class="pkg-img-box">
-                            <img src="${pkgImg}">
-                            <div class="pkg-type-badge">${pkgType}</div>
-                        </div>
-                        <div class="pkg-body">
-                            <h3 class="pkg-title">${pkg.title}</h3>
-                            <div class="pkg-price">${pkgPrice}</div>
-                            <p class="pkg-desc">${pkg.description || 'محتوى تعليمي شامل'}</p>
-                            <button class="pkg-btn" onclick="openCourseDetails('${pkgId}')">اشترك الآن <i class="fas fa-arrow-left"></i></button>
-                        </div>
-                    `;
-                    list.appendChild(card);
+            let userSubs = {};
+            if(currentUser) {
+                const userSubRef = ref(db, `users/${currentUser.phone}/subscriptions`);
+                onValue(userSubRef, (snap) => {
+                    userSubs = snap.val() || {};
+                    loadPackagesUI();
                 });
-            });
+            } else {
+                onValue(packagesRef, (snapshot) => {
+                    window.currentTeacherPackages = snapshot.val() || {};
+                    loadPackagesUI();
+                });
+            }
+
+            function loadPackagesUI() {
+                get(packagesRef).then((snapshot) => {
+                    list.innerHTML = ''; 
+                    if (!snapshot.exists()) {
+                        list.innerHTML = `
+                            <div style="text-align:center; padding:40px;">
+                                 <img src="https://cdn-icons-png.flaticon.com/512/7486/7486831.png" style="width:120px; opacity:0.8;">
+                                 <h3 style="margin-top:20px; color:var(--text-light);">لا يوجد محتوى حالياً</h3>
+                            </div>`;
+                        return;
+                    }
+                    const data = snapshot.val();
+                    window.currentTeacherPackages = data;
+
+                    Object.entries(data).forEach(([pkgId, pkg]) => {
+                        const pkgImg = pkg.image || 'https://via.placeholder.com/300x200';
+                        const pkgType = pkg.type || 'كورس';
+                        const pkgPrice = pkg.price ? `${pkg.price} EGP` : 'مجاني';
+                        
+                        let btnText = `اشترك الآن <i class="fas fa-arrow-left"></i>`;
+                        let btnAction = `openPaymentModal('${pkgId}', '${pkg.title}', '${pkg.price}')`;
+                        let btnClass = "pkg-btn";
+
+                        if(currentUser && userSubs[pkgId]) {
+                            const status = userSubs[pkgId].status;
+                            if(status === 'active') {
+                                btnText = `ادخل الكورس <i class="fas fa-door-open"></i>`;
+                                btnAction = `openCourseDetails('${pkgId}')`;
+                                btnClass = "pkg-btn btn-success";
+                            } else if (status === 'pending') {
+                                btnText = `في انتظار المراجعة <i class="fas fa-clock"></i>`;
+                                btnAction = `alert('طلبك قيد المراجعة من الإدارة، سيتم تفعيل الكورس قريباً')`;
+                                btnClass = "pkg-btn btn-pending";
+                            } else if (status === 'rejected') {
+                                btnText = `تم الرفض (حاول مجدداً) <i class="fas fa-times"></i>`;
+                                btnAction = `openPaymentModal('${pkgId}', '${pkg.title}', '${pkg.price}')`;
+                                btnClass = "pkg-btn btn-wrong";
+                            }
+                        }
+
+                        const card = document.createElement('div');
+                        card.className = 'pkg-card';
+                        card.innerHTML = `
+                            <div class="pkg-img-box">
+                                <img src="${pkgImg}">
+                                <div class="pkg-type-badge">${pkgType}</div>
+                            </div>
+                            <div class="pkg-body">
+                                <h3 class="pkg-title">${pkg.title}</h3>
+                                <div class="pkg-price">${pkgPrice}</div>
+                                <p class="pkg-desc">${pkg.description || 'محتوى تعليمي شامل'}</p>
+                                <button class="${btnClass}" onclick="${btnAction}">${btnText}</button>
+                            </div>
+                        `;
+                        list.appendChild(card);
+                    });
+                });
+            }
+        }
+
+        window.openPaymentModal = function(pkgId, title, price) {
+            if(!currentUser) {
+                alert("يجب تسجيل الدخول أولاً للاشتراك");
+                openAuthModal('login');
+                return;
+            }
+            document.getElementById('payment-modal').classList.add('active');
+            document.getElementById('pay-pkg-id').value = pkgId;
+            document.getElementById('pay-pkg-price').value = price;
+            document.getElementById('payment-amount-display').innerText = `المبلغ المطلوب: ${price} جنيه`;
+        }
+
+        window.handlePaymentSubmit = async function(e) {
+            e.preventDefault();
+            const pkgId = document.getElementById('pay-pkg-id').value;
+            const senderPhone = document.getElementById('pay-sender-phone').value;
+            const fileInput = document.getElementById('pay-receipt');
+            
+            if(fileInput.files.length === 0) return alert("يرجى رفع صورة التحويل");
+
+            const btn = e.target.querySelector('button');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = 'جاري الرفع... <i class="fas fa-spinner fa-spin"></i>';
+            btn.disabled = true;
+
+            try {
+                const base64Img = await toBase64(fileInput.files[0]);
+
+                const requestData = {
+                    userId: currentUser.phone,
+                    userName: currentUser.name,
+                    packageId: pkgId,
+                    pkgTitle: window.currentTeacherPackages[pkgId].title,
+                    senderPhone: senderPhone,
+                    receiptImage: base64Img,
+                    status: 'pending',
+                    timestamp: Date.now()
+                };
+
+                const newReqRef = push(ref(db, 'requests'));
+                await set(newReqRef, requestData);
+
+                await update(ref(db, `users/${currentUser.phone}/subscriptions/${pkgId}`), {
+                    status: 'pending',
+                    reqId: newReqRef.key,
+                    timestamp: Date.now()
+                });
+
+                alert("تم إرسال طلب الاشتراك بنجاح! سيتم مراجعة الطلب وتفعيل الكورس.");
+                document.getElementById('payment-modal').classList.remove('active');
+                
+                fetchPackages(Object.keys(window.currentTeacherPackages)[0]);
+                
+            } catch (error) {
+                console.error(error);
+                alert("حدث خطأ أثناء الإرسال");
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
         }
 
         window.openCourseDetails = function(pkgId) {
-            const pkg = window.currentTeacherPackages[pkgId];
-            if(!pkg) return;
-            document.getElementById('cd-title').innerText = pkg.title;
-            document.getElementById('cd-type').innerText = pkg.type || 'كورس';
-            document.getElementById('cd-desc').innerText = pkg.description || '';
-            const contentArea = document.getElementById('course-content-area');
-            contentArea.innerHTML = '';
+            const userSubRef = ref(db, `users/${currentUser.phone}/subscriptions/${pkgId}`);
+            get(userSubRef).then(snap => {
+                if(snap.exists() && snap.val().status === 'active') {
+                     const pkg = window.currentTeacherPackages[pkgId];
+                    if(!pkg) return;
+                    document.getElementById('cd-title').innerText = pkg.title;
+                    document.getElementById('cd-type').innerText = pkg.type || 'كورس';
+                    document.getElementById('cd-desc').innerText = pkg.description || '';
+                    const contentArea = document.getElementById('course-content-area');
+                    contentArea.innerHTML = '';
 
-            if (pkg.weeks) {
-                Object.entries(pkg.weeks).forEach(([wId, week]) => {
-                    let contentHtml = '';
-                    if (week.content) {
-                        Object.entries(week.content).forEach(([cId, content]) => {
-                            const isVideo = content.type === 'video';
-                            const iconClass = isVideo ? 'fa-play' : 'fa-clipboard-check';
-                            const iconColor = isVideo ? '#e74c3c' : '#3498db';
-                            
-                            let action = "";
-                            if(isVideo) {
-                                action = `openVideoPage('${content.url}', '${content.title}')`;
-                            } else {
-                                action = `openExamPage('${pkgId}', '${wId}', '${cId}')`; 
+                    if (pkg.weeks) {
+                        Object.entries(pkg.weeks).forEach(([wId, week]) => {
+                            let contentHtml = '';
+                            if (week.content) {
+                                Object.entries(week.content).forEach(([cId, content]) => {
+                                    const isVideo = content.type === 'video';
+                                    const iconClass = isVideo ? 'fa-play' : 'fa-clipboard-check';
+                                    const iconColor = isVideo ? '#e74c3c' : '#3498db';
+                                    
+                                    let action = "";
+                                    if(isVideo) {
+                                        action = `openVideoPage('${content.url}', '${content.title}')`;
+                                    } else {
+                                        action = `openExamPage('${pkgId}', '${wId}', '${cId}')`; 
+                                    }
+
+                                    contentHtml += `
+                                        <a href="javascript:void(0)" class="content-link" onclick="${action}">
+                                            <div class="c-icon" style="width:40px;height:40px;background:${iconColor};color:#fff;display:flex;align-items:center;justify-content:center;border-radius:10px;"><i class="fas ${iconClass}"></i></div>
+                                            <span>${content.title}</span>
+                                        </a>
+                                    `;
+                                });
                             }
-
-                            contentHtml += `
-                                <a href="javascript:void(0)" class="content-link" onclick="${action}">
-                                    <div class="c-icon" style="width:40px;height:40px;background:${iconColor};color:#fff;display:flex;align-items:center;justify-content:center;border-radius:10px;"><i class="fas ${iconClass}"></i></div>
-                                    <span>${content.title}</span>
-                                </a>
-                            `;
+                            contentArea.innerHTML += `
+                                <div class="week-box">
+                                    <div class="week-head" onclick="toggleWeek(this)">
+                                        <span><i class="fas fa-calendar-week" style="color:var(--primary); margin-left:10px;"></i> ${week.title}</span>
+                                        <i class="fas fa-chevron-down"></i>
+                                    </div>
+                                    <div class="week-body">${contentHtml || '<p style="padding:15px;text-align:center;color:#999;">لا يوجد محتوى</p>'}</div>
+                                </div>`;
                         });
+                    } else {
+                        contentArea.innerHTML = '<div style="text-align:center; padding:40px;">لا يوجد محتوى</div>';
                     }
-                    contentArea.innerHTML += `
-                        <div class="week-box">
-                            <div class="week-head" onclick="toggleWeek(this)">
-                                <span><i class="fas fa-calendar-week" style="color:var(--primary); margin-left:10px;"></i> ${week.title}</span>
-                                <i class="fas fa-chevron-down"></i>
-                            </div>
-                            <div class="week-body">${contentHtml || '<p style="padding:15px;text-align:center;color:#999;">لا يوجد محتوى</p>'}</div>
-                        </div>`;
-                });
-            } else {
-                contentArea.innerHTML = '<div style="text-align:center; padding:40px;">لا يوجد محتوى</div>';
-            }
-            switchView('course-details-view');
+                    switchView('course-details-view');
+                } else {
+                    alert("غير مصرح لك بدخول الكورس");
+                }
+            });
         }
 
         window.toggleWeek = function(head) {
