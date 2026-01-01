@@ -27,6 +27,8 @@
             --shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
             --radius: 20px;
             --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --correct: #27ae60;
+            --wrong: #c0392b;
         }
 
         [data-theme="dark"] {
@@ -109,10 +111,42 @@
         .theme-btn:hover { transform: rotate(15deg); color: var(--accent); }
         .menu-btn { display: none; }
 
-        /* --- Views & Hero --- */
-        .view { display: none; opacity: 0; transition: opacity 0.5s; }
+        /* --- Views & Layout --- */
+        .view { display: none; opacity: 0; transition: opacity 0.5s; padding-bottom: 80px; }
         .view.active-view { display: block; opacity: 1; animation: fadeIn 0.5s forwards; }
         
+        /* --- Clean Back Button Style --- */
+        .clean-back-container {
+            padding: 30px 5% 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .clean-back-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--secondary);
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 20px; 
+        }
+
+        .clean-back-btn:hover {
+            background: var(--primary);
+            color: #fff;
+            transform: translateX(5px) scale(1.1);
+            box-shadow: 0 10px 20px rgba(192, 57, 43, 0.3);
+        }
+
+        /* --- Hero --- */
         .hero { min-height: 85vh; display: flex; align-items: center; justify-content: space-between; padding: 0 5%; gap: 40px; }
         .hero-text { flex: 1; z-index: 2; }
         .hero h1 { font-size: 3.2rem; margin-bottom: 20px; line-height: 1.3; font-weight: 900; }
@@ -178,145 +212,154 @@
         }
         .btn-card:hover { background: var(--primary); color: #fff; transform: scale(1.02); }
 
-        /* --- Teacher Page Inner --- */
+        /* --- Teacher Profile --- */
         .teacher-profile-header {
-            padding: 50px 5%;
-            text-align: center;
-            background: var(--glass-bg);
-            margin: 20px 5%;
-            border-radius: 40px;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--glass-border);
-            position: relative;
+            padding: 50px 5%; text-align: center; background: var(--glass-bg);
+            margin: 20px 5%; border-radius: 40px; box-shadow: var(--shadow);
+            border: 1px solid var(--glass-border); position: relative;
             animation: slideUp 0.5s ease;
-        }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        
-        .back-btn {
-            position: absolute; top: 25px; right: 25px;
-            background: #fff; border: 1px solid #ddd;
-            padding: 10px 25px; border-radius: 50px;
-            font-size: 1rem; color: var(--secondary); font-weight: 800;
-            cursor: pointer; display: flex; align-items: center; gap: 10px;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            z-index: 10;
-        }
-        .back-btn:hover { 
-            background: var(--primary); color: #fff; border-color: var(--primary); 
-            transform: translateX(5px) scale(1.05); box-shadow: 0 10px 20px rgba(192, 57, 43, 0.3);
         }
         
         .tp-img-container {
-            width: 180px; height: 180px; margin: 0 auto 25px;
-            border-radius: 50%; border: 5px solid var(--accent);
-            overflow: hidden; box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            width: 150px; height: 150px; margin: 0 auto 20px;
+            border-radius: 50%; border: 4px solid var(--accent);
+            overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.15);
             padding: 3px; background: #fff;
         }
         .tp-img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+        .tp-name { font-size: 1.8rem; color: var(--secondary); margin-bottom: 10px; font-weight: 900; }
+        .tp-bio { color: var(--text-light); max-width: 700px; margin: 0 auto; line-height: 1.6; font-size: 1rem; }
+
+        /* --- Packages Grid --- */
+        .packages-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px; padding: 20px 5%;
+        }
+
+        .pkg-card {
+            background: var(--glass-bg); border-radius: 20px; overflow: hidden;
+            box-shadow: var(--shadow); border: 1px solid var(--glass-border);
+            transition: 0.3s; display: flex; flex-direction: column;
+        }
+        .pkg-card:hover { transform: translateY(-8px); border-color: var(--primary); }
+
+        .pkg-img-box {
+            position: relative; height: 200px; width: 100%;
+        }
+        .pkg-img-box img { width: 100%; height: 100%; object-fit: cover; }
         
-        .tp-name { font-size: 2.2rem; color: var(--secondary); margin-bottom: 15px; font-weight: 900; }
-        .tp-bio { color: var(--text-light); max-width: 700px; margin: 0 auto 25px; line-height: 1.8; font-size: 1.1rem; font-weight: 600; }
-        .tp-subject { 
-            display: inline-block; background: rgba(192, 57, 43, 0.1); 
-            color: var(--primary); padding: 8px 25px; border-radius: 50px; font-weight: 800; font-size: 1.1rem;
+        .pkg-type-badge {
+            position: absolute; top: 15px; left: 15px;
+            background: rgba(0,0,0,0.7); color: #fff; backdrop-filter: blur(5px);
+            padding: 6px 15px; border-radius: 50px; font-weight: 700; font-size: 0.85rem;
+            display: flex; align-items: center; gap: 5px;
         }
 
-        .subscriptions-divider {
-            text-align: center; margin: 50px 0 30px; position: relative;
+        .pkg-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+        .pkg-title { font-size: 1.3rem; font-weight: 900; color: var(--secondary); margin-bottom: 10px; }
+        .pkg-price { font-size: 1.4rem; font-weight: 900; color: var(--primary); margin-bottom: 15px; }
+        .pkg-desc { color: var(--text-light); font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px; flex: 1; }
+        .pkg-btn {
+            width: 100%; padding: 12px; background: linear-gradient(45deg, var(--secondary), #34495e);
+            color: #fff; border: none; border-radius: 12px; font-weight: 800;
+            cursor: pointer; transition: 0.3s;
         }
-        .subscriptions-divider::after {
-            content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 300px; height: 3px; background: linear-gradient(90deg, transparent, var(--text-light), transparent); opacity: 0.2; z-index: -1;
+        .pkg-btn:hover { background: var(--primary); }
+
+        /* --- Course Content Styles --- */
+        .course-header {
+            background: linear-gradient(rgba(44, 62, 80, 0.9), rgba(44, 62, 80, 0.9)), url('https://images.unsplash.com/photo-1513258496098-b05360f979aa?auto=format&fit=crop&q=80');
+            background-size: cover; background-position: center;
+            color: #fff; padding: 60px 5%; border-radius: 0 0 40px 40px;
+            margin-bottom: 40px;
         }
-        .subscriptions-title {
-            background: var(--glass-bg); padding: 5px 30px; border-radius: 50px;
-            font-size: 1.6rem; color: var(--secondary); font-weight: 900;
-            border: 1px solid var(--glass-border);
+        .course-content-container { max-width: 900px; margin: 0 auto; padding: 0 5% 60px; }
+        .week-box { background: #fff; border: 1px solid #eee; border-radius: 15px; margin-bottom: 15px; overflow: hidden; }
+        .week-head { padding: 20px; background: #fff; cursor: pointer; font-weight: 800; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid transparent; transition: 0.3s; }
+        .week-head:hover { background: #f9f9f9; }
+        .week-body { display: none; background: #f8f9fa; border-top: 1px solid #eee; }
+        .week-body.open { display: block; }
+        .content-link { display: flex; align-items: center; gap: 15px; padding: 15px 20px; border-bottom: 1px solid #eee; text-decoration: none; color: var(--text-main); font-weight: 600; }
+        .content-link:hover { background: #fff; padding-right: 25px; color: var(--primary); }
+
+        /* --- Video View Specifics --- */
+        .video-container-page {
+            max-width: 1000px; margin: 0 auto; padding: 0 5%;
+        }
+        .video-frame-wrapper {
+            position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;
+            border-radius: 20px; box-shadow: var(--shadow); background: #000;
+        }
+        .video-frame-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        .video-title-page { font-size: 1.8rem; font-weight: 900; margin-top: 25px; color: var(--secondary); }
+
+        /* --- Exam View Specifics --- */
+        .exam-container { max-width: 800px; margin: 0 auto; padding: 0 5%; }
+        .exam-header { text-align: center; margin-bottom: 40px; }
+        .question-box {
+            background: var(--glass-bg); padding: 25px; border-radius: 20px;
+            margin-bottom: 25px; border: 1px solid var(--glass-border);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .q-text { font-size: 1.2rem; font-weight: 800; margin-bottom: 20px; color: var(--secondary); }
+        .q-option {
+            display: block; padding: 15px; background: rgba(255,255,255,0.7);
+            border: 2px solid transparent; border-radius: 12px; margin-bottom: 10px;
+            cursor: pointer; transition: 0.2s; font-weight: 600;
+        }
+        .q-option:hover { background: #fff; border-color: #ddd; }
+        input[type="radio"] { display: none; }
+        input[type="radio"]:checked + .q-option {
+            border-color: var(--primary); background: rgba(192, 57, 43, 0.05); color: var(--primary);
         }
 
-        /* --- Dynamic Package Styles --- */
-        .subscriptions-container {
-            padding: 20px 5%;
-            min-height: 250px;
-            display: flex; flex-direction: column;
-            align-items: center; gap: 30px;
-            color: var(--text-light); 
+        /* --- Result View Specifics --- */
+        .result-header { text-align: center; padding: 40px 0; }
+        
+        /* 3D Trophy Avatar Style */
+        .trophy-avatar {
+            width: 180px; height: 180px; margin: 0 auto 20px;
+            display: block; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
+            animation: bounceIn 1s ease;
+        }
+        @keyframes bounceIn {
+            0% { transform: scale(0); opacity: 0; }
+            60% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+
+        .score-display {
+            font-size: 3.5rem; color: var(--secondary); font-weight: 900;
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.05);
         }
         
-        .pkg-item {
-            background: var(--glass-bg); width: 100%; max-width: 900px;
-            border-radius: 20px; overflow: hidden; box-shadow: var(--shadow);
-            border: 1px solid var(--glass-border); transition: 0.3s;
-        }
-        .pkg-item:hover { transform: translateY(-5px); border-color: var(--primary); }
-        
-        .pkg-header {
-            padding: 25px; display: flex; align-items: center; gap: 20px;
-            border-bottom: 1px solid rgba(0,0,0,0.05); background: rgba(255,255,255,0.5);
-        }
-        .pkg-img { width: 100px; height: 100px; border-radius: 15px; object-fit: cover; }
-        .pkg-info { flex: 1; }
-        .pkg-title { font-size: 1.4rem; font-weight: 900; color: var(--secondary); margin-bottom: 5px; }
-        .pkg-meta { display: flex; gap: 10px; font-size: 0.9rem; color: var(--text-light); font-weight: 600; }
-        .pkg-price { color: var(--primary); font-weight: 900; font-size: 1.2rem; }
-        
-        .week-container { padding: 20px; background: #fff; }
-        .week-box { 
-            border: 1px solid #eee; border-radius: 15px; margin-bottom: 15px; overflow: hidden; 
-        }
-        .week-head {
-            padding: 15px 20px; background: #f8f9fa; cursor: pointer; font-weight: 800;
-            display: flex; justify-content: space-between; align-items: center;
-        }
-        .week-head:hover { background: #eee; }
-        .week-body { padding: 10px; display: none; border-top: 1px solid #eee; }
-        .week-body.open { display: block; animation: fadeIn 0.3s; }
+        .answer-review { margin-top: 10px; font-size: 0.95rem; padding: 10px; border-radius: 8px; }
+        .ans-correct { background: rgba(39, 174, 96, 0.1); color: #27ae60; border: 1px solid #27ae60; }
+        .ans-wrong { background: rgba(192, 57, 43, 0.1); color: #c0392b; border: 1px solid #c0392b; }
 
-        .content-link {
-            display: flex; align-items: center; gap: 15px; padding: 12px;
-            border-radius: 10px; text-decoration: none; color: var(--text-main);
-            transition: 0.2s; margin-bottom: 5px; font-weight: 600;
-        }
-        .content-link:hover { background: #f0f0f0; padding-right: 20px; }
-        .c-icon { width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: #fff; }
-
-        .empty-icon {
-            font-size: 4rem; margin-bottom: 20px;
-            color: var(--text-light); opacity: 0.5;
-            animation: pulseIcon 2s infinite;
-        }
-        @keyframes pulseIcon { 0%, 100% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.1); opacity: 0.7; } }
-
-        /* --- Modals & Auth --- */
+        /* --- Auth Modal --- */
         .modal-overlay {
             position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(8px);
             z-index: 1000; display: none; justify-content: center; align-items: center; padding: 20px;
         }
         .modal-overlay.active { display: flex; animation: fadeIn 0.3s ease; }
-        
         .auth-box {
             background: var(--glass-bg); width: 100%; max-width: 500px;
             padding: 40px; border-radius: 30px; box-shadow: 0 25px 80px rgba(0,0,0,0.3);
             position: relative; max-height: 90vh; overflow-y: auto;
             border: 1px solid var(--glass-border);
         }
-
-        .close-modal { position: absolute; top: 20px; left: 20px; background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--text-light); transition: 0.3s; }
-        .close-modal:hover { color: var(--primary); transform: rotate(90deg); }
-
-        .inp-field {
-            width: 100%; padding: 14px 20px 14px 50px; 
-            border: 2px solid transparent; border-radius: 15px; background: rgba(255,255,255,0.8);
-            margin-bottom: 18px; font-size: 1rem; color: var(--text-main); font-weight: 600;
-            transition: 0.3s; box-shadow: inset 0 2px 5px rgba(0,0,0,0.03);
+        .auth-avatar-header {
+            width: 120px; margin: -60px auto 10px; display: block;
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));
         }
-        .inp-field:focus { border-color: var(--primary); outline: none; background: #fff; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
-        .inp-wrapper { position: relative; }
-        .inp-icon { position: absolute; left: 18px; top: 18px; color: var(--primary); font-size: 1.1rem; }
-        select.inp-field { padding-left: 50px; cursor: pointer; appearance: none; }
 
-        /* --- Footer --- */
+        .close-modal { position: absolute; top: 20px; left: 20px; background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--text-light); }
+        .inp-field { width: 100%; padding: 14px 20px 14px 50px; border-radius: 15px; background: rgba(255,255,255,0.8); margin-bottom: 18px; border: 2px solid transparent; }
+        .inp-wrapper { position: relative; }
+        .inp-icon { position: absolute; left: 18px; top: 18px; color: var(--primary); }
+
+        /* --- Footer (Restored) --- */
         footer {
             background: var(--secondary); color: #fff;
             padding: 70px 5% 30px; margin-top: 100px; text-align: center;
@@ -341,25 +384,18 @@
         .footer-links { margin-top: 40px; display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; font-size: 1rem; opacity: 0.9; }
         .footer-links a { color: #fff; text-decoration: none; transition: 0.3s; font-weight: bold; }
         .footer-links a:hover { color: var(--accent); }
-
-        /* --- Toast & Media Queries --- */
-        #toast {
-            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px);
-            background: rgba(44, 62, 80, 0.95); color: #fff; padding: 15px 35px; border-radius: 50px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3); z-index: 9999; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            opacity: 0; pointer-events: none; font-weight: bold; display: flex; align-items: center; gap: 12px; font-size: 1.1rem;
-        }
+        
+        /* Toast */
+        #toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background: rgba(44, 62, 80, 0.95); color: #fff; padding: 15px 35px; border-radius: 50px; z-index: 9999; transition: 0.4s; opacity: 0; pointer-events: none; }
         #toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         @media (max-width: 768px) {
             .hero { flex-direction: column-reverse; text-align: center; padding-top: 40px; }
             .hero h1 { font-size: 2.2rem; }
-            .nav-links { display: none; position: fixed; top: 75px; left: 0; width: 100%; background: var(--glass-bg); flex-direction: column; padding: 30px; border-bottom: 1px solid rgba(0,0,0,0.1); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+            .nav-links { display: none; position: fixed; top: 75px; left: 0; width: 100%; background: var(--glass-bg); flex-direction: column; padding: 30px; }
             .nav-links.active { display: flex; }
             .menu-btn { display: block; }
             .teachers-grid { grid-template-columns: 1fr; }
-            .shape { opacity: 0.2; }
         }
     </style>
 </head>
@@ -373,44 +409,36 @@
 
     <div id="toast"><i class="fas fa-check-circle" style="color:#2ecc71;"></i> <span id="toast-msg"></span></div>
 
-      <nav>
+    <nav>
         <div class="logo"><i class="fas fa-graduation-cap"></i> Al-Nokhba</div>
-        
         <div class="nav-links" id="navLinks">
             <a href="#" onclick="switchView('home')"><i class="fas fa-home"></i> الرئيسية</a>
-            <a href="#teachers" onclick="switchView('home')"><i class="fas fa-chalkboard-teacher"></i> المدرسين</a>
-            
+            <a href="#" onclick="document.getElementById('teachers').scrollIntoView()"><i class="fas fa-chalkboard-teacher"></i> المدرسين</a>
             <div id="nav-guest-area">
                 <a href="#" onclick="openAuthModal('login')" style="color:var(--primary);"><i class="fas fa-sign-in-alt"></i> دخول</a>
                 <button class="btn-main" onclick="openAuthModal('register')" style="padding: 10px 25px; font-size:0.95rem;">اشترك الآن</button>
             </div>
-
             <div id="nav-user-area" style="display:none;">
                 <div class="nav-profile-wrapper" onclick="openProfileModal()">
                     <img src="" id="nav-user-avatar" class="nav-avatar">
                     <span id="nav-user-name" class="nav-username"></span>
-                    <i class="fas fa-chevron-down" style="font-size:0.8rem; margin-right:5px; color:var(--text-light);"></i>
                 </div>
             </div>
         </div>
-
         <div class="nav-actions">
             <button class="theme-btn" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
             <button class="menu-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
         </div>
     </nav>
 
+    <!-- HOME VIEW -->
     <div id="home" class="view active-view">
         <section class="hero">
             <div class="hero-text">
                 <h3 style="color:var(--accent); font-weight:800; margin-bottom:15px; display:inline-block; border-bottom:2px solid var(--accent); padding-bottom:5px;">الصف الأول الثانوي</h3>
                 <h1>منصة النخبة التعليمية<br><span>مستقبلك يبدأ هنا</span></h1>
-                <p>
-                    أقوى تجميعة لمدرسي مصر في مكان واحد. وفرنا عليك البحث وجبنا لك الخلاصة في كل المواد مع نظام متابعة متكامل يضمن لك التفوق.
-                </p>
-                <button class="btn-main" onclick="document.getElementById('teachers').scrollIntoView()">
-                    استعرض المدرسين <i class="fas fa-arrow-left"></i>
-                </button>
+                <p>أقوى تجميعة لمدرسي مصر في مكان واحد. وفرنا عليك البحث وجبنا لك الخلاصة في كل المواد.</p>
+                <button class="btn-main" onclick="document.getElementById('teachers').scrollIntoView()">استعرض المدرسين <i class="fas fa-arrow-left"></i></button>
             </div>
             <div class="hero-img">
                 <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Students Learning">
@@ -419,8 +447,6 @@
 
         <section id="teachers">
             <h2 class="section-title">نخبة <span>المدرسين</span></h2>
-            
-            <!-- تم تعديل الأزرار لإرسال معرف المدرس (ID) مثل t1, t2 -->
             <div class="teachers-grid">
                 <div class="teacher-card">
                     <div class="subject-badge"><i class="fas fa-language"></i> لغة إنجليزية</div>
@@ -511,36 +537,173 @@
                         </button>
                     </div>
                 </div>
+
+                <!-- Teacher 7: Minology (Badge Moved to Left) -->
+                <div class="teacher-card">
+                    <!-- Added inline style to move badge to left -->
+                    <div class="subject-badge" style="right: auto; left: 15px;"><i class="fas fa-brain"></i> فلسفة</div>
+                    <div class="card-img-wrapper">
+                        <img src="https://i.postimg.cc/K4Sq9sKj/Gemini-Generated-Image-3j04bf3j04bf3j04.png" alt="Minology">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="teacher-name">Minology</h3>
+                        <p class="teacher-bio">أسلوب عبقري في شرح الفلسفة، هتحب المادة وتفهمها من غير حفظ.</p>
+                        <button class="btn-card" 
+                            onclick="openTeacherPage('t7', 'Minology', 'https://i.postimg.cc/K4Sq9sKj/Gemini-Generated-Image-3j04bf3j04bf3j04.png', 'أسلوب عبقري في شرح الفلسفة، هتحب المادة وتفهمها من غير حفظ.', 'فلسفة')">
+                            الدخول لصفحة المدرس <i class="fas fa-external-link-alt"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Teacher 8: Lotfy Zahran (Fixed: Math) -->
+                <div class="teacher-card">
+                    <div class="subject-badge"><i class="fas fa-calculator"></i> رياضيات</div>
+                    <div class="card-img-wrapper">
+                        <img src="https://i.postimg.cc/7ZMs9kgG/Gemini-Generated-Image-7ou14v7ou14v7ou1.png" alt="Lotfy Zahran">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="teacher-name">أ/ لطفي زهران</h3>
+                        <p class="teacher-bio">عميد الرياضيات، شرح مبسط لكل القوانين والمسائل يضمن لك الدرجة النهائية.</p>
+                        <button class="btn-card" 
+                            onclick="openTeacherPage('t8', 'أ/ لطفي زهران', 'https://i.postimg.cc/7ZMs9kgG/Gemini-Generated-Image-7ou14v7ou14v7ou1.png', 'عميد الرياضيات، شرح مبسط لكل القوانين والمسائل يضمن لك الدرجة النهائية.', 'رياضيات')">
+                            الدخول لصفحة المدرس <i class="fas fa-external-link-alt"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
         </section>
     </div>
 
-    <!-- Teacher Detail View (Dynamic Content) -->
+    <!-- TEACHER VIEW (Package List) -->
     <div id="teacher-view" class="view">
+        <div class="clean-back-container">
+            <button class="clean-back-btn" onclick="switchView('home')"><i class="fas fa-arrow-right"></i></button>
+        </div>
+        
         <div class="teacher-profile-header">
-            <button class="back-btn" onclick="switchView('home')">
-                <i class="fas fa-arrow-right"></i> رجوع للقائمة
-            </button>
-            
-            <div class="tp-img-container">
-                <img id="tp-img" src="" class="tp-img">
-            </div>
-            
+            <div class="tp-img-container"><img id="tp-img" src="" class="tp-img"></div>
             <h1 id="tp-name" class="tp-name"></h1>
-            <span id="tp-subject" class="tp-subject"></span>
-            <p id="tp-bio" class="tp-bio" style="margin-top:20px;"></p>
+            <p id="tp-bio" class="tp-bio"></p>
+        </div>
+        <div class="packages-grid" id="packages-list"></div>
+    </div>
+
+    <!-- COURSE DETAILS VIEW (Weeks List) -->
+    <div id="course-details-view" class="view">
+        <div class="clean-back-container">
+            <button class="clean-back-btn" onclick="switchView('teacher-view')"><i class="fas fa-arrow-right"></i></button>
         </div>
 
-        <div class="subscriptions-divider">
-            <span class="subscriptions-title">المحتوى الدراسي</span>
+        <div class="course-header">
+            <div style="max-width:900px; margin:0 auto;">
+                <div id="cd-type" style="background:var(--accent); color:#000; padding:5px 15px; border-radius:50px; font-weight:800; display:inline-block; margin-bottom:15px;"></div>
+                <h1 id="cd-title" style="font-size:2.5rem; font-weight:900;"></h1>
+                <p id="cd-desc" style="opacity:0.9; margin-top:10px;"></p>
+            </div>
         </div>
+        <div class="course-content-container" id="course-content-area"></div>
+    </div>
 
-        <div class="subscriptions-container" id="packages-list">
-            <!-- سيتم تحميل الباقات هنا ديناميكياً من فايربيس -->
-            <i class="fas fa-spinner fa-spin empty-icon" style="font-size:3rem; color:var(--primary);"></i>
+    <!-- VIDEO PLAYER VIEW (New Page) -->
+    <div id="video-view" class="view">
+        <div class="clean-back-container">
+            <button class="clean-back-btn" onclick="switchView('course-details-view')"><i class="fas fa-arrow-right"></i></button>
+        </div>
+        
+        <div class="video-container-page">
+            <div class="video-frame-wrapper">
+                <iframe id="page-video-frame" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <h2 id="page-video-title" class="video-title-page"></h2>
         </div>
     </div>
 
+    <!-- EXAM VIEW -->
+    <div id="exam-view" class="view">
+        <div class="clean-back-container">
+            <button class="clean-back-btn" onclick="switchView('course-details-view')"><i class="fas fa-arrow-right"></i></button>
+        </div>
+
+        <div class="exam-container">
+            <div class="exam-header">
+                <h1 id="exam-title" style="font-size:2rem; font-weight:900; color:var(--secondary);"></h1>
+                <p style="color:var(--text-light);">أجب عن جميع الأسئلة التالية ثم اضغط تسليم</p>
+            </div>
+            <form id="exam-form" onsubmit="submitExam(event)">
+                <div id="questions-area"></div>
+                <button type="submit" class="btn-main" style="width:100%; justify-content:center; margin-top:30px;">تسليم الإجابات <i class="fas fa-check-circle"></i></button>
+            </form>
+        </div>
+    </div>
+
+    <!-- EXAM RESULT VIEW -->
+    <div id="exam-result-view" class="view">
+        <div class="clean-back-container">
+            <button class="clean-back-btn" onclick="switchView('course-details-view')"><i class="fas fa-arrow-right"></i></button>
+        </div>
+
+        <div class="exam-container">
+            <div class="result-header">
+                <!-- Trophy 3D Avatar Added Here -->
+                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="trophy-avatar" alt="Trophy">
+                
+                <h2 style="color:var(--secondary); font-weight:900;">النتيجة النهائية</h2>
+                <div class="score-display" id="result-score">0/0</div>
+            </div>
+            
+            <h3 style="margin-bottom:20px; color:var(--text-main);">مراجعة الإجابات:</h3>
+            <div id="result-review-area"></div>
+            
+            <button class="btn-main" onclick="switchView('course-details-view')" style="width:100%; justify-content:center; margin-top:30px;">العودة للكورس</button>
+        </div>
+    </div>
+
+    <!-- Auth & Profile Modals -->
+    <div id="auth-modal" class="modal-overlay">
+        <div class="auth-box">
+            <!-- Auth 3D Avatar Added Here -->
+            <img src="https://cdn-icons-png.flaticon.com/512/9374/9374921.png" class="auth-avatar-header" alt="Login">
+            
+            <button class="close-modal" onclick="closeAuthModal()"><i class="fas fa-times"></i></button>
+            <h2 id="auth-title" style="text-align:center; margin-bottom:25px; color:var(--secondary);">تسجيل الدخول</h2>
+            
+            <div style="display:flex; margin-bottom:25px; border-bottom:2px solid #ddd;">
+                <button onclick="toggleAuthMode('login')" id="tab-login" style="flex:1; padding:15px; background:none; border:none; border-bottom:3px solid var(--primary); font-weight:800;">دخول</button>
+                <button onclick="toggleAuthMode('register')" id="tab-register" style="flex:1; padding:15px; background:none; border:none;">تسجيل جديد</button>
+            </div>
+            
+            <form id="form-login" onsubmit="handleLogin(event)">
+                <div class="inp-wrapper"><i class="fas fa-phone inp-icon"></i><input type="tel" id="login-phone" class="inp-field" placeholder="رقم الهاتف" required></div>
+                <div class="inp-wrapper"><i class="fas fa-lock inp-icon"></i><input type="password" id="login-pass" class="inp-field" placeholder="كلمة المرور" required></div>
+                <button class="btn-main" style="width:100%; justify-content:center;">دخول الآن</button>
+            </form>
+            
+            <form id="form-register" onsubmit="handleRegister(event)" style="display:none;">
+                <div class="inp-wrapper"><i class="fas fa-user inp-icon"></i><input type="text" id="reg-name" class="inp-field" placeholder="اسم الطالب" required></div>
+                <div class="inp-wrapper"><i class="fas fa-phone inp-icon"></i><input type="tel" id="reg-phone" class="inp-field" placeholder="رقم الهاتف" required></div>
+                <div class="inp-wrapper"><i class="fas fa-lock inp-icon"></i><input type="password" id="reg-pass" class="inp-field" placeholder="كلمة المرور" required></div>
+                <button class="btn-main" style="width:100%; justify-content:center;">إنشاء حساب</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="profile-modal" class="modal-overlay">
+        <div class="auth-box">
+            <button class="close-modal" onclick="document.getElementById('profile-modal').classList.remove('active')"><i class="fas fa-times"></i></button>
+            <h2 style="text-align:center;">الملف الشخصي</h2>
+            <div style="text-align:center; margin-bottom:20px;">
+                <img src="" id="edit-avatar-preview" style="width:100px; height:100px; border-radius:50%; border:4px solid var(--accent); object-fit:cover;">
+            </div>
+            <form onsubmit="handleEditProfile(event)">
+                <div class="inp-wrapper"><i class="fas fa-user inp-icon"></i><input type="text" id="edit-name" class="inp-field" required></div>
+                <div class="inp-wrapper"><i class="fas fa-phone inp-icon"></i><input type="tel" id="edit-phone" class="inp-field" required></div>
+                <button class="btn-main" style="width:100%;">حفظ التعديلات</button>
+                <button type="button" onclick="logout()" style="width:100%; margin-top:15px; background:none; border:2px solid #e74c3c; color:#e74c3c; padding:12px; border-radius:50px;">تسجيل الخروج</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Restored Full Footer -->
     <footer>
         <h2 style="margin-bottom:15px; font-weight:900;">تابعنا على المنصات</h2>
         <p style="opacity:0.9; font-weight:600;">عشان يوصلك كل جديد ومذكرات مجانية</p>
@@ -563,108 +726,7 @@
         <p style="margin-top:40px; font-size:0.9rem; color:#fff; opacity:0.6;">جميع الحقوق محفوظة &copy; 2026 لمنصة النخبة</p>
     </footer>
 
-    <!-- Video Modal -->
-    <div id="video-modal" class="modal-overlay">
-        <div class="auth-box" style="max-width:800px; padding:20px;">
-            <button class="close-modal" onclick="document.getElementById('video-modal').classList.remove('active'); document.getElementById('video-frame').src='';"><i class="fas fa-times"></i></button>
-            <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:15px; margin-top:20px;">
-                <iframe id="video-frame" style="position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen></iframe>
-            </div>
-        </div>
-    </div>
-
-    <!-- Auth Modal -->
-    <div id="auth-modal" class="modal-overlay">
-        <div class="auth-box">
-            <button class="close-modal" onclick="closeAuthModal()"><i class="fas fa-times"></i></button>
-            <h2 id="auth-title" style="text-align:center; margin-bottom:25px; color:var(--secondary); font-weight:900;">تسجيل الدخول</h2>
-            
-            <div style="display:flex; margin-bottom:25px; border-bottom:2px solid #ddd;">
-                <button onclick="toggleAuthMode('login')" id="tab-login" style="flex:1; padding:15px; background:none; border:none; border-bottom:3px solid var(--primary); font-weight:800; font-size:1.1rem; cursor:pointer;">دخول</button>
-                <button onclick="toggleAuthMode('register')" id="tab-register" style="flex:1; padding:15px; background:none; border:none; border-bottom:3px solid transparent; color:var(--text-light); font-weight:800; font-size:1.1rem; cursor:pointer;">تسجيل جديد</button>
-            </div>
-
-            <form id="form-login" onsubmit="handleLogin(event)">
-                <div class="inp-wrapper">
-                    <i class="fas fa-phone inp-icon"></i>
-                    <input type="tel" id="login-phone" class="inp-field" placeholder="رقم الهاتف" required>
-                </div>
-                <div class="inp-wrapper">
-                    <i class="fas fa-lock inp-icon"></i>
-                    <input type="password" id="login-pass" class="inp-field" placeholder="كلمة المرور" required>
-                </div>
-                <button class="btn-main" style="width:100%; justify-content:center;">دخول الآن</button>
-            </form>
-
-            <form id="form-register" onsubmit="handleRegister(event)" style="display:none;">
-                <div class="inp-wrapper">
-                    <i class="fas fa-user inp-icon"></i>
-                    <input type="text" id="reg-name" class="inp-field" placeholder="اسم الطالب الثلاثي" required>
-                </div>
-                <div class="inp-wrapper">
-                    <i class="fas fa-venus-mars inp-icon"></i>
-                    <select id="reg-gender" class="inp-field" required>
-                        <option value="" disabled selected>اختر النوع</option>
-                        <option value="male">ذكر</option>
-                        <option value="female">أنثى</option>
-                    </select>
-                </div>
-                <div class="inp-wrapper">
-                    <i class="fas fa-phone inp-icon"></i>
-                    <input type="tel" id="reg-phone" class="inp-field" placeholder="رقم هاتف الطالب" required>
-                </div>
-                <div class="inp-wrapper">
-                    <i class="fas fa-user-tie inp-icon"></i>
-                    <input type="tel" id="reg-parent-phone" class="inp-field" placeholder="رقم هاتف ولي الأمر" required>
-                </div>
-                <div class="inp-wrapper">
-                    <i class="fas fa-lock inp-icon"></i>
-                    <input type="password" id="reg-pass" class="inp-field" placeholder="كلمة المرور" required>
-                </div>
-                <button class="btn-main" style="width:100%; justify-content:center;">إنشاء حساب جديد</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Profile Modal -->
-    <div id="profile-modal" class="modal-overlay">
-        <div class="auth-box">
-            <button class="close-modal" onclick="document.getElementById('profile-modal').classList.remove('active')"><i class="fas fa-times"></i></button>
-            <h2 style="text-align:center; margin-bottom:20px; font-weight:900;">الملف الشخصي</h2>
-            
-            <div style="text-align:center; margin-bottom:25px;">
-                <img src="" id="edit-avatar-preview" style="width:90px; height:90px; border-radius:50%; border:4px solid var(--accent); padding:2px; background:#fff;">
-                <p style="margin-top:10px; color:var(--text-light); font-weight:bold;">تعديل البيانات</p>
-            </div>
-
-            <form onsubmit="handleEditProfile(event)">
-                <div class="inp-wrapper">
-                    <i class="fas fa-user inp-icon"></i>
-                    <input type="text" id="edit-name" class="inp-field" placeholder="الاسم" required>
-                </div>
-                <div class="inp-wrapper">
-                    <i class="fas fa-phone inp-icon"></i>
-                    <input type="tel" id="edit-phone" class="inp-field" placeholder="رقم هاتفك" required>
-                </div>
-                <div class="inp-wrapper">
-                    <i class="fas fa-user-tie inp-icon"></i>
-                    <input type="tel" id="edit-parent-phone" class="inp-field" placeholder="رقم ولي الأمر" required>
-                </div>
-                <div class="inp-wrapper">
-                    <i class="fas fa-lock inp-icon"></i>
-                    <input type="password" id="edit-pass" class="inp-field" placeholder="كلمة المرور الجديدة (اختياري)">
-                </div>
-                
-                <button class="btn-main" style="width:100%; justify-content:center;">حفظ التعديلات</button>
-                <button type="button" onclick="logout()" style="width:100%; margin-top:15px; background:none; border:2px solid #e74c3c; color:#e74c3c; padding:12px; border-radius:50px; cursor:pointer; font-weight:bold; transition:0.3s;">تسجيل الخروج <i class="fas fa-sign-out-alt"></i></button>
-            </form>
-        </div>
-    </div>
-
     <script type="module">
-        // -----------------------------------------------------------
-        // 1. Firebase Configuration & Initialization
-        // -----------------------------------------------------------
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
@@ -682,12 +744,17 @@
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
-        // -----------------------------------------------------------
-        // 2. Global Helper Functions (Attached to Window for HTML Access)
-        // -----------------------------------------------------------
-        
+        // --- GLOBAL VARIABLES ---
+        window.currentTeacherPackages = {}; 
+        let currentTeacherName = "";
+        let currentExamQuestions = [];
+
+        // --- VIEW NAVIGATION ---
         window.switchView = function(viewId) {
             document.querySelectorAll('.view').forEach(el => el.classList.remove('active-view'));
+            const iframe = document.getElementById('page-video-frame');
+            iframe.src = iframe.src; 
+            
             setTimeout(() => {
                 const target = document.getElementById(viewId);
                 if(target) target.classList.add('active-view');
@@ -695,285 +762,274 @@
             window.scrollTo(0,0);
         }
 
-        // Modified: Accepts TeacherID to fetch data from Firebase
         window.openTeacherPage = function(tId, name, img, bio, subject) {
+            currentTeacherName = name;
             document.getElementById('tp-name').innerText = name;
             document.getElementById('tp-img').src = img;
             document.getElementById('tp-bio').innerText = bio;
-            document.getElementById('tp-subject').innerText = subject;
-            
-            // Fetch packages for this teacher
             fetchPackages(tId);
-            
             switchView('teacher-view');
         }
 
-        window.toggleWeek = function(header) {
-            const body = header.nextElementSibling;
-            const icon = header.querySelector('.fa-chevron-down');
-            if (body.classList.contains('open')) {
-                body.classList.remove('open');
-                icon.style.transform = 'rotate(0deg)';
-            } else {
-                body.classList.add('open');
-                icon.style.transform = 'rotate(180deg)';
-            }
-        }
-
-        window.playVideo = function(url) {
-            // Simple logic to convert youtube watch link to embed link
-            let embedUrl = url;
-            if (url.includes('watch?v=')) {
-                const vId = url.split('v=')[1].split('&')[0];
-                embedUrl = `https://www.youtube.com/embed/${vId}`;
-            } else if (url.includes('youtu.be/')) {
-                const vId = url.split('youtu.be/')[1];
-                embedUrl = `https://www.youtube.com/embed/${vId}`;
-            }
-
-            document.getElementById('video-frame').src = embedUrl;
-            document.getElementById('video-modal').classList.add('active');
-        }
-
-        // -----------------------------------------------------------
-        // 3. Firebase Data Fetching Logic
-        // -----------------------------------------------------------
-
+        // --- FETCHING DATA ---
         function fetchPackages(teacherId) {
             const list = document.getElementById('packages-list');
-            list.innerHTML = '<i class="fas fa-spinner fa-spin empty-icon" style="font-size:3rem; color:var(--primary);"></i>';
-
+            list.innerHTML = '<i class="fas fa-spinner fa-spin" style="font-size:3rem; color:var(--primary); margin:auto;"></i>';
             const packagesRef = ref(db, `teachers/${teacherId}/packages`);
             
             onValue(packagesRef, (snapshot) => {
-                list.innerHTML = ''; // Clear loading
-                
+                list.innerHTML = ''; 
                 if (!snapshot.exists()) {
                     list.innerHTML = `
-                        <div style="text-align:center; opacity:0.7;">
-                            <i class="fas fa-box-open empty-icon"></i>
-                            <h3>لا يوجد محتوى حالياً</h3>
+                        <div style="text-align:center; padding:40px;">
+                             <img src="https://cdn-icons-png.flaticon.com/512/7486/7486831.png" style="width:120px; opacity:0.8;">
+                             <h3 style="margin-top:20px; color:var(--text-light);">لا يوجد محتوى حالياً</h3>
                         </div>`;
                     return;
                 }
-
                 const data = snapshot.val();
-                
-                // Loop through packages
+                window.currentTeacherPackages = data;
+
                 Object.entries(data).forEach(([pkgId, pkg]) => {
-                    const pkgDiv = document.createElement('div');
-                    pkgDiv.className = 'pkg-item';
+                    const pkgImg = pkg.image || 'https://via.placeholder.com/300x200';
+                    const pkgType = pkg.type || 'كورس';
+                    const pkgPrice = pkg.price ? `${pkg.price} EGP` : 'مجاني';
                     
-                    let weeksHtml = '';
-                    
-                    if (pkg.weeks) {
-                        Object.entries(pkg.weeks).forEach(([wId, week]) => {
-                            let contentHtml = '';
-                            if (week.content) {
-                                Object.entries(week.content).forEach(([cId, content]) => {
-                                    if (content.type === 'video') {
-                                        contentHtml += `
-                                            <a href="#" class="content-link" onclick="playVideo('${content.url}')">
-                                                <div class="c-icon" style="background:#e74c3c"><i class="fas fa-play"></i></div>
-                                                <span>${content.title}</span>
-                                            </a>
-                                        `;
-                                    } else {
-                                        contentHtml += `
-                                            <a href="#" class="content-link" onclick="alert('يجب الاشتراك لفتح الامتحان')">
-                                                <div class="c-icon" style="background:#3498db"><i class="fas fa-clipboard-check"></i></div>
-                                                <span>${content.title}</span>
-                                            </a>
-                                        `;
-                                    }
-                                });
-                            }
-
-                            weeksHtml += `
-                                <div class="week-box">
-                                    <div class="week-head" onclick="toggleWeek(this)">
-                                        <span><i class="fas fa-calendar-week" style="color:var(--primary); margin-left:10px;"></i> ${week.title}</span>
-                                        <i class="fas fa-chevron-down" style="transition:0.3s"></i>
-                                    </div>
-                                    <div class="week-body">
-                                        ${contentHtml || '<p style="text-align:center; font-size:0.9rem; color:#999;">لا يوجد محتوى بعد</p>'}
-                                    </div>
-                                </div>
-                            `;
-                        });
-                    } else {
-                        weeksHtml = '<div style="padding:20px; text-align:center;">جاري إضافة الأسابيع...</div>';
-                    }
-
-                    pkgDiv.innerHTML = `
-                        <div class="pkg-header">
-                            <img src="${pkg.image || 'https://via.placeholder.com/100'}" class="pkg-img">
-                            <div class="pkg-info">
-                                <div class="pkg-title">${pkg.title}</div>
-                                <div class="pkg-meta">
-                                    <span style="background:var(--accent); color:#000; padding:2px 8px; border-radius:4px;">${pkg.type}</span>
-                                </div>
-                            </div>
-                            <div class="pkg-price">${pkg.price} EGP</div>
+                    const card = document.createElement('div');
+                    card.className = 'pkg-card';
+                    card.innerHTML = `
+                        <div class="pkg-img-box">
+                            <img src="${pkgImg}">
+                            <div class="pkg-type-badge">${pkgType}</div>
                         </div>
-                        <div class="week-container">
-                            ${weeksHtml}
+                        <div class="pkg-body">
+                            <h3 class="pkg-title">${pkg.title}</h3>
+                            <div class="pkg-price">${pkgPrice}</div>
+                            <p class="pkg-desc">${pkg.description || 'محتوى تعليمي شامل'}</p>
+                            <button class="pkg-btn" onclick="openCourseDetails('${pkgId}')">اشترك الآن <i class="fas fa-arrow-left"></i></button>
                         </div>
                     `;
-                    list.appendChild(pkgDiv);
+                    list.appendChild(card);
                 });
             });
         }
 
-        // -----------------------------------------------------------
-        // 4. Regular User Auth & UI Logic (Same as before)
-        // -----------------------------------------------------------
+        // --- COURSE DETAILS ---
+        window.openCourseDetails = function(pkgId) {
+            const pkg = window.currentTeacherPackages[pkgId];
+            if(!pkg) return;
+            document.getElementById('cd-title').innerText = pkg.title;
+            document.getElementById('cd-type').innerText = pkg.type || 'كورس';
+            document.getElementById('cd-desc').innerText = pkg.description || '';
+            const contentArea = document.getElementById('course-content-area');
+            contentArea.innerHTML = '';
 
+            if (pkg.weeks) {
+                Object.entries(pkg.weeks).forEach(([wId, week]) => {
+                    let contentHtml = '';
+                    if (week.content) {
+                        Object.entries(week.content).forEach(([cId, content]) => {
+                            const isVideo = content.type === 'video';
+                            const iconClass = isVideo ? 'fa-play' : 'fa-clipboard-check';
+                            const iconColor = isVideo ? '#e74c3c' : '#3498db';
+                            
+                            let action = "";
+                            if(isVideo) {
+                                action = `openVideoPage('${content.url}', '${content.title}')`;
+                            } else {
+                                action = `openExamPage('${pkgId}', '${wId}', '${cId}')`; 
+                            }
+
+                            contentHtml += `
+                                <a href="javascript:void(0)" class="content-link" onclick="${action}">
+                                    <div class="c-icon" style="width:40px;height:40px;background:${iconColor};color:#fff;display:flex;align-items:center;justify-content:center;border-radius:10px;"><i class="fas ${iconClass}"></i></div>
+                                    <span>${content.title}</span>
+                                </a>
+                            `;
+                        });
+                    }
+                    contentArea.innerHTML += `
+                        <div class="week-box">
+                            <div class="week-head" onclick="toggleWeek(this)">
+                                <span><i class="fas fa-calendar-week" style="color:var(--primary); margin-left:10px;"></i> ${week.title}</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="week-body">${contentHtml || '<p style="padding:15px;text-align:center;color:#999;">لا يوجد محتوى</p>'}</div>
+                        </div>`;
+                });
+            } else {
+                contentArea.innerHTML = '<div style="text-align:center; padding:40px;">لا يوجد محتوى</div>';
+            }
+            switchView('course-details-view');
+        }
+
+        window.toggleWeek = function(head) {
+            head.nextElementSibling.classList.toggle('open');
+            head.querySelector('.fa-chevron-down').style.transform = head.nextElementSibling.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
+        }
+
+        // --- NEW VIDEO PAGE LOGIC ---
+        window.openVideoPage = function(url, title) {
+            let embedUrl = url;
+            if (url.includes('watch?v=')) embedUrl = `https://www.youtube.com/embed/${url.split('v=')[1].split('&')[0]}`;
+            else if (url.includes('youtu.be/')) embedUrl = `https://www.youtube.com/embed/${url.split('youtu.be/')[1]}`;
+            
+            document.getElementById('page-video-frame').src = embedUrl;
+            document.getElementById('page-video-title').innerText = title;
+            switchView('video-view');
+        }
+
+        // --- NEW EXAM PAGE LOGIC ---
+        window.openExamPage = function(pkgId, wId, cId) {
+            const examData = window.currentTeacherPackages[pkgId].weeks[wId].content[cId];
+            
+            if(!examData || !examData.questions) {
+                alert("عذراً، لا توجد أسئلة مضافة لهذا الامتحان بعد.");
+                return;
+            }
+
+            document.getElementById('exam-title').innerText = examData.title;
+            const qArea = document.getElementById('questions-area');
+            qArea.innerHTML = '';
+            
+            currentExamQuestions = examData.questions;
+
+            if (Array.isArray(examData.questions)) {
+                examData.questions.forEach((q, index) => {
+                    let optionsHtml = '';
+                    if(q.options) {
+                        q.options.forEach((opt, optIndex) => {
+                            optionsHtml += `
+                                <label>
+                                    <input type="radio" name="q_${index}" value="${optIndex}" required>
+                                    <span class="q-option">${opt}</span>
+                                </label>
+                            `;
+                        });
+                    }
+
+                    const qDiv = document.createElement('div');
+                    qDiv.className = 'question-box';
+                    qDiv.innerHTML = `<div class="q-text">${index + 1}. ${q.text || q.question}</div>${optionsHtml}`;
+                    qArea.appendChild(qDiv);
+                });
+            } 
+
+            switchView('exam-view');
+        }
+
+        window.submitExam = function(e) {
+            e.preventDefault();
+            let score = 0;
+            const reviewArea = document.getElementById('result-review-area');
+            reviewArea.innerHTML = '';
+
+            currentExamQuestions.forEach((q, index) => {
+                const selected = document.querySelector(`input[name="q_${index}"]:checked`);
+                const selectedVal = selected ? parseInt(selected.value) : -1;
+                const correctVal = (q.correct !== undefined) ? q.correct : q.correctAnswer;
+                
+                const isCorrect = selectedVal == correctVal;
+                
+                if (isCorrect) score++;
+
+                const statusClass = isCorrect ? 'ans-correct' : 'ans-wrong';
+                const statusIcon = isCorrect ? '<i class="fas fa-check"></i> إجابة صحيحة' : '<i class="fas fa-times"></i> إجابة خاطئة';
+                const yourAns = selectedVal !== -1 ? q.options[selectedVal] : 'لم يتم الإجابة';
+                const correctAnsText = q.options[correctVal];
+
+                reviewArea.innerHTML += `
+                    <div class="question-box" style="padding:15px;">
+                        <div style="font-weight:bold; margin-bottom:10px;">${index+1}. ${q.text || q.question}</div>
+                        <div class="answer-review ${statusClass}">
+                            ${statusIcon}<br>
+                            إجابتك: ${yourAns}
+                            ${!isCorrect ? `<br>الإجابة الصحيحة: <strong>${correctAnsText}</strong>` : ''}
+                        </div>
+                    </div>
+                `;
+            });
+
+            document.getElementById('result-score').innerText = `${score}/${currentExamQuestions.length}`;
+            switchView('exam-result-view');
+        }
+
+        // --- AUTH & MISC ---
         const MALE_AVATAR = "https://cdn-icons-png.flaticon.com/512/4140/4140048.png"; 
         const FEMALE_AVATAR = "https://cdn-icons-png.flaticon.com/512/4140/4140047.png"; 
 
         window.onload = () => {
-            checkLoginStatus();
-        };
-
-        window.checkLoginStatus = function() {
             const user = JSON.parse(localStorage.getItem('nokhba_user'));
             if (user) {
                 document.getElementById('nav-guest-area').style.display = 'none';
                 document.getElementById('nav-user-area').style.display = 'block';
                 document.getElementById('nav-user-name').innerText = user.name.split(' ')[0];
                 document.getElementById('nav-user-avatar').src = user.avatar;
-            } else {
-                document.getElementById('nav-guest-area').style.display = 'block';
-                document.getElementById('nav-user-area').style.display = 'none';
             }
-        }
+        };
 
-        window.openAuthModal = function(mode) {
+        window.openAuthModal = (mode) => {
             document.getElementById('auth-modal').classList.add('active');
-            toggleAuthMode(mode);
+            window.toggleAuthMode(mode);
         }
-
-        window.closeAuthModal = function() {
-            document.getElementById('auth-modal').classList.remove('active');
-        }
-
-        window.toggleAuthMode = function(mode) {
-            const loginBtn = document.getElementById('tab-login');
-            const regBtn = document.getElementById('tab-register');
+        window.closeAuthModal = () => document.getElementById('auth-modal').classList.remove('active');
+        
+        window.toggleAuthMode = (mode) => {
             const loginForm = document.getElementById('form-login');
             const regForm = document.getElementById('form-register');
             const title = document.getElementById('auth-title');
-
             if (mode === 'login') {
-                loginBtn.style.borderBottomColor = 'var(--primary)';
-                loginBtn.style.color = 'var(--text-main)';
-                regBtn.style.borderBottomColor = 'transparent';
-                regBtn.style.color = 'var(--text-light)';
-                loginForm.style.display = 'block';
-                regForm.style.display = 'none';
+                loginForm.style.display = 'block'; regForm.style.display = 'none';
                 title.innerText = 'تسجيل الدخول';
+                document.getElementById('tab-login').style.borderBottomColor = 'var(--primary)';
+                document.getElementById('tab-register').style.borderBottomColor = 'transparent';
             } else {
-                regBtn.style.borderBottomColor = 'var(--primary)';
-                regBtn.style.color = 'var(--text-main)';
-                loginBtn.style.borderBottomColor = 'transparent';
-                loginBtn.style.color = 'var(--text-light)';
-                regForm.style.display = 'block';
-                loginForm.style.display = 'none';
+                loginForm.style.display = 'none'; regForm.style.display = 'block';
                 title.innerText = 'حساب جديد';
+                document.getElementById('tab-register').style.borderBottomColor = 'var(--primary)';
+                document.getElementById('tab-login').style.borderBottomColor = 'transparent';
             }
         }
 
-        window.handleRegister = function(e) {
+        window.handleRegister = (e) => {
             e.preventDefault();
             const name = document.getElementById('reg-name').value;
-            const gender = document.getElementById('reg-gender').value;
             const phone = document.getElementById('reg-phone').value;
-            const parentPhone = document.getElementById('reg-parent-phone').value;
             const pass = document.getElementById('reg-pass').value;
-
-            const avatar = gender === 'male' ? MALE_AVATAR : FEMALE_AVATAR;
-
-            const user = { name, gender, phone, parentPhone, password: pass, avatar };
-
+            const user = { name, phone, password: pass, avatar: MALE_AVATAR };
             localStorage.setItem('nokhba_user', JSON.stringify(user));
-            showToast(`أهلاً بك يا ${name} في منصة النخبة!`);
-            closeAuthModal();
-            checkLoginStatus(); 
+            location.reload();
         }
 
-        window.handleLogin = function(e) {
+        window.handleLogin = (e) => {
             e.preventDefault();
             const phone = document.getElementById('login-phone').value;
             const pass = document.getElementById('login-pass').value;
-            const savedUser = JSON.parse(localStorage.getItem('nokhba_user'));
-
-            if (savedUser && savedUser.phone === phone && savedUser.password === pass) {
-                showToast(`مرحباً بعودتك، ${savedUser.name}`);
-                closeAuthModal();
-                checkLoginStatus();
-            } else {
-                showToast('بيانات الدخول غير صحيحة');
-            }
+            const saved = JSON.parse(localStorage.getItem('nokhba_user'));
+            if (saved && saved.phone === phone && saved.password === pass) location.reload();
+            else alert('بيانات خاطئة');
         }
 
-        window.openProfileModal = function() {
+        window.openProfileModal = () => {
             const user = JSON.parse(localStorage.getItem('nokhba_user'));
-            if(!user) return;
-
             document.getElementById('edit-name').value = user.name;
             document.getElementById('edit-phone').value = user.phone;
-            document.getElementById('edit-parent-phone').value = user.parentPhone;
             document.getElementById('edit-avatar-preview').src = user.avatar;
             document.getElementById('profile-modal').classList.add('active');
         }
 
-        window.handleEditProfile = function(e) {
-            e.preventDefault();
-            const user = JSON.parse(localStorage.getItem('nokhba_user'));
-            
-            user.name = document.getElementById('edit-name').value;
-            user.phone = document.getElementById('edit-phone').value;
-            user.parentPhone = document.getElementById('edit-parent-phone').value;
-            
-            const newPass = document.getElementById('edit-pass').value;
-            if(newPass) user.password = newPass;
-
-            localStorage.setItem('nokhba_user', JSON.stringify(user));
-            showToast('تم تحديث البيانات بنجاح');
-            document.getElementById('profile-modal').classList.remove('active');
-            checkLoginStatus();
-        }
-
-        window.logout = function() {
-            if(confirm('هل أنت متأكد من تسجيل الخروج؟')) {
+        window.logout = () => {
+            if(confirm('تسجيل الخروج؟')) {
                 localStorage.removeItem('nokhba_user');
                 location.reload();
             }
         }
 
-        window.showToast = function(msg) {
-            const t = document.getElementById('toast');
-            document.getElementById('toast-msg').innerText = msg;
-            t.classList.add('show');
-            setTimeout(() => t.classList.remove('show'), 3000);
-        }
-
-        window.toggleTheme = function() {
+        window.toggleTheme = () => {
             const body = document.body;
-            const btn = document.querySelector('.theme-btn i');
-            if(body.getAttribute('data-theme') === 'dark') {
-                body.removeAttribute('data-theme');
-                btn.className = 'fas fa-moon';
-            } else {
-                body.setAttribute('data-theme', 'dark');
-                btn.className = 'fas fa-sun';
-            }
+            body.setAttribute('data-theme', body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
         }
-
-        window.toggleMenu = function() {
-            document.getElementById('navLinks').classList.toggle('active');
-        }
+        window.toggleMenu = () => document.getElementById('navLinks').classList.toggle('active');
     </script>
 </body>
 </html>
