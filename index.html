@@ -234,20 +234,31 @@
         .tp-name { font-size: 1.8rem; color: var(--secondary); margin-bottom: 10px; font-weight: 900; }
         .tp-bio { color: var(--text-light); max-width: 700px; margin: 0 auto; line-height: 1.6; font-size: 1rem; }
 
+        /* --- UPDATED PACKAGES GRID STYLE --- */
         .packages-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px; padding: 20px 5%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            padding: 20px 5%;
         }
 
         .pkg-card {
-            background: var(--glass-bg); border-radius: 20px; overflow: hidden;
-            box-shadow: var(--shadow); border: 1px solid var(--glass-border);
-            transition: 0.3s; display: flex; flex-direction: column;
+            background: var(--glass-bg); 
+            border-radius: 20px; 
+            overflow: hidden;
+            box-shadow: var(--shadow); 
+            border: 1px solid var(--glass-border);
+            transition: 0.3s; 
+            display: flex; 
+            flex-direction: column;
+            width: 100%;
+            max-width: 320px; /* Fixed width to prevent stretching */
         }
         .pkg-card:hover { transform: translateY(-8px); border-color: var(--primary); }
 
         .pkg-img-box {
-            position: relative; height: 200px; width: 100%;
+            position: relative; height: 180px; width: 100%;
         }
         .pkg-img-box img { width: 100%; height: 100%; object-fit: cover; }
         
@@ -259,9 +270,9 @@
         }
 
         .pkg-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
-        .pkg-title { font-size: 1.3rem; font-weight: 900; color: var(--secondary); margin-bottom: 10px; }
-        .pkg-price { font-size: 1.4rem; font-weight: 900; color: var(--primary); margin-bottom: 15px; }
-        .pkg-desc { color: var(--text-light); font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px; flex: 1; }
+        .pkg-title { font-size: 1.2rem; font-weight: 900; color: var(--secondary); margin-bottom: 10px; }
+        .pkg-price { font-size: 1.3rem; font-weight: 900; color: var(--primary); margin-bottom: 15px; }
+        .pkg-desc { color: var(--text-light); font-size: 0.9rem; line-height: 1.6; margin-bottom: 20px; flex: 1; }
         .pkg-btn {
             width: 100%; padding: 12px; background: linear-gradient(45deg, var(--secondary), #34495e);
             color: #fff; border: none; border-radius: 12px; font-weight: 800;
@@ -582,7 +593,7 @@
                     </div>
                     <div class="card-content">
                         <h3 class="teacher-name">أ/ لطفي زهران</h3>
-                        <p class="teacher-bio">عميد الرياضيات، شرح مبسط لكل القوانين والمسائل يضمن لك الدرجة النهائية.</p>
+                        <p class="teacher-bio"> الرياضيات، شرح مبسط لكل القوانين والمسائل يضمن لك الدرجة النهائية.</p>
                         <button class="btn-card" 
                             onclick="openTeacherPage('t8', 'أ/ لطفي زهران', 'https://i.postimg.cc/7ZMs9kgG/Gemini-Generated-Image-7ou14v7ou14v7ou1.png', 'عميد الرياضيات، شرح مبسط لكل القوانين والمسائل يضمن لك الدرجة النهائية.', 'رياضيات')">
                             الدخول لصفحة المدرس <i class="fas fa-external-link-alt"></i>
