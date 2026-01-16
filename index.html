@@ -3,435 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/2997/2997495.png">
-    
-    <title>منصة النخبة التعليمية | أقوى مدرسي مصر</title>
-    
-    <meta name="description" content="منصة النخبة التعليمية، تجمع لك أقوى مدرسي الثانوية العامة في مكان واحد.">
-
-    <meta property="og:title" content="منصة النخبة التعليمية | أقوى مدرسي مصر">
-    <meta property="og:description" content="منصة النخبة التعليمية، تجمع لك أقوى مدرسي الثانوية العامة في مكان واحد.">
-    <meta property="og:image" content="https://i.postimg.cc/wvL7Rgyx/Screenshot-2026-01-01-201916.png">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="googlebot" content="index, follow">
+    <title>منصة النخبة التعليمية | أقوى مدرسي الثانوية العامة في مصر 2026</title>
+    <meta name="description" content="منصة النخبة التعليمية هي الأقوى لطلاب الثانوية العامة والصف الأول الثانوي. تجمع لك أفضل مدرسي مصر في اللغة الإنجليزية، العلوم المتكاملة، اللغة العربية، الرياضيات، والفلسفة في مكان واحد مع امتحانات إلكترونية ومتابعة دورية.">
+    <meta name="keywords" content="منصة النخبة التعليمية, ثانوية عامة 2026, الصف الأول الثانوي, منصة تعليمية مصرية, مراجعات نهائية, دروس اونلاين, امتحانات الكترونية, وزارة التربية والتعليم, تابلت الثانوية, خالد صقر, محمد عبد الجواد, جيو ماجد امام, مستر انجليشاوي, محمد صلاح عربي, لطفي زهران رياضة, تعليم عن بعد">
+    <link rel="canonical" href="https://alnokhba-edu.com">
+    <meta property="og:locale" content="ar_EG">
     <meta property="og:type" content="website">
-    
+    <meta property="og:title" content="منصة النخبة التعليمية | طريقك للتفوق في الثانوية العامة">
+    <meta property="og:description" content="سجل الآن في منصة النخبة واحصل على شرح مبسط ومراجعات نهائية من عمالقة التدريس في مصر.">
+    <meta property="og:url" content="https://alnokhba-edu.com">
+    <meta property="og:site_name" content="منصة النخبة">
+    <meta property="og:image" content="https://i.postimg.cc/wvL7Rgyx/Screenshot-2026-01-01-201916.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="منصة النخبة التعليمية | أقوى مدرسي مصر">
+    <meta name="twitter:description" content="شرح ومراجعات لجميع مواد الثانوية العامة مع أقوى المدرسين.">
+    <meta name="twitter:image" content="https://i.postimg.cc/wvL7Rgyx/Screenshot-2026-01-01-201916.png">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "EducationalOrganization",
+      "name": "منصة النخبة التعليمية",
+      "url": "https://alnokhba-edu.com",
+      "logo": "https://cdn-icons-png.flaticon.com/512/2997/2997495.png",
+      "description": "منصة تعليمية رائدة لطلاب المرحلة الثانوية في مصر توفر شروحات وامتحانات إلكترونية.",
+      "sameAs": [
+        "https://www.facebook.com/alnokhba",
+        "https://www.youtube.com/alnokhba"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "EG",
+        "addressRegion": "Cairo"
+      }
+    }
+    </script>
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/2997/2997495.png">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <style>
-        :root {
-            --primary: #c0392b;
-            --primary-light: #e74c3c;
-            --secondary: #2c3e50;
-            --accent: #f1c40f;
-            --bg-body: #f8f9fa;
-            --glass-bg: rgba(255, 255, 255, 0.92);
-            --glass-border: rgba(255, 255, 255, 0.6);
-            --text-main: #2c3e50;
-            --text-light: #555; 
-            --shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-            --radius: 20px;
-            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            --correct: #27ae60;
-            --wrong: #c0392b;
-            --pending: #f39c12;
-        }
-
-        [data-theme="dark"] {
-            --primary: #e74c3c;
-            --primary-light: #ff6b6b;
-            --secondary: #ecf0f1;
-            --accent: #f1c40f;
-            --bg-body: #1a1a1a;
-            --glass-bg: rgba(30, 30, 30, 0.95);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --text-main: #ffffff; 
-            --text-light: #e0e0e0; 
-            --shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-        }
-
-        * {
-            margin: 0; padding: 0; box-sizing: border-box;
-            font-family: 'Cairo', sans-serif;
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background-color: var(--bg-body);
-            color: var(--text-main);
-            overflow-x: hidden;
-            transition: var(--transition);
-        }
-
-        .background-shapes {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-            overflow: hidden; pointer-events: none;
-        }
-        .shape {
-            position: absolute; border-radius: 50%;
-            filter: blur(80px); opacity: 0.4;
-            animation: floatShape 10s infinite alternate;
-        }
-        .shape-1 { width: 400px; height: 400px; background: var(--primary); top: -100px; left: -100px; }
-        .shape-2 { width: 500px; height: 500px; background: var(--accent); bottom: -150px; right: -150px; animation-delay: 2s; }
-        .shape-3 { width: 300px; height: 300px; background: #3498db; top: 40%; left: 40%; animation-delay: 4s; opacity: 0.3; }
-
-        @keyframes floatShape {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(30px, 50px); }
-        }
-
-        nav {
-            position: sticky; top: 0; z-index: 100;
-            background: var(--glass-bg);
-            backdrop-filter: blur(15px);
-            border-bottom: 1px solid var(--glass-border);
-            padding: 12px 5%;
-            display: flex; justify-content: space-between; align-items: center;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-        }
-        .logo { font-size: 1.6rem; font-weight: 900; color: var(--secondary); display: flex; align-items: center; gap: 10px; }
-        .logo i { color: var(--primary); }
-        
-        .nav-links { display: flex; gap: 25px; align-items: center; }
-        .nav-links a { text-decoration: none; color: var(--text-main); font-weight: 700; transition: 0.3s; position: relative; font-size: 1.05rem; }
-        .nav-links a:hover { color: var(--primary); }
-        .nav-links a i { margin-left: 5px; color: var(--accent); }
-
-        .nav-profile-wrapper {
-            display: flex; align-items: center; gap: 10px; cursor: pointer;
-            padding: 5px 15px; border-radius: 50px; transition: 0.3s;
-            border: 2px solid transparent; background: rgba(0,0,0,0.03);
-        }
-        .nav-profile-wrapper:hover { border-color: var(--primary); background: rgba(0,0,0,0.08); }
-        .nav-avatar {
-            width: 42px; height: 42px; border-radius: 50%; object-fit: cover;
-            border: 2px solid var(--primary);
-        }
-        .nav-username { font-weight: 800; font-size: 0.95rem; color: var(--text-main); }
-
-        .nav-actions { display: flex; gap: 15px; align-items: center; }
-        .theme-btn, .menu-btn { background: none; border: none; font-size: 1.3rem; color: var(--text-main); cursor: pointer; transition: 0.3s; }
-        .theme-btn:hover { transform: rotate(15deg); color: var(--accent); }
-        .menu-btn { display: none; }
-
-        .view { display: none; opacity: 0; transition: opacity 0.5s; padding-bottom: 80px; }
-        .view.active-view { display: block; opacity: 1; animation: fadeIn 0.5s forwards; }
-        
-        .clean-back-container {
-            padding: 30px 5% 10px;
-            display: flex;
-            align-items: center;
-        }
-
-        .clean-back-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            color: var(--secondary);
-            font-size: 1.4rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            margin-bottom: 20px; 
-        }
-
-        .clean-back-btn:hover {
-            background: var(--primary);
-            color: #fff;
-            transform: translateX(5px) scale(1.1);
-            box-shadow: 0 10px 20px rgba(192, 57, 43, 0.3);
-        }
-
-        .hero { min-height: 85vh; display: flex; align-items: center; justify-content: space-between; padding: 0 5%; gap: 40px; }
-        .hero-text { flex: 1; z-index: 2; }
-        .hero h1 { font-size: 3.2rem; margin-bottom: 20px; line-height: 1.3; font-weight: 900; }
-        .hero span { color: var(--primary); position: relative; }
-        .hero span::after { content: ''; position: absolute; bottom: 5px; left: 0; width: 100%; height: 12px; background: var(--accent); opacity: 0.3; z-index: -1; }
-        
-        .hero p { font-size: 1.2rem; color: var(--text-light); margin-bottom: 30px; line-height: 1.8; font-weight: 600; }
-
-        .btn-main {
-            padding: 14px 40px; background: linear-gradient(45deg, var(--primary), var(--primary-light)); 
-            color: #fff; border: none; border-radius: 50px;
-            font-size: 1.1rem; font-weight: 700; cursor: pointer; 
-            box-shadow: 0 10px 25px rgba(192, 57, 43, 0.3);
-            transition: var(--transition); display: inline-flex; align-items: center; gap: 10px;
-        }
-        .btn-main:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 15px 35px rgba(192, 57, 43, 0.5); }
-        
-        .btn-disabled { background: #95a5a6; cursor: not-allowed; box-shadow: none; pointer-events: none; }
-        .btn-success { background: linear-gradient(45deg, #27ae60, #2ecc71); box-shadow: 0 10px 25px rgba(39, 174, 96, 0.3); }
-        .btn-pending { background: linear-gradient(45deg, #f39c12, #f1c40f); box-shadow: 0 10px 25px rgba(243, 156, 18, 0.3); color: #fff; }
-        .btn-wrong { background: linear-gradient(45deg, #c0392b, #e74c3c); }
-
-        .hero-img { flex: 1; z-index: 2; display: flex; justify-content: center; }
-        .hero-img img { 
-            width: 100%; max-width: 500px; border-radius: 40px; 
-            box-shadow: -20px 20px 0 rgba(0,0,0,0.1);
-            animation: floatImg 6s ease-in-out infinite;
-        }
-        @keyframes floatImg { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
-        
-        .section-title { text-align: center; margin-bottom: 60px; font-size: 2.5rem; color: var(--secondary); font-weight: 900; padding-top: 60px; text-shadow: 2px 2px 0 rgba(0,0,0,0.05); }
-        .section-title span { color: var(--primary); border-bottom: 4px solid var(--accent); }
-
-        .teachers-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px; padding: 0 5% 80px;
-        }
-
-        .teacher-card {
-            background: var(--glass-bg); border-radius: 25px; overflow: hidden;
-            box-shadow: var(--shadow); transition: var(--transition);
-            border: 1px solid var(--glass-border); position: relative;
-        }
-
-        .teacher-card:hover { transform: translateY(-12px); border-color: var(--primary); box-shadow: 0 20px 50px rgba(0,0,0,0.15); }
-
-        .card-img-wrapper { width: 100%; height: 320px; overflow: hidden; position: relative; background: #ecf0f1; }
-        .card-img-wrapper img { width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: 0.6s; }
-        .teacher-card:hover .card-img-wrapper img { transform: scale(1.08); }
-
-        .subject-badge {
-            position: absolute; top: 15px; right: 15px; background: var(--accent);
-            color: #fff; padding: 8px 18px; border-radius: 50px; font-weight: 800;
-            font-size: 0.9rem; box-shadow: 0 5px 15px rgba(0,0,0,0.2); z-index: 2;
-            display: flex; align-items: center; gap: 5px;
-        }
-
-        .card-content { padding: 25px; text-align: center; }
-        .teacher-name { font-size: 1.5rem; color: var(--secondary); margin-bottom: 8px; font-weight: 900; }
-        .teacher-bio { color: var(--text-light); font-size: 1rem; margin-bottom: 20px; line-height: 1.6; height: 50px; overflow: hidden; font-weight: 600; }
-
-        .btn-card {
-            width: 100%; padding: 14px; background: transparent; color: var(--primary);
-            border: 2px solid var(--primary); border-radius: 15px; font-weight: 800;
-            cursor: pointer; transition: 0.3s; font-size: 1rem;
-            display: flex; align-items: center; justify-content: center; gap: 8px;
-        }
-        .btn-card:hover { background: var(--primary); color: #fff; transform: scale(1.02); }
-
-        .teacher-profile-header {
-            padding: 50px 5%; text-align: center; background: var(--glass-bg);
-            margin: 20px 5%; border-radius: 40px; box-shadow: var(--shadow);
-            border: 1px solid var(--glass-border); position: relative;
-            animation: slideUp 0.5s ease;
-        }
-        
-        .tp-img-container {
-            width: 150px; height: 150px; margin: 0 auto 20px;
-            border-radius: 50%; border: 4px solid var(--accent);
-            overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-            padding: 3px; background: #fff;
-        }
-        .tp-img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
-        .tp-name { font-size: 1.8rem; color: var(--secondary); margin-bottom: 10px; font-weight: 900; }
-        .tp-bio { color: var(--text-light); max-width: 700px; margin: 0 auto; line-height: 1.6; font-size: 1rem; }
-
-        /* --- UPDATED PACKAGES GRID STYLE --- */
-        .packages-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
-            padding: 20px 5%;
-        }
-
-        .pkg-card {
-            background: var(--glass-bg); 
-            border-radius: 20px; 
-            overflow: hidden;
-            box-shadow: var(--shadow); 
-            border: 1px solid var(--glass-border);
-            transition: 0.3s; 
-            display: flex; 
-            flex-direction: column;
-            width: 100%;
-            max-width: 320px; /* Fixed width to prevent stretching */
-        }
-        .pkg-card:hover { transform: translateY(-8px); border-color: var(--primary); }
-
-        .pkg-img-box {
-            position: relative; height: 180px; width: 100%;
-        }
-        .pkg-img-box img { width: 100%; height: 100%; object-fit: cover; }
-        
-        .pkg-type-badge {
-            position: absolute; top: 15px; left: 15px;
-            background: rgba(0,0,0,0.7); color: #fff; backdrop-filter: blur(5px);
-            padding: 6px 15px; border-radius: 50px; font-weight: 700; font-size: 0.85rem;
-            display: flex; align-items: center; gap: 5px;
-        }
-
-        .pkg-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
-        .pkg-title { font-size: 1.2rem; font-weight: 900; color: var(--secondary); margin-bottom: 10px; }
-        .pkg-price { font-size: 1.3rem; font-weight: 900; color: var(--primary); margin-bottom: 15px; }
-        .pkg-desc { color: var(--text-light); font-size: 0.9rem; line-height: 1.6; margin-bottom: 20px; flex: 1; }
-        .pkg-btn {
-            width: 100%; padding: 12px; background: linear-gradient(45deg, var(--secondary), #34495e);
-            color: #fff; border: none; border-radius: 12px; font-weight: 800;
-            cursor: pointer; transition: 0.3s;
-        }
-        .pkg-btn:hover { background: var(--primary); }
-
-        .course-header {
-            background: linear-gradient(rgba(44, 62, 80, 0.9), rgba(44, 62, 80, 0.9)), url('https://images.unsplash.com/photo-1513258496098-b05360f979aa?auto=format&fit=crop&q=80');
-            background-size: cover; background-position: center;
-            color: #fff; padding: 60px 5%; border-radius: 0 0 40px 40px;
-            margin-bottom: 40px;
-        }
-        .course-content-container { max-width: 900px; margin: 0 auto; padding: 0 5% 60px; }
-        .week-box { background: #fff; border: 1px solid #eee; border-radius: 15px; margin-bottom: 15px; overflow: hidden; }
-        .week-head { padding: 20px; background: #fff; cursor: pointer; font-weight: 800; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid transparent; transition: 0.3s; }
-        .week-head:hover { background: #f9f9f9; }
-        .week-body { display: none; background: #f8f9fa; border-top: 1px solid #eee; }
-        .week-body.open { display: block; }
-        .content-link { display: flex; align-items: center; gap: 15px; padding: 15px 20px; border-bottom: 1px solid #eee; text-decoration: none; color: var(--text-main); font-weight: 600; }
-        .content-link:hover { background: #fff; padding-right: 25px; color: var(--primary); }
-
-        .video-container-page {
-            max-width: 1000px; margin: 0 auto; padding: 0 5%;
-        }
-        .video-frame-wrapper {
-            position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;
-            border-radius: 20px; box-shadow: var(--shadow); background: #000;
-        }
-        .video-frame-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-        .video-title-page { font-size: 1.8rem; font-weight: 900; margin-top: 25px; color: var(--secondary); }
-
-        .exam-container { max-width: 800px; margin: 0 auto; padding: 0 5%; }
-        .exam-header { text-align: center; margin-bottom: 40px; }
-        .question-box {
-            background: var(--glass-bg); padding: 25px; border-radius: 20px;
-            margin-bottom: 25px; border: 1px solid var(--glass-border);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        }
-        .q-text { font-size: 1.2rem; font-weight: 800; margin-bottom: 20px; color: var(--secondary); }
-        .q-option {
-            display: block; padding: 15px; background: rgba(255,255,255,0.7);
-            border: 2px solid transparent; border-radius: 12px; margin-bottom: 10px;
-            cursor: pointer; transition: 0.2s; font-weight: 600;
-        }
-        .q-option:hover { background: #fff; border-color: #ddd; }
-        input[type="radio"] { display: none; }
-        input[type="radio"]:checked + .q-option {
-            border-color: var(--primary); background: rgba(192, 57, 43, 0.05); color: var(--primary);
-        }
-
-        .result-header { text-align: center; padding: 40px 0; }
-        
-        .trophy-avatar {
-            width: 180px; height: 180px; margin: 0 auto 20px;
-            display: block; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
-            animation: bounceIn 1s ease;
-        }
-        @keyframes bounceIn {
-            0% { transform: scale(0); opacity: 0; }
-            60% { transform: scale(1.1); opacity: 1; }
-            100% { transform: scale(1); }
-        }
-
-        .score-display {
-            font-size: 3.5rem; color: var(--secondary); font-weight: 900;
-            text-shadow: 2px 2px 0 rgba(0,0,0,0.05);
-        }
-        
-        .answer-review { margin-top: 10px; font-size: 0.95rem; padding: 10px; border-radius: 8px; }
-        .ans-correct { background: rgba(39, 174, 96, 0.1); color: #27ae60; border: 1px solid #27ae60; }
-        .ans-wrong { background: rgba(192, 57, 43, 0.1); color: #c0392b; border: 1px solid #c0392b; }
-
-        .modal-overlay {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(8px);
-            z-index: 1000; display: none; justify-content: center; align-items: center; padding: 20px;
-        }
-        .modal-overlay.active { display: flex; animation: fadeIn 0.3s ease; }
-        .auth-box {
-            background: var(--glass-bg); width: 100%; max-width: 500px;
-            padding: 40px; border-radius: 30px; box-shadow: 0 25px 80px rgba(0,0,0,0.3);
-            position: relative; max-height: 90vh; overflow-y: auto;
-            border: 1px solid var(--glass-border);
-        }
-        .auth-avatar-header {
-            width: 120px; margin: -60px auto 10px; display: block;
-            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));
-        }
-
-        .close-modal { position: absolute; top: 20px; left: 20px; background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--text-light); }
-        .inp-field { width: 100%; padding: 14px 20px 14px 50px; border-radius: 15px; background: rgba(255,255,255,0.8); margin-bottom: 18px; border: 2px solid transparent; }
-        .inp-wrapper { position: relative; }
-        .inp-icon { position: absolute; left: 18px; top: 18px; color: var(--primary); }
-        .file-upload-wrapper { border: 2px dashed #ccc; padding: 20px; text-align: center; border-radius: 15px; margin-bottom: 20px; cursor: pointer; transition: 0.3s; background: rgba(255,255,255,0.5); }
-        .file-upload-wrapper:hover { border-color: var(--primary); background: rgba(192, 57, 43, 0.05); }
-
-        footer {
-            background: var(--secondary); color: #fff;
-            padding: 70px 5% 30px; margin-top: 100px; text-align: center;
-            border-top-left-radius: 60px; border-top-right-radius: 60px;
-            position: relative; overflow: hidden;
-        }
-        .footer-socials { display: flex; justify-content: center; gap: 20px; margin: 30px 0; flex-wrap: wrap; }
-        .social-link {
-            width: 55px; height: 55px; background: rgba(255,255,255,0.9); border-radius: 50%;
-            display: flex; justify-content: center; align-items: center;
-            font-size: 1.5rem; transition: 0.4s; text-decoration: none;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-        }
-        .social-link.fb { color: #1877F2; }
-        .social-link.yt { color: #FF0000; }
-        .social-link.dc { color: #5865F2; }
-        .social-link.rd { color: #FF4500; }
-        .social-link.tg { color: #0088cc; }
-        .social-link.wa { color: #25D366; }
-        .social-link:hover { transform: translateY(-8px) scale(1.1); box-shadow: 0 15px 30px rgba(0,0,0,0.4); }
-
-        .footer-links { margin-top: 40px; display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; font-size: 1rem; opacity: 0.9; }
-        .footer-links a { color: #fff; text-decoration: none; transition: 0.3s; font-weight: bold; }
-        .footer-links a:hover { color: var(--accent); }
-        
-        #toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background: rgba(44, 62, 80, 0.95); color: #fff; padding: 15px 35px; border-radius: 50px; z-index: 9999; transition: 0.4s; opacity: 0; pointer-events: none; }
-        #toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
-
-        .share-float-btn {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            color: white;
-            border-radius: 50%;
-            border: none;
-            box-shadow: 0 5px 20px rgba(192, 57, 43, 0.4);
-            z-index: 900;
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .share-float-btn:hover {
-            transform: scale(1.15) rotate(10deg);
-            box-shadow: 0 8px 30px rgba(192, 57, 43, 0.6);
-        }
-
-        @media (max-width: 768px) {
-            .hero { flex-direction: column-reverse; text-align: center; padding-top: 40px; }
-            .hero h1 { font-size: 2.2rem; }
-            .nav-links { display: none; position: fixed; top: 75px; left: 0; width: 100%; background: var(--glass-bg); flex-direction: column; padding: 30px; }
-            .nav-links.active { display: flex; }
-            .menu-btn { display: block; }
-            .teachers-grid { grid-template-columns: 1fr; }
-            .share-float-btn { width: 50px; height: 50px; bottom: 20px; left: 20px; font-size: 1.2rem; }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -454,14 +65,14 @@
             </div>
             <div id="nav-user-area" style="display:none;">
                 <div class="nav-profile-wrapper" onclick="openProfileModal()">
-                    <img src="" id="nav-user-avatar" class="nav-avatar">
+                    <img src="" id="nav-user-avatar" class="nav-avatar" alt="User Avatar">
                     <span id="nav-user-name" class="nav-username"></span>
                 </div>
             </div>
         </div>
         <div class="nav-actions">
-            <button class="theme-btn" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
-            <button class="menu-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+            <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle Theme"><i class="fas fa-moon"></i></button>
+            <button class="menu-btn" onclick="toggleMenu()" aria-label="Open Menu"><i class="fas fa-bars"></i></button>
         </div>
     </nav>
 
@@ -474,7 +85,7 @@
                 <button class="btn-main" onclick="document.getElementById('teachers').scrollIntoView()">استعرض المدرسين <i class="fas fa-arrow-left"></i></button>
             </div>
             <div class="hero-img">
-                <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Students Learning">
+                <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="طلاب يدرسون في منصة النخبة">
             </div>
         </section>
 
@@ -484,7 +95,7 @@
                 <div class="teacher-card">
                     <div class="subject-badge"><i class="fas fa-language"></i> لغة إنجليزية</div>
                     <div class="card-img-wrapper">
-                        <img src="https://i.postimg.cc/hGYYpxyS/image_(1).png" alt="Miss May">
+                        <img src="https://i.postimg.cc/hGYYpxyS/image_(1).png" alt="Miss May مدرس لغة إنجليزية">
                     </div>
                     <div class="card-content">
                         <h3 class="teacher-name">Miss May</h3>
@@ -499,7 +110,7 @@
                 <div class="teacher-card">
                     <div class="subject-badge"><i class="fas fa-atom"></i> علوم متكاملة</div>
                     <div class="card-img-wrapper">
-                        <img src="https://i.postimg.cc/25tt2vc6/image_(2).png" alt="Khaled Sakr">
+                        <img src="https://i.postimg.cc/25tt2vc6/image_(2).png" alt="أستاذ خالد صقر مدرس علوم">
                     </div>
                     <div class="card-content">
                         <h3 class="teacher-name">أ/ خالد صقر</h3>
@@ -514,7 +125,7 @@
                 <div class="teacher-card">
                     <div class="subject-badge"><i class="fas fa-microphone-alt"></i> لغة إنجليزية</div>
                     <div class="card-img-wrapper">
-                        <img src="https://i.postimg.cc/W4yyXrWt/image_(4).png" alt="Englishawy">
+                        <img src="https://i.postimg.cc/W4yyXrWt/image_(4).png" alt="Englishawy مستر مصطفى">
                     </div>
                     <div class="card-content">
                         <h3 class="teacher-name">Englishawy</h3>
@@ -529,7 +140,7 @@
                 <div class="teacher-card">
                     <div class="subject-badge"><i class="fas fa-book-open"></i> لغة عربية</div>
                     <div class="card-img-wrapper">
-                        <img src="https://i.postimg.cc/ydSb5dt6/image_(5).png" alt="Mohamed Salah">
+                        <img src="https://i.postimg.cc/ydSb5dt6/image_(5).png" alt="أستاذ محمد صلاح لغة عربية">
                     </div>
                     <div class="card-content">
                         <h3 class="teacher-name">أ/ محمد صلاح</h3>
@@ -544,7 +155,7 @@
                 <div class="teacher-card">
                     <div class="subject-badge"><i class="fas fa-globe"></i> علوم متكاملة</div>
                     <div class="card-img-wrapper">
-                        <img src="https://i.postimg.cc/76TWc6df/image_(6).png" alt="Geo Maged Imam">
+                        <img src="https://i.postimg.cc/76TWc6df/image_(6).png" alt="جيو ماجد إمام">
                     </div>
                     <div class="card-content">
                         <h3 class="teacher-name">جيو/ ماجد إمام</h3>
@@ -559,7 +170,7 @@
                 <div class="teacher-card">
                     <div class="subject-badge"><i class="fas fa-flask"></i> علوم متكاملة</div>
                     <div class="card-img-wrapper">
-                        <img src="https://i.postimg.cc/yNGGv9f5/c78ffbf64a791da67752132a9aaf7c8f127fc4f4.jpg" alt="Mohamed Abdelgawad">
+                        <img src="https://i.postimg.cc/yNGGv9f5/c78ffbf64a791da67752132a9aaf7c8f127fc4f4.jpg" alt="أستاذ محمد عبد الجواد كيمياء">
                     </div>
                     <div class="card-content">
                         <h3 class="teacher-name">أ/ محمد عبد الجواد</h3>
@@ -574,7 +185,7 @@
                 <div class="teacher-card">
                     <div class="subject-badge" style="right: auto; left: 15px;"><i class="fas fa-brain"></i> فلسفة</div>
                     <div class="card-img-wrapper">
-                        <img src="https://i.postimg.cc/K4Sq9sKj/Gemini-Generated-Image-3j04bf3j04bf3j04.png" alt="Minology">
+                        <img src="https://i.postimg.cc/K4Sq9sKj/Gemini-Generated-Image-3j04bf3j04bf3j04.png" alt="Minology فلسفة">
                     </div>
                     <div class="card-content">
                         <h3 class="teacher-name">Minology</h3>
@@ -589,11 +200,11 @@
                 <div class="teacher-card">
                     <div class="subject-badge"><i class="fas fa-calculator"></i> رياضيات</div>
                     <div class="card-img-wrapper">
-                        <img src="https://i.postimg.cc/7ZMs9kgG/Gemini-Generated-Image-7ou14v7ou14v7ou1.png" alt="Lotfy Zahran">
+                        <img src="https://i.postimg.cc/7ZMs9kgG/Gemini-Generated-Image-7ou14v7ou14v7ou1.png" alt="أستاذ لطفي زهران رياضيات">
                     </div>
                     <div class="card-content">
                         <h3 class="teacher-name">أ/ لطفي زهران</h3>
-                        <p class="teacher-bio"> الرياضيات، شرح مبسط لكل القوانين والمسائل يضمن لك الدرجة النهائية.</p>
+                        <p class="teacher-bio">عميد الرياضيات، شرح مبسط لكل القوانين والمسائل يضمن لك الدرجة النهائية.</p>
                         <button class="btn-card" 
                             onclick="openTeacherPage('t8', 'أ/ لطفي زهران', 'https://i.postimg.cc/7ZMs9kgG/Gemini-Generated-Image-7ou14v7ou14v7ou1.png', 'عميد الرياضيات، شرح مبسط لكل القوانين والمسائل يضمن لك الدرجة النهائية.', 'رياضيات')">
                             الدخول لصفحة المدرس <i class="fas fa-external-link-alt"></i>
@@ -606,11 +217,11 @@
 
     <div id="teacher-view" class="view">
         <div class="clean-back-container">
-            <button class="clean-back-btn" onclick="switchView('home')"><i class="fas fa-arrow-right"></i></button>
+            <button class="clean-back-btn" onclick="switchView('home')" aria-label="Back"><i class="fas fa-arrow-right"></i></button>
         </div>
         
         <div class="teacher-profile-header">
-            <div class="tp-img-container"><img id="tp-img" src="" class="tp-img"></div>
+            <div class="tp-img-container"><img id="tp-img" src="" class="tp-img" alt="صورة المدرس"></div>
             <h1 id="tp-name" class="tp-name"></h1>
             <p id="tp-bio" class="tp-bio"></p>
         </div>
@@ -619,7 +230,7 @@
 
     <div id="course-details-view" class="view">
         <div class="clean-back-container">
-            <button class="clean-back-btn" onclick="switchView('teacher-view')"><i class="fas fa-arrow-right"></i></button>
+            <button class="clean-back-btn" onclick="switchView('teacher-view')" aria-label="Back"><i class="fas fa-arrow-right"></i></button>
         </div>
 
         <div class="course-header">
@@ -634,12 +245,12 @@
 
     <div id="video-view" class="view">
         <div class="clean-back-container">
-            <button class="clean-back-btn" onclick="switchView('course-details-view')"><i class="fas fa-arrow-right"></i></button>
+            <button class="clean-back-btn" onclick="switchView('course-details-view')" aria-label="Back"><i class="fas fa-arrow-right"></i></button>
         </div>
         
         <div class="video-container-page">
             <div class="video-frame-wrapper">
-                <iframe id="page-video-frame" frameborder="0" allowfullscreen></iframe>
+                <iframe id="page-video-frame" frameborder="0" allowfullscreen title="Educational Video"></iframe>
             </div>
             <h2 id="page-video-title" class="video-title-page"></h2>
         </div>
@@ -647,7 +258,7 @@
 
     <div id="exam-view" class="view">
         <div class="clean-back-container">
-            <button class="clean-back-btn" onclick="switchView('course-details-view')"><i class="fas fa-arrow-right"></i></button>
+            <button class="clean-back-btn" onclick="switchView('course-details-view')" aria-label="Back"><i class="fas fa-arrow-right"></i></button>
         </div>
 
         <div class="exam-container">
@@ -664,12 +275,12 @@
 
     <div id="exam-result-view" class="view">
         <div class="clean-back-container">
-            <button class="clean-back-btn" onclick="switchView('course-details-view')"><i class="fas fa-arrow-right"></i></button>
+            <button class="clean-back-btn" onclick="switchView('course-details-view')" aria-label="Back"><i class="fas fa-arrow-right"></i></button>
         </div>
 
         <div class="exam-container">
             <div class="result-header">
-                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="trophy-avatar" alt="Trophy">
+                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="trophy-avatar" alt="Trophy Result">
                 
                 <h2 style="color:var(--secondary); font-weight:900;">النتيجة النهائية</h2>
                 <div class="score-display" id="result-score">0/0</div>
@@ -684,7 +295,7 @@
 
     <div id="payment-modal" class="modal-overlay">
         <div class="auth-box">
-            <button class="close-modal" onclick="document.getElementById('payment-modal').classList.remove('active')"><i class="fas fa-times"></i></button>
+            <button class="close-modal" onclick="document.getElementById('payment-modal').classList.remove('active')" aria-label="Close"><i class="fas fa-times"></i></button>
             <h2 style="text-align:center; color:var(--secondary); margin-bottom:20px;">تأكيد الاشتراك</h2>
             
             <div style="background:var(--secondary); color:#fff; padding:20px; border-radius:15px; text-align:center; margin-bottom:25px;">
@@ -714,9 +325,9 @@
 
     <div id="auth-modal" class="modal-overlay">
         <div class="auth-box">
-            <img src="https://cdn-icons-png.flaticon.com/512/9374/9374921.png" class="auth-avatar-header" alt="Login">
+            <img src="https://cdn-icons-png.flaticon.com/512/9374/9374921.png" class="auth-avatar-header" alt="Login Avatar">
             
-            <button class="close-modal" onclick="closeAuthModal()"><i class="fas fa-times"></i></button>
+            <button class="close-modal" onclick="closeAuthModal()" aria-label="Close"><i class="fas fa-times"></i></button>
             <h2 id="auth-title" style="text-align:center; margin-bottom:25px; color:var(--secondary);">تسجيل الدخول</h2>
             
             <div style="display:flex; margin-bottom:25px; border-bottom:2px solid #ddd;">
@@ -741,10 +352,10 @@
 
     <div id="profile-modal" class="modal-overlay">
         <div class="auth-box">
-            <button class="close-modal" onclick="document.getElementById('profile-modal').classList.remove('active')"><i class="fas fa-times"></i></button>
+            <button class="close-modal" onclick="document.getElementById('profile-modal').classList.remove('active')" aria-label="Close"><i class="fas fa-times"></i></button>
             <h2 style="text-align:center;">الملف الشخصي</h2>
             <div style="text-align:center; margin-bottom:20px;">
-                <img src="" id="edit-avatar-preview" style="width:100px; height:100px; border-radius:50%; border:4px solid var(--accent); object-fit:cover;">
+                <img src="" id="edit-avatar-preview" style="width:100px; height:100px; border-radius:50%; border:4px solid var(--accent); object-fit:cover;" alt="Edit Avatar">
             </div>
             <form onsubmit="handleEditProfile(event)">
                 <div class="inp-wrapper"><i class="fas fa-user inp-icon"></i><input type="text" id="edit-name" class="inp-field" required></div>
@@ -755,7 +366,7 @@
         </div>
     </div>
 
-    <button id="share-btn" class="share-float-btn" onclick="shareSite()">
+    <button id="share-btn" class="share-float-btn" onclick="shareSite()" aria-label="Share">
         <i class="fas fa-share-alt"></i>
     </button>
 
@@ -764,12 +375,12 @@
         <p style="opacity:0.9; font-weight:600;">عشان يوصلك كل جديد ومذكرات مجانية</p>
         
         <div class="footer-socials">
-            <a href="#" class="social-link fb"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="social-link yt"><i class="fab fa-youtube"></i></a>
-            <a href="#" class="social-link dc"><i class="fab fa-discord"></i></a>
-            <a href="#" class="social-link rd"><i class="fab fa-reddit-alien"></i></a>
-            <a href="#" class="social-link tg"><i class="fab fa-telegram-plane"></i></a>
-            <a href="#" class="social-link wa"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" class="social-link fb" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link yt" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="social-link dc" aria-label="Discord"><i class="fab fa-discord"></i></a>
+            <a href="#" class="social-link rd" aria-label="Reddit"><i class="fab fa-reddit-alien"></i></a>
+            <a href="#" class="social-link tg" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
+            <a href="#" class="social-link wa" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
         </div>
 
         <div class="footer-links">
@@ -780,444 +391,6 @@
         <p style="margin-top:40px; font-size:0.9rem; color:#fff; opacity:0.6;">جميع الحقوق محفوظة &copy; 2026 لمنصة النخبة</p>
     </footer>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getDatabase, ref, onValue, push, set, update, get } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyCsnZdFrg-KlWFc0z6OgmXgBp6lPKf14fU",
-            authDomain: "saifsa-b51f1.firebaseapp.com",
-            databaseURL: "https://saifsa-b51f1-default-rtdb.europe-west1.firebasedatabase.app",
-            projectId: "saifsa-b51f1",
-            storageBucket: "saifsa-b51f1.firebasestorage.app",
-            messagingSenderId: "41089917871",
-            appId: "1:41089917871:web:fce49f6f23bd4f679b055a",
-            measurementId: "G-4K733KS3CP"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getDatabase(app);
-
-        window.currentTeacherPackages = {}; 
-        let currentTeacherName = "";
-        let currentExamQuestions = [];
-        let currentUser = JSON.parse(localStorage.getItem('nokhba_user'));
-
-        const toBase64 = file => new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => resolve(reader.result);
-            reader.onerror = error => reject(error);
-        });
-
-        window.switchView = function(viewId) {
-            document.querySelectorAll('.view').forEach(el => el.classList.remove('active-view'));
-            const iframe = document.getElementById('page-video-frame');
-            iframe.src = iframe.src; 
-            
-            setTimeout(() => {
-                const target = document.getElementById(viewId);
-                if(target) target.classList.add('active-view');
-            }, 50);
-            window.scrollTo(0,0);
-        }
-
-        window.openTeacherPage = function(tId, name, img, bio, subject) {
-            currentTeacherName = name;
-            document.getElementById('tp-name').innerText = name;
-            document.getElementById('tp-img').src = img;
-            document.getElementById('tp-bio').innerText = bio;
-            fetchPackages(tId);
-            switchView('teacher-view');
-        }
-
-        function fetchPackages(teacherId) {
-            const list = document.getElementById('packages-list');
-            list.innerHTML = '<i class="fas fa-spinner fa-spin" style="font-size:3rem; color:var(--primary); margin:auto;"></i>';
-            const packagesRef = ref(db, `teachers/${teacherId}/packages`);
-            
-            let userSubs = {};
-            if(currentUser) {
-                const userSubRef = ref(db, `users/${currentUser.phone}/subscriptions`);
-                onValue(userSubRef, (snap) => {
-                    userSubs = snap.val() || {};
-                    loadPackagesUI();
-                });
-            } else {
-                onValue(packagesRef, (snapshot) => {
-                    window.currentTeacherPackages = snapshot.val() || {};
-                    loadPackagesUI();
-                });
-            }
-
-            function loadPackagesUI() {
-                get(packagesRef).then((snapshot) => {
-                    list.innerHTML = ''; 
-                    if (!snapshot.exists()) {
-                        list.innerHTML = `
-                            <div style="text-align:center; padding:40px;">
-                                 <img src="https://cdn-icons-png.flaticon.com/512/7486/7486831.png" style="width:120px; opacity:0.8;">
-                                 <h3 style="margin-top:20px; color:var(--text-light);">لا يوجد محتوى حالياً</h3>
-                            </div>`;
-                        return;
-                    }
-                    const data = snapshot.val();
-                    window.currentTeacherPackages = data;
-
-                    Object.entries(data).forEach(([pkgId, pkg]) => {
-                        const pkgImg = pkg.image || 'https://via.placeholder.com/300x200';
-                        const pkgType = pkg.type || 'كورس';
-                        const pkgPrice = pkg.price ? `${pkg.price} EGP` : 'مجاني';
-                        
-                        let btnText = `اشترك الآن <i class="fas fa-arrow-left"></i>`;
-                        let btnAction = `openPaymentModal('${pkgId}', '${pkg.title}', '${pkg.price}')`;
-                        let btnClass = "pkg-btn";
-
-                        if(currentUser && userSubs[pkgId]) {
-                            const status = userSubs[pkgId].status;
-                            if(status === 'active') {
-                                btnText = `ادخل الكورس <i class="fas fa-door-open"></i>`;
-                                btnAction = `openCourseDetails('${pkgId}')`;
-                                btnClass = "pkg-btn btn-success";
-                            } else if (status === 'pending') {
-                                btnText = `في انتظار المراجعة <i class="fas fa-clock"></i>`;
-                                btnAction = `alert('طلبك قيد المراجعة من الإدارة، سيتم تفعيل الكورس قريباً')`;
-                                btnClass = "pkg-btn btn-pending";
-                            } else if (status === 'rejected') {
-                                btnText = `تم الرفض (حاول مجدداً) <i class="fas fa-times"></i>`;
-                                btnAction = `openPaymentModal('${pkgId}', '${pkg.title}', '${pkg.price}')`;
-                                btnClass = "pkg-btn btn-wrong";
-                            }
-                        }
-
-                        const card = document.createElement('div');
-                        card.className = 'pkg-card';
-                        card.innerHTML = `
-                            <div class="pkg-img-box">
-                                <img src="${pkgImg}">
-                                <div class="pkg-type-badge">${pkgType}</div>
-                            </div>
-                            <div class="pkg-body">
-                                <h3 class="pkg-title">${pkg.title}</h3>
-                                <div class="pkg-price">${pkgPrice}</div>
-                                <p class="pkg-desc">${pkg.description || 'محتوى تعليمي شامل'}</p>
-                                <button class="${btnClass}" onclick="${btnAction}">${btnText}</button>
-                            </div>
-                        `;
-                        list.appendChild(card);
-                    });
-                });
-            }
-        }
-
-        window.openPaymentModal = function(pkgId, title, price) {
-            if(!currentUser) {
-                alert("يجب تسجيل الدخول أولاً للاشتراك");
-                openAuthModal('login');
-                return;
-            }
-            document.getElementById('payment-modal').classList.add('active');
-            document.getElementById('pay-pkg-id').value = pkgId;
-            document.getElementById('pay-pkg-price').value = price;
-            document.getElementById('payment-amount-display').innerText = `المبلغ المطلوب: ${price} جنيه`;
-        }
-
-        window.handlePaymentSubmit = async function(e) {
-            e.preventDefault();
-            const pkgId = document.getElementById('pay-pkg-id').value;
-            const senderPhone = document.getElementById('pay-sender-phone').value;
-            const fileInput = document.getElementById('pay-receipt');
-            
-            if(fileInput.files.length === 0) return alert("يرجى رفع صورة التحويل");
-
-            const btn = e.target.querySelector('button');
-            const originalText = btn.innerHTML;
-            btn.innerHTML = 'جاري الرفع... <i class="fas fa-spinner fa-spin"></i>';
-            btn.disabled = true;
-
-            try {
-                const base64Img = await toBase64(fileInput.files[0]);
-
-                const requestData = {
-                    userId: currentUser.phone,
-                    userName: currentUser.name,
-                    packageId: pkgId,
-                    pkgTitle: window.currentTeacherPackages[pkgId].title,
-                    senderPhone: senderPhone,
-                    receiptImage: base64Img,
-                    status: 'pending',
-                    timestamp: Date.now()
-                };
-
-                const newReqRef = push(ref(db, 'requests'));
-                await set(newReqRef, requestData);
-
-                await update(ref(db, `users/${currentUser.phone}/subscriptions/${pkgId}`), {
-                    status: 'pending',
-                    reqId: newReqRef.key,
-                    timestamp: Date.now()
-                });
-
-                alert("تم إرسال طلب الاشتراك بنجاح! سيتم مراجعة الطلب وتفعيل الكورس.");
-                document.getElementById('payment-modal').classList.remove('active');
-                
-                fetchPackages(Object.keys(window.currentTeacherPackages)[0]);
-                
-            } catch (error) {
-                console.error(error);
-                alert("حدث خطأ أثناء الإرسال");
-            } finally {
-                btn.innerHTML = originalText;
-                btn.disabled = false;
-            }
-        }
-
-        window.openCourseDetails = function(pkgId) {
-            const userSubRef = ref(db, `users/${currentUser.phone}/subscriptions/${pkgId}`);
-            get(userSubRef).then(snap => {
-                if(snap.exists() && snap.val().status === 'active') {
-                     const pkg = window.currentTeacherPackages[pkgId];
-                    if(!pkg) return;
-                    document.getElementById('cd-title').innerText = pkg.title;
-                    document.getElementById('cd-type').innerText = pkg.type || 'كورس';
-                    document.getElementById('cd-desc').innerText = pkg.description || '';
-                    const contentArea = document.getElementById('course-content-area');
-                    contentArea.innerHTML = '';
-
-                    if (pkg.weeks) {
-                        Object.entries(pkg.weeks).forEach(([wId, week]) => {
-                            let contentHtml = '';
-                            if (week.content) {
-                                Object.entries(week.content).forEach(([cId, content]) => {
-                                    const isVideo = content.type === 'video';
-                                    const iconClass = isVideo ? 'fa-play' : 'fa-clipboard-check';
-                                    const iconColor = isVideo ? '#e74c3c' : '#3498db';
-                                    
-                                    let action = "";
-                                    if(isVideo) {
-                                        action = `openVideoPage('${content.url}', '${content.title}')`;
-                                    } else {
-                                        action = `openExamPage('${pkgId}', '${wId}', '${cId}')`; 
-                                    }
-
-                                    contentHtml += `
-                                        <a href="javascript:void(0)" class="content-link" onclick="${action}">
-                                            <div class="c-icon" style="width:40px;height:40px;background:${iconColor};color:#fff;display:flex;align-items:center;justify-content:center;border-radius:10px;"><i class="fas ${iconClass}"></i></div>
-                                            <span>${content.title}</span>
-                                        </a>
-                                    `;
-                                });
-                            }
-                            contentArea.innerHTML += `
-                                <div class="week-box">
-                                    <div class="week-head" onclick="toggleWeek(this)">
-                                        <span><i class="fas fa-calendar-week" style="color:var(--primary); margin-left:10px;"></i> ${week.title}</span>
-                                        <i class="fas fa-chevron-down"></i>
-                                    </div>
-                                    <div class="week-body">${contentHtml || '<p style="padding:15px;text-align:center;color:#999;">لا يوجد محتوى</p>'}</div>
-                                </div>`;
-                        });
-                    } else {
-                        contentArea.innerHTML = '<div style="text-align:center; padding:40px;">لا يوجد محتوى</div>';
-                    }
-                    switchView('course-details-view');
-                } else {
-                    alert("غير مصرح لك بدخول الكورس");
-                }
-            });
-        }
-
-        window.toggleWeek = function(head) {
-            head.nextElementSibling.classList.toggle('open');
-            head.querySelector('.fa-chevron-down').style.transform = head.nextElementSibling.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
-        }
-
-        window.openVideoPage = function(url, title) {
-            let embedUrl = url;
-            if (url.includes('watch?v=')) embedUrl = `https://www.youtube.com/embed/${url.split('v=')[1].split('&')[0]}`;
-            else if (url.includes('youtu.be/')) embedUrl = `https://www.youtube.com/embed/${url.split('youtu.be/')[1]}`;
-            
-            document.getElementById('page-video-frame').src = embedUrl;
-            document.getElementById('page-video-title').innerText = title;
-            switchView('video-view');
-        }
-
-        window.openExamPage = function(pkgId, wId, cId) {
-            const examData = window.currentTeacherPackages[pkgId].weeks[wId].content[cId];
-            
-            if(!examData || !examData.questions) {
-                alert("عذراً، لا توجد أسئلة مضافة لهذا الامتحان بعد.");
-                return;
-            }
-
-            document.getElementById('exam-title').innerText = examData.title;
-            const qArea = document.getElementById('questions-area');
-            qArea.innerHTML = '';
-            
-            currentExamQuestions = examData.questions;
-
-            if (Array.isArray(examData.questions)) {
-                examData.questions.forEach((q, index) => {
-                    let optionsHtml = '';
-                    if(q.options) {
-                        q.options.forEach((opt, optIndex) => {
-                            optionsHtml += `
-                                <label>
-                                    <input type="radio" name="q_${index}" value="${optIndex}" required>
-                                    <span class="q-option">${opt}</span>
-                                </label>
-                            `;
-                        });
-                    }
-
-                    const qDiv = document.createElement('div');
-                    qDiv.className = 'question-box';
-                    qDiv.innerHTML = `<div class="q-text">${index + 1}. ${q.text || q.question}</div>${optionsHtml}`;
-                    qArea.appendChild(qDiv);
-                });
-            } 
-
-            switchView('exam-view');
-        }
-
-        window.submitExam = function(e) {
-            e.preventDefault();
-            let score = 0;
-            const reviewArea = document.getElementById('result-review-area');
-            reviewArea.innerHTML = '';
-
-            currentExamQuestions.forEach((q, index) => {
-                const selected = document.querySelector(`input[name="q_${index}"]:checked`);
-                const selectedVal = selected ? parseInt(selected.value) : -1;
-                const correctVal = (q.correct !== undefined) ? q.correct : q.correctAnswer;
-                
-                const isCorrect = selectedVal == correctVal;
-                
-                if (isCorrect) score++;
-
-                const statusClass = isCorrect ? 'ans-correct' : 'ans-wrong';
-                const statusIcon = isCorrect ? '<i class="fas fa-check"></i> إجابة صحيحة' : '<i class="fas fa-times"></i> إجابة خاطئة';
-                const yourAns = selectedVal !== -1 ? q.options[selectedVal] : 'لم يتم الإجابة';
-                const correctAnsText = q.options[correctVal];
-
-                reviewArea.innerHTML += `
-                    <div class="question-box" style="padding:15px;">
-                        <div style="font-weight:bold; margin-bottom:10px;">${index+1}. ${q.text || q.question}</div>
-                        <div class="answer-review ${statusClass}">
-                            ${statusIcon}<br>
-                            إجابتك: ${yourAns}
-                            ${!isCorrect ? `<br>الإجابة الصحيحة: <strong>${correctAnsText}</strong>` : ''}
-                        </div>
-                    </div>
-                `;
-            });
-
-            document.getElementById('result-score').innerText = `${score}/${currentExamQuestions.length}`;
-            switchView('exam-result-view');
-        }
-
-        const MALE_AVATAR = "https://cdn-icons-png.flaticon.com/512/4140/4140048.png"; 
-        const FEMALE_AVATAR = "https://cdn-icons-png.flaticon.com/512/4140/4140047.png"; 
-
-        window.onload = () => {
-            const user = JSON.parse(localStorage.getItem('nokhba_user'));
-            if (user) {
-                document.getElementById('nav-guest-area').style.display = 'none';
-                document.getElementById('nav-user-area').style.display = 'block';
-                document.getElementById('nav-user-name').innerText = user.name.split(' ')[0];
-                document.getElementById('nav-user-avatar').src = user.avatar;
-            }
-        };
-
-        window.openAuthModal = (mode) => {
-            document.getElementById('auth-modal').classList.add('active');
-            window.toggleAuthMode(mode);
-        }
-        window.closeAuthModal = () => document.getElementById('auth-modal').classList.remove('active');
-        
-        window.toggleAuthMode = (mode) => {
-            const loginForm = document.getElementById('form-login');
-            const regForm = document.getElementById('form-register');
-            const title = document.getElementById('auth-title');
-            if (mode === 'login') {
-                loginForm.style.display = 'block'; regForm.style.display = 'none';
-                title.innerText = 'تسجيل الدخول';
-                document.getElementById('tab-login').style.borderBottomColor = 'var(--primary)';
-                document.getElementById('tab-register').style.borderBottomColor = 'transparent';
-            } else {
-                loginForm.style.display = 'none'; regForm.style.display = 'block';
-                title.innerText = 'حساب جديد';
-                document.getElementById('tab-register').style.borderBottomColor = 'var(--primary)';
-                document.getElementById('tab-login').style.borderBottomColor = 'transparent';
-            }
-        }
-
-        window.handleRegister = (e) => {
-            e.preventDefault();
-            const name = document.getElementById('reg-name').value;
-            const phone = document.getElementById('reg-phone').value;
-            const pass = document.getElementById('reg-pass').value;
-            const user = { name, phone, password: pass, avatar: MALE_AVATAR };
-            localStorage.setItem('nokhba_user', JSON.stringify(user));
-            location.reload();
-        }
-
-        window.handleLogin = (e) => {
-            e.preventDefault();
-            const phone = document.getElementById('login-phone').value;
-            const pass = document.getElementById('login-pass').value;
-            const saved = JSON.parse(localStorage.getItem('nokhba_user'));
-            if (saved && saved.phone === phone && saved.password === pass) location.reload();
-            else alert('بيانات خاطئة');
-        }
-
-        window.openProfileModal = () => {
-            const user = JSON.parse(localStorage.getItem('nokhba_user'));
-            document.getElementById('edit-name').value = user.name;
-            document.getElementById('edit-phone').value = user.phone;
-            document.getElementById('edit-avatar-preview').src = user.avatar;
-            document.getElementById('profile-modal').classList.add('active');
-        }
-
-        window.logout = () => {
-            if(confirm('تسجيل الخروج؟')) {
-                localStorage.removeItem('nokhba_user');
-                location.reload();
-            }
-        }
-
-        window.toggleTheme = () => {
-            const body = document.body;
-            body.setAttribute('data-theme', body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
-        }
-        window.toggleMenu = () => document.getElementById('navLinks').classList.toggle('active');
-
-        window.shareSite = async () => {
-            if (navigator.share) {
-                try {
-                    await navigator.share({
-                        title: 'منصة النخبة التعليمية',
-                        text: 'أقوى مدرسي الثانوية العامة في مكان واحد',
-                        url: window.location.href
-                    });
-                } catch (err) {
-                    console.log('Error sharing', err);
-                }
-            } else {
-                const dummy = document.createElement('input');
-                document.body.appendChild(dummy);
-                dummy.value = window.location.href;
-                dummy.select();
-                document.execCommand('copy');
-                document.body.removeChild(dummy);
-                
-                const toast = document.getElementById('toast');
-                const msg = document.getElementById('toast-msg');
-                msg.innerText = 'تم نسخ الرابط بنجاح';
-                toast.classList.add('show');
-                setTimeout(() => toast.classList.remove('show'), 3000);
-            }
-        }
-    </script>
+    <script type="module" src="script.js"></script>
 </body>
 </html>
