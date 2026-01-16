@@ -5,18 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>لوحة الإدارة المركزية | النخبة</title>
     
-    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            --primary: #c0392b;       /* اللون الأحمر الأساسي */
+            --primary: #c0392b;       
             --primary-dark: #a93226;
-            --secondary: #2c3e50;     /* اللون الكحلي */
-            --accent: #f1c40f;        /* اللون الأصفر */
-            --success: #27ae60;       /* الأخضر للقبول */
-            --danger: #c0392b;        /* الأحمر للحذف والرفض */
+            --secondary: #2c3e50;    
+            --accent: #f1c40f;        
+            --success: #27ae60;       
+            --danger: #c0392b;        
             --bg-body: #f4f6f9;
             --white: #ffffff;
             --text-main: #2c3e50;
@@ -29,7 +28,6 @@
         
         body { background-color: var(--bg-body); color: var(--text-main); padding-bottom: 50px; }
 
-        /* --- HEADER --- */
         header {
             background: var(--secondary); color: var(--white);
             padding: 15px 5%; display: flex; justify-content: space-between; align-items: center;
@@ -38,11 +36,9 @@
         .brand { font-size: 1.4rem; font-weight: 900; display: flex; align-items: center; gap: 10px; }
         .admin-badge { background: var(--accent); color: var(--secondary); padding: 5px 15px; border-radius: 50px; font-weight: bold; font-size: 0.85rem; }
 
-        /* --- CONTAINER --- */
         .container { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
         .hidden { display: none !important; }
 
-        /* --- BUTTONS STYLES --- */
         .btn { border: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; gap: 8px; font-size: 0.95rem; }
         .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
         
@@ -56,7 +52,6 @@
 
         .btn-sm { padding: 5px 10px; font-size: 0.85rem; }
 
-        /* --- TEACHERS GRID VIEW --- */
         .grid-header { margin-bottom: 30px; border-bottom: 2px solid #e0e0e0; padding-bottom: 15px; }
         .teachers-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
         
@@ -78,7 +73,6 @@
         .tc-btn { width: 100%; justify-content: center; background: #f0f2f5; color: var(--secondary); }
         .teacher-card:hover .tc-btn { background: var(--primary); color: #fff; }
 
-        /* --- DASHBOARD VIEW --- */
         .dash-header {
             background: var(--white); padding: 20px; border-radius: var(--radius);
             box-shadow: var(--shadow); margin-bottom: 25px;
@@ -87,7 +81,6 @@
         .dh-info { display: flex; align-items: center; gap: 15px; }
         .dh-img { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent); }
         
-        /* Tabs */
         .tabs-container { display: flex; background: #f0f2f5; padding: 5px; border-radius: 50px; gap: 5px; }
         .tab-btn {
             background: transparent; border: none; padding: 10px 25px; border-radius: 40px;
@@ -96,7 +89,6 @@
         .tab-btn.active { background: var(--secondary); color: #fff; box-shadow: 0 4px 10px rgba(44, 62, 80, 0.3); }
         .badge-count { background: var(--danger); color: #fff; padding: 2px 8px; border-radius: 10px; font-size: 0.75rem; margin-right: 5px; }
 
-        /* --- PACKAGES LIST --- */
         .pkg-card { background: var(--white); border-radius: var(--radius); margin-bottom: 20px; box-shadow: var(--shadow); overflow: hidden; border: 1px solid #eee; }
         .pkg-header {
             padding: 15px 20px; background: #fafafa; border-bottom: 1px solid #eee;
@@ -122,7 +114,6 @@
         }
         .c-icon { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 0.9rem; }
 
-        /* --- REQUESTS GRID --- */
         .req-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
         .req-card {
             background: var(--white); border-radius: 15px; overflow: hidden;
@@ -143,7 +134,6 @@
         .req-actions { padding: 15px; display: flex; gap: 10px; border-top: 1px solid #eee; background: #fafafa; }
         .req-actions button { flex: 1; justify-content: center; }
 
-        /* --- MODALS --- */
         .modal-overlay {
             position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px);
             z-index: 1000; display: none; justify-content: center; align-items: center; padding: 20px;
@@ -161,18 +151,15 @@
         }
         .inp-field:focus { border-color: var(--primary); }
         
-        /* Preview Modal */
         #imgPreviewModal .modal-box { max-width: 800px; background: transparent; box-shadow: none; padding: 0; text-align: center; }
         #previewImgSrc { max-width: 100%; max-height: 85vh; border-radius: 10px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
 
-        /* Question Box */
         .q-box { background: #f8f9fa; border: 1px solid #e0e0e0; padding: 15px; border-radius: 10px; margin-bottom: 10px; position: relative; }
         .del-q-btn { position: absolute; top: 10px; left: 10px; color: var(--danger); background: none; border: none; cursor: pointer; }
 
         @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
         @keyframes slideUp { from { transform: translateY(20px); opacity:0; } to { transform: translateY(0); opacity:1; } }
 
-        /* Toast */
         #toast {
             position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px);
             background: var(--secondary); color: #fff; padding: 12px 30px; border-radius: 50px;
@@ -186,7 +173,6 @@
 
     <div id="toast"><i class="fas fa-check-circle"></i> تم تنفيذ العملية بنجاح</div>
 
-    <!-- Header -->
     <header>
         <div class="brand">
             <i class="fas fa-graduation-cap" style="color:var(--accent);"></i>
@@ -197,7 +183,6 @@
         </div>
     </header>
 
-    <!-- VIEW 1: TEACHERS LIST -->
     <div id="view-teachers" class="container">
         <div class="grid-header">
             <h2><i class="fas fa-chalkboard-teacher" style="color:var(--primary);"></i> اختر المدرس</h2>
@@ -206,10 +191,8 @@
         <div class="teachers-grid" id="teachersGrid"></div>
     </div>
 
-    <!-- VIEW 2: TEACHER DASHBOARD -->
     <div id="view-manager" class="container hidden">
         
-        <!-- Dashboard Top Bar -->
         <div class="dash-header">
             <div class="dh-info">
                 <button class="btn btn-outline" onclick="closeManager()">
@@ -238,19 +221,16 @@
             </button>
         </div>
 
-        <!-- TAB CONTENT: PACKAGES -->
         <div id="tab-packages">
             <div id="packagesContainer"></div>
         </div>
 
-        <!-- TAB CONTENT: REQUESTS -->
         <div id="tab-requests" class="hidden">
             <div class="req-grid" id="requestsContainer"></div>
         </div>
 
     </div>
 
-    <!-- MODAL: ADD PACKAGE -->
     <div id="pkgModal" class="modal-overlay">
         <div class="modal-box">
             <h3 style="margin-bottom:20px; color:var(--secondary);">إضافة كورس / باقة جديدة</h3>
@@ -290,7 +270,6 @@
         </div>
     </div>
 
-    <!-- MODAL: CONTENT TYPE SELECTOR -->
     <div id="contentSelectModal" class="modal-overlay">
         <div class="modal-box" style="text-align:center; max-width:400px;">
             <h3 style="margin-bottom:25px;">اختر نوع المحتوى</h3>
@@ -306,7 +285,6 @@
         </div>
     </div>
 
-    <!-- MODAL: ADD VIDEO -->
     <div id="videoModal" class="modal-overlay">
         <div class="modal-box">
             <h3 style="margin-bottom:20px; color:#e74c3c;"><i class="fab fa-youtube"></i> إضافة فيديو</h3>
@@ -323,7 +301,6 @@
         </div>
     </div>
 
-    <!-- MODAL: ADD EXAM -->
     <div id="examModal" class="modal-overlay">
         <div class="modal-box" style="max-width:700px;">
             <h3 style="margin-bottom:20px; color:#3498db;"><i class="fas fa-clipboard-list"></i> إضافة امتحان</h3>
@@ -344,7 +321,6 @@
         </div>
     </div>
 
-    <!-- MODAL: IMAGE PREVIEW -->
     <div id="imgPreviewModal" class="modal-overlay" onclick="closeModal('imgPreviewModal')">
         <div class="modal-box">
             <img id="previewImgSrc" src="">
@@ -371,7 +347,6 @@
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
-        // --- GLOBAL VARIABLES ---
         let currentTeacherId = null;
         let activePkgId = null;
         let activeWeekId = null;
@@ -388,7 +363,6 @@
             { id: "t8", name: "أ/ لطفي زهران", subject: "رياضيات", img: "https://i.postimg.cc/7ZMs9kgG/Gemini-Generated-Image-7ou14v7ou14v7ou1.png" }
         ];
 
-        // --- INITIALIZATION ---
         window.onload = () => {
             const grid = document.getElementById('teachersGrid');
             grid.innerHTML = allTeachers.map(t => `
@@ -403,7 +377,6 @@
             `).join('');
         };
 
-        // --- MANAGER NAVIGATION ---
         window.openTeacherManager = (tId) => {
             currentTeacherId = tId;
             const teacher = allTeachers.find(t => t.id === tId);
@@ -414,7 +387,6 @@
             document.getElementById('view-teachers').classList.add('hidden');
             document.getElementById('view-manager').classList.remove('hidden');
             
-            // Default to packages tab
             window.switchTab('packages', document.querySelector('.tab-btn'));
             loadPackages(tId);
         };
@@ -441,17 +413,14 @@
             }
         };
 
-        // --- REQUESTS LOGIC ---
         function loadRequests() {
             const container = document.getElementById('requestsContainer');
             container.innerHTML = '<p style="text-align:center; width:100%; margin-top:50px;"><i class="fas fa-spinner fa-spin"></i> جاري تحميل الطلبات...</p>';
             
-            // 1. Get Teacher's Packages IDs
             const teacherPkgRef = ref(db, `teachers/${currentTeacherId}/packages`);
             get(teacherPkgRef).then(snap => {
                 teacherPackagesIds = snap.exists() ? Object.keys(snap.val()) : [];
                 
-                // 2. Fetch Requests
                 const reqRef = ref(db, 'requests');
                 onValue(reqRef, (reqSnap) => {
                     container.innerHTML = '';
@@ -466,7 +435,6 @@
                     let hasRequests = false;
 
                     Object.entries(data).forEach(([reqId, req]) => {
-                        // FILTER: Only show requests for this teacher's packages AND status is pending
                         if (teacherPackagesIds.includes(req.packageId) && req.status === 'pending') {
                             hasRequests = true;
                             count++;
@@ -499,7 +467,6 @@
                         }
                     });
 
-                    // Update Badge
                     const badge = document.getElementById('reqBadge');
                     badge.innerText = count;
                     badge.classList.toggle('hidden', count === 0);
@@ -530,15 +497,12 @@
             
             const newStatus = action === 'approve' ? 'active' : 'rejected';
             
-            // Update Request Status
             await update(ref(db, `requests/${reqId}`), { status: newStatus });
-            // Update User Subscription Status
             await update(ref(db, `users/${userId}/subscriptions/${pkgId}`), { status: newStatus });
             
             showToast(action === 'approve' ? 'تم التفعيل بنجاح' : 'تم رفض الطلب');
         };
 
-        // --- PACKAGES & CONTENT LOGIC ---
         function loadPackages(tId) {
             const container = document.getElementById('packagesContainer');
             container.innerHTML = '<p style="text-align:center; margin-top:30px;"><i class="fas fa-spinner fa-spin"></i> جاري التحميل...</p>';
@@ -628,7 +592,6 @@
             });
         }
 
-        // --- CRUD FUNCTIONS ---
         window.createPackage = () => {
             const title = document.getElementById('pTitle').value;
             const price = document.getElementById('pPrice').value;
@@ -648,7 +611,6 @@
         window.prepContent = (pid, wid, e) => { e.stopPropagation(); activePkgId=pid; activeWeekId=wid; document.getElementById('contentSelectModal').style.display='flex'; };
         window.delContent = (pid, wid, cid) => { if(confirm('حذف المحتوى؟')) remove(ref(db, `teachers/${currentTeacherId}/packages/${pid}/weeks/${wid}/content/${cid}`)); };
 
-        // --- CONTENT MODALS ---
         window.openVideoModal = () => { closeModal('contentSelectModal'); document.getElementById('videoModal').style.display='flex'; };
         window.addVideo = () => {
             const title = document.getElementById('vTitle').value;
@@ -707,7 +669,6 @@
             .then(() => { closeModal('examModal'); showToast('تم نشر الامتحان'); });
         };
 
-        // --- HELPERS ---
         window.openModal = (id) => document.getElementById(id).style.display = 'flex';
         window.closeModal = (id) => document.getElementById(id).style.display = 'none';
         
