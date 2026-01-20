@@ -19,6 +19,7 @@ window.currentTeacherPackages = {};
 let currentTeacherName = "";
 let currentExamQuestions = [];
 let currentUser = JSON.parse(localStorage.getItem('nokhba_user'));
+let pendingAction = null; 
 
 const toBase64 = file => new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -87,7 +88,7 @@ function fetchPackages(teacherId) {
                 const pkgPrice = pkg.price ? `${pkg.price} EGP` : 'مجاني';
                 
                 let btnText = `اشترك الآن <i class="fas fa-arrow-left"></i>`;
-                let btnAction = `openPaymentModal('${pkgId}', '${pkg.title}', '${pkg.price}')`;
+                let btnAction = `openPaymentView('${pkgId}', '${pkg.title}', '${pkg.price}')`;
                 let btnClass = "pkg-btn";
 
                 if(currentUser && userSubs[pkgId]) {
@@ -102,7 +103,7 @@ function fetchPackages(teacherId) {
                         btnClass = "pkg-btn btn-pending";
                     } else if (status === 'rejected') {
                         btnText = `تم الرفض (حاول مجدداً) <i class="fas fa-times"></i>`;
-                        btnAction = `openPaymentModal('${pkgId}', '${pkg.title}', '${pkg.price}')`;
+                        btnAction = `openPaymentView('${pkgId}', '${pkg.title}', '${pkg.price}')`;
                         btnClass = "pkg-btn btn-wrong";
                     }
                 }
@@ -127,16 +128,31 @@ function fetchPackages(teacherId) {
     }
 }
 
-window.openPaymentModal = function(pkgId, title, price) {
+window.openPaymentView = function(pkgId, title, price) {
     if(!currentUser) {
-        alert("يجب تسجيل الدخول أولاً للاشتراك");
+        pendingAction = function() {
+            openPaymentView(pkgId, title, price);
+        };
         openAuthModal('login');
         return;
     }
-    document.getElementById('payment-modal').classList.add('active');
+    
+    switchView('payment-view');
     document.getElementById('pay-pkg-id').value = pkgId;
     document.getElementById('pay-pkg-price').value = price;
     document.getElementById('payment-amount-display').innerText = `المبلغ المطلوب: ${price} جنيه`;
+    
+    document.getElementById('pay-sender-phone').value = '';
+    document.getElementById('pay-receipt').value = '';
+    document.getElementById('file-name-display').innerText = 'يفضل أن تكون الصورة واضحة';
+}
+
+window.updateFileName = function(input) {
+    if(input.files && input.files[0]) {
+        document.getElementById('file-name-display').innerText = input.files[0].name;
+        document.getElementById('file-name-display').style.color = 'var(--primary)';
+        document.getElementById('file-name-display').style.fontWeight = 'bold';
+    }
 }
 
 window.handlePaymentSubmit = async function(e) {
@@ -176,9 +192,8 @@ window.handlePaymentSubmit = async function(e) {
         });
 
         alert("تم إرسال طلب الاشتراك بنجاح! سيتم مراجعة الطلب وتفعيل الكورس.");
-        document.getElementById('payment-modal').classList.remove('active');
-        
-        fetchPackages(Object.keys(window.currentTeacherPackages)[0]);
+        switchView('teacher-view');
+        fetchPackages(Object.keys(window.currentTeacherPackages)[0]); 
         
     } catch (error) {
         console.error(error);
@@ -190,6 +205,8 @@ window.handlePaymentSubmit = async function(e) {
 }
 
 window.openCourseDetails = function(pkgId) {
+    if(!currentUser) return openAuthModal('login');
+    
     const userSubRef = ref(db, `users/${currentUser.phone}/subscriptions/${pkgId}`);
     get(userSubRef).then(snap => {
         if(snap.exists() && snap.val().status === 'active') {
@@ -336,14 +353,20 @@ window.submitExam = function(e) {
 const MALE_AVATAR = "https://cdn-icons-png.flaticon.com/512/4140/4140048.png"; 
 const FEMALE_AVATAR = "https://cdn-icons-png.flaticon.com/512/4140/4140047.png"; 
 
-window.onload = () => {
-    const user = JSON.parse(localStorage.getItem('nokhba_user'));
-    if (user) {
+window.updateNavUI = () => {
+    if (currentUser) {
         document.getElementById('nav-guest-area').style.display = 'none';
         document.getElementById('nav-user-area').style.display = 'block';
-        document.getElementById('nav-user-name').innerText = user.name.split(' ')[0];
-        document.getElementById('nav-user-avatar').src = user.avatar;
+        document.getElementById('nav-user-name').innerText = currentUser.name.split(' ')[0];
+        document.getElementById('nav-user-avatar').src = currentUser.avatar;
+    } else {
+        document.getElementById('nav-guest-area').style.display = 'block';
+        document.getElementById('nav-user-area').style.display = 'none';
     }
+}
+
+window.onload = () => {
+    updateNavUI();
 };
 
 window.openAuthModal = (mode) => {
@@ -376,7 +399,17 @@ window.handleRegister = (e) => {
     const pass = document.getElementById('reg-pass').value;
     const user = { name, phone, password: pass, avatar: MALE_AVATAR };
     localStorage.setItem('nokhba_user', JSON.stringify(user));
-    location.reload();
+    currentUser = user;
+    
+    updateNavUI();
+    closeAuthModal();
+    
+    if(pendingAction) {
+        pendingAction();
+        pendingAction = null;
+    } else {
+        alert("تم إنشاء الحساب بنجاح");
+    }
 }
 
 window.handleLogin = (e) => {
@@ -384,21 +417,32 @@ window.handleLogin = (e) => {
     const phone = document.getElementById('login-phone').value;
     const pass = document.getElementById('login-pass').value;
     const saved = JSON.parse(localStorage.getItem('nokhba_user'));
-    if (saved && saved.phone === phone && saved.password === pass) location.reload();
-    else alert('بيانات خاطئة');
+    
+    if (saved && saved.phone === phone && saved.password === pass) {
+        currentUser = saved;
+        updateNavUI();
+        closeAuthModal();
+        
+        if(pendingAction) {
+            pendingAction();
+            pendingAction = null;
+        }
+    } else {
+        alert('بيانات خاطئة أو غير مسجلة');
+    }
 }
 
 window.openProfileModal = () => {
-    const user = JSON.parse(localStorage.getItem('nokhba_user'));
-    document.getElementById('edit-name').value = user.name;
-    document.getElementById('edit-phone').value = user.phone;
-    document.getElementById('edit-avatar-preview').src = user.avatar;
+    document.getElementById('edit-name').value = currentUser.name;
+    document.getElementById('edit-phone').value = currentUser.phone;
+    document.getElementById('edit-avatar-preview').src = currentUser.avatar;
     document.getElementById('profile-modal').classList.add('active');
 }
 
 window.logout = () => {
     if(confirm('تسجيل الخروج؟')) {
         localStorage.removeItem('nokhba_user');
+        currentUser = null;
         location.reload();
     }
 }
@@ -408,30 +452,3 @@ window.toggleTheme = () => {
     body.setAttribute('data-theme', body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
 }
 window.toggleMenu = () => document.getElementById('navLinks').classList.toggle('active');
-
-window.shareSite = async () => {
-    if (navigator.share) {
-        try {
-            await navigator.share({
-                title: 'منصة النخبة التعليمية',
-                text: 'أقوى مدرسي الثانوية العامة في مكان واحد',
-                url: window.location.href
-            });
-        } catch (err) {
-            console.log('Error sharing', err);
-        }
-    } else {
-        const dummy = document.createElement('input');
-        document.body.appendChild(dummy);
-        dummy.value = window.location.href;
-        dummy.select();
-        document.execCommand('copy');
-        document.body.removeChild(dummy);
-        
-        const toast = document.getElementById('toast');
-        const msg = document.getElementById('toast-msg');
-        msg.innerText = 'تم نسخ الرابط بنجاح';
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 3000);
-    }
-}
