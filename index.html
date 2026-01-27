@@ -11,7 +11,7 @@
     
     <meta property="og:title" content="منصة النخبة التعليمية">
     <meta property="og:description" content="مستقبلك يبدأ هنا مع أقوى مدرسي الثانوية العامة">
-    <meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/3413/3413535.png">
+    <meta property="og:image" content="https://i.postimg.cc/RVzCgr5m/Screenshot-2026-01-27-153943.png">
     <meta property="og:url" content="https://saifsa-b51f1.web.app">
     <meta property="og:type" content="website">
 
@@ -32,6 +32,10 @@
 
     <div id="toast"><i class="fas fa-check-circle" style="color:#2ecc71;"></i> <span id="toast-msg"></span></div>
 
+    <button id="pwa-install-btn" class="pwa-install-btn" style="display: none;">
+        <i class="fas fa-download"></i> تثبيت التطبيق
+    </button>
+
     <a href="https://t.me/al_nokhbaX" target="_blank" class="telegram-btn" aria-label="Telegram">
         <i class="fab fa-telegram-plane"></i>
     </a>
@@ -45,8 +49,8 @@
             <a href="#" onclick="switchView('home')"><i class="fas fa-home"></i> الرئيسية</a>
             <a href="#" onclick="document.getElementById('teachers').scrollIntoView()"><i class="fas fa-chalkboard-teacher"></i> المدرسين</a>
             <div id="nav-guest-area">
-                <a href="#" onclick="openAuthModal('login')" style="color:var(--primary);"><i class="fas fa-sign-in-alt"></i> دخول</a>
-                <button class="btn-main" onclick="openAuthModal('register')" style="padding: 10px 25px; font-size:0.95rem;">اشترك الآن</button>
+                <a href="#" onclick="openAuthPage('login')" style="color:var(--primary);"><i class="fas fa-sign-in-alt"></i> دخول</a>
+                <button class="btn-main" onclick="openAuthPage('register')" style="padding: 10px 25px; font-size:0.95rem;">اشترك الآن</button>
             </div>
             <div id="nav-user-area" style="display:none;">
                 <div class="nav-profile-wrapper" onclick="openProfileModal()">
@@ -201,6 +205,40 @@
         </section>
     </div>
 
+    <div id="auth-view" class="view">
+        <div class="clean-back-container" style="justify-content: flex-start;">
+            <button class="clean-back-btn" onclick="switchView('home')" aria-label="Back">
+                <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+        
+        <div class="auth-page-container">
+            <div class="auth-box page-mode">
+                <img src="https://cdn-icons-png.flaticon.com/512/9374/9374921.png" class="auth-avatar-header" alt="Login Avatar">
+                
+                <h2 id="auth-title" style="text-align:center; margin-bottom:25px; color:var(--secondary);">تسجيل الدخول</h2>
+                
+                <div style="display:flex; margin-bottom:25px; border-bottom:2px solid #ddd;">
+                    <button onclick="toggleAuthMode('login')" id="tab-login" style="flex:1; padding:15px; background:none; border:none; border-bottom:3px solid var(--primary); font-weight:800; cursor:pointer;">دخول</button>
+                    <button onclick="toggleAuthMode('register')" id="tab-register" style="flex:1; padding:15px; background:none; border:none; cursor:pointer;">تسجيل جديد</button>
+                </div>
+                
+                <form id="form-login" onsubmit="handleLogin(event)">
+                    <div class="inp-wrapper"><i class="fas fa-phone inp-icon"></i><input type="tel" id="login-phone" class="inp-field" placeholder="رقم الهاتف" required></div>
+                    <div class="inp-wrapper"><i class="fas fa-lock inp-icon"></i><input type="password" id="login-pass" class="inp-field" placeholder="كلمة المرور" required></div>
+                    <button class="btn-main" style="width:100%; justify-content:center;">دخول الآن</button>
+                </form>
+                
+                <form id="form-register" onsubmit="handleRegister(event)" style="display:none;">
+                    <div class="inp-wrapper"><i class="fas fa-user inp-icon"></i><input type="text" id="reg-name" class="inp-field" placeholder="اسم الطالب" required></div>
+                    <div class="inp-wrapper"><i class="fas fa-phone inp-icon"></i><input type="tel" id="reg-phone" class="inp-field" placeholder="رقم الهاتف" required></div>
+                    <div class="inp-wrapper"><i class="fas fa-lock inp-icon"></i><input type="password" id="reg-pass" class="inp-field" placeholder="كلمة المرور" required></div>
+                    <button class="btn-main" style="width:100%; justify-content:center;">إنشاء حساب</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <div id="teacher-view" class="view">
         <div class="clean-back-container">
             <button class="clean-back-btn" onclick="switchView('home')" aria-label="Back"><i class="fas fa-arrow-right"></i></button>
@@ -322,33 +360,6 @@
             <div id="result-review-area"></div>
             
             <button class="btn-main" onclick="switchView('course-details-view')" style="width:100%; justify-content:center; margin-top:30px;">العودة للكورس</button>
-        </div>
-    </div>
-
-    <div id="auth-modal" class="modal-overlay">
-        <div class="auth-box">
-            <img src="https://cdn-icons-png.flaticon.com/512/9374/9374921.png" class="auth-avatar-header" alt="Login Avatar">
-            
-            <button class="close-modal" onclick="closeAuthModal()" aria-label="Close"><i class="fas fa-times"></i></button>
-            <h2 id="auth-title" style="text-align:center; margin-bottom:25px; color:var(--secondary);">تسجيل الدخول</h2>
-            
-            <div style="display:flex; margin-bottom:25px; border-bottom:2px solid #ddd;">
-                <button onclick="toggleAuthMode('login')" id="tab-login" style="flex:1; padding:15px; background:none; border:none; border-bottom:3px solid var(--primary); font-weight:800;">دخول</button>
-                <button onclick="toggleAuthMode('register')" id="tab-register" style="flex:1; padding:15px; background:none; border:none;">تسجيل جديد</button>
-            </div>
-            
-            <form id="form-login" onsubmit="handleLogin(event)">
-                <div class="inp-wrapper"><i class="fas fa-phone inp-icon"></i><input type="tel" id="login-phone" class="inp-field" placeholder="رقم الهاتف" required></div>
-                <div class="inp-wrapper"><i class="fas fa-lock inp-icon"></i><input type="password" id="login-pass" class="inp-field" placeholder="كلمة المرور" required></div>
-                <button class="btn-main" style="width:100%; justify-content:center;">دخول الآن</button>
-            </form>
-            
-            <form id="form-register" onsubmit="handleRegister(event)" style="display:none;">
-                <div class="inp-wrapper"><i class="fas fa-user inp-icon"></i><input type="text" id="reg-name" class="inp-field" placeholder="اسم الطالب" required></div>
-                <div class="inp-wrapper"><i class="fas fa-phone inp-icon"></i><input type="tel" id="reg-phone" class="inp-field" placeholder="رقم الهاتف" required></div>
-                <div class="inp-wrapper"><i class="fas fa-lock inp-icon"></i><input type="password" id="reg-pass" class="inp-field" placeholder="كلمة المرور" required></div>
-                <button class="btn-main" style="width:100%; justify-content:center;">إنشاء حساب</button>
-            </form>
         </div>
     </div>
 
