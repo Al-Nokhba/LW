@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>منصة النخبة التعليمية | أقوى مدرسي الثانوية العامة في مصر 2026</title>
     <meta name="description" content="منصة النخبة التعليمية - طريقك للتفوق">
+    
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/3413/3413535.png">
+    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3413/3413535.png">
+    
+    <meta property="og:title" content="منصة النخبة التعليمية">
+    <meta property="og:description" content="مستقبلك يبدأ هنا مع أقوى مدرسي الثانوية العامة">
+    <meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/3413/3413535.png">
+    <meta property="og:url" content="https://saifsa-b51f1.web.app">
+    <meta property="og:type" content="website">
+
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#c0392b">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -24,7 +37,10 @@
     </a>
 
     <nav>
-        <div class="logo"><i class="fas fa-graduation-cap"></i> Al-Nokhba</div>
+        <div class="logo">
+            <img src="https://cdn-icons-png.flaticon.com/512/3413/3413535.png" alt="Education Logo" style="width:45px; margin-left:10px; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1));"> 
+            Al-Nokhba
+        </div>
         <div class="nav-links" id="navLinks">
             <a href="#" onclick="switchView('home')"><i class="fas fa-home"></i> الرئيسية</a>
             <a href="#" onclick="document.getElementById('teachers').scrollIntoView()"><i class="fas fa-chalkboard-teacher"></i> المدرسين</a>
@@ -375,5 +391,14 @@
     </footer>
 
     <script type="module" src="script.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(reg => console.log('SW registered'))
+                    .catch(err => console.log('SW error', err));
+            });
+        }
+    </script>
 </body>
 </html>
