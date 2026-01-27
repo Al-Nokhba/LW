@@ -20,6 +20,7 @@ let currentTeacherName = "";
 let currentExamQuestions = [];
 let currentUser = JSON.parse(localStorage.getItem('nokhba_user'));
 let pendingAction = null; 
+let deferredPrompt;
 
 const toBase64 = file => new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -133,7 +134,7 @@ window.openPaymentView = function(pkgId, title, price) {
         pendingAction = function() {
             openPaymentView(pkgId, title, price);
         };
-        openAuthModal('login');
+        openAuthPage('login');
         return;
     }
     
@@ -205,7 +206,7 @@ window.handlePaymentSubmit = async function(e) {
 }
 
 window.openCourseDetails = function(pkgId) {
-    if(!currentUser) return openAuthModal('login');
+    if(!currentUser) return openAuthPage('login');
     
     const userSubRef = ref(db, `users/${currentUser.phone}/subscriptions/${pkgId}`);
     get(userSubRef).then(snap => {
@@ -365,15 +366,10 @@ window.updateNavUI = () => {
     }
 }
 
-window.onload = () => {
-    updateNavUI();
-};
-
-window.openAuthModal = (mode) => {
-    document.getElementById('auth-modal').classList.add('active');
+window.openAuthPage = (mode) => {
+    window.switchView('auth-view');
     window.toggleAuthMode(mode);
 }
-window.closeAuthModal = () => document.getElementById('auth-modal').classList.remove('active');
 
 window.toggleAuthMode = (mode) => {
     const loginForm = document.getElementById('form-login');
@@ -402,7 +398,7 @@ window.handleRegister = (e) => {
     currentUser = user;
     
     updateNavUI();
-    closeAuthModal();
+    switchView('home');
     
     if(pendingAction) {
         pendingAction();
@@ -421,7 +417,7 @@ window.handleLogin = (e) => {
     if (saved && saved.phone === phone && saved.password === pass) {
         currentUser = saved;
         updateNavUI();
-        closeAuthModal();
+        switchView('home');
         
         if(pendingAction) {
             pendingAction();
@@ -452,3 +448,34 @@ window.toggleTheme = () => {
     body.setAttribute('data-theme', body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
 }
 window.toggleMenu = () => document.getElementById('navLinks').classList.toggle('active');
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    const btn = document.getElementById('pwa-install-btn');
+    btn.style.display = 'flex';
+    setTimeout(() => {
+        btn.classList.add('show');
+    }, 100);
+
+    setTimeout(() => {
+        btn.classList.remove('show');
+        setTimeout(() => {
+             btn.style.display = 'none';
+        }, 600);
+    }, 5000);
+    
+    btn.addEventListener('click', () => {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+                console.log('User accepted the A2HS prompt');
+            }
+            deferredPrompt = null;
+        });
+    });
+});
+
+window.onload = () => {
+    updateNavUI();
+};
